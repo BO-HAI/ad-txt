@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><%= htmlWebpackPlugin.options.title %></title>
     <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
-    <script src="http://www.hqwx.com/subject/0000/color_picker/js/colpick.js"></script>
-    <script src="http://www.hqwx.com/subject/0000/color_picker/js/plugin.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colors.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colorpicker.data.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colorpicker.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/javascript_implementation/jscolor.js"></script>
 </head>
 <body>
     <header>
@@ -38,10 +40,8 @@
                 </div>
                 <div class="form-group">
                     <label for="fontcolor">颜色:</label>
-                    <input name="fontColor" type="text" value="#333333">
-                    <a href="javascript:;" id="picker"  class="button">取色</a>
+                    <input class="color" name="fontColor" type="text" value="#333333">
                 </div>
-
                 <div class="form-group">
                     <label for="fontFamily">字体:</label>
                     <select name="fontFamily" id="">
@@ -73,62 +73,5 @@
 
         </div>
     </div>
-    <!-- <footer>
-        <div class="option-block">
-            <form action="" id="titleForm">
-                <div class="form-group">
-                    <label for="title">标题:</label>
-                    <input name="title" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="fontcolor">颜色:</label>
-                    <input name="fontColor" type="text" value="#333333">
-                    <a href="javascript:;" id="picker"  class="button">取色</a>
-                </div>
-
-                <div class="form-group">
-                    <label for="fontFamily">字体:</label>
-                    <select name="fontFamily" id="">
-                        <option value="cnYAHEI" class="cnYAHEI">微软雅黑</option>
-                        <option value="cnZHSRZJ" class="cnZHSRZJ">张海山锐线体简</option>
-                        <option value="enJonahRegular" class="enJonahRegular">Jonah Regular</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fontSize">字号:</label>
-                    <input name="fontSize" type="text" value="50px">
-                </div>
-                <div class="form-group">
-                    <label for="x">X:</label>
-                    <input name="x" type="text" value="" placeholder="默认居中">
-                </div>
-                <div class="form-group">
-                    <label for="y">Y:</label>
-                    <input name="y" type="text" value="" placeholder="默认居中">
-                </div>
-
-                <div class="form-group button-group">
-                    <a class="button" id="saveImg" href="javascript:;">生成图片</a>
-                    <a class="button button-big" id="submitTxt" href="javascript:;">添加</a>
-                </div>
-            </form>
-        </div>
-        <div class="history-block">
-
-        </div>
-    </footer> -->
 </body>
-<script type="text/javascript">
-$(document).ready(function () {
-    $('#picker').colpick();
-    $('.colpick_submit').on('click', function () {
-        var value = '#' + $('.colpick_hex_field').find('input').val();
-        $('input[name="fontColor"]').val(value);
-        $('#picker').css({
-            'background': value
-        });
-        $('.colpick').hide();
-    });
-});
-</script>
 </html>
