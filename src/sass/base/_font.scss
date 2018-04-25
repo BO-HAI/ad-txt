@@ -1,0 +1,39 @@
+@font-face {
+    font-family: "enJonahRegular";
+    src: url("../font/Jonah-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*张海山锐字简*/
+@font-face {
+    font-family: "cnZHSRZJ";
+    src: url("../font/rzbg.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*造字工坊悦黑 纤细超长体*/
+// @font-face {
+//     font-family: "cnZZGFYHQXCCT";
+//     src: url("../font/zzgf_yh_6.ttf") format('truetype');
+//     font-weight: normal;
+//     font-style: normal;
+// }
+
+
+.cnYAHEI {
+    font-family: 'microsoft yahei' !important;
+}
+
+.cnZHSRZJ {
+    font-family: 'cnZHSRZJ' !important;
+}
+
+.enJonahRegular {
+    font-family: 'enJonahRegular' !important;
+}
+
+// .cnZZGFYHQXCCT {
+//     font-family: 'cnZZGFYHQXCCT' !important;
+// }

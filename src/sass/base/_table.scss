@@ -1,0 +1,33 @@
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+    // background: rgb(204, 124, 40);
+
+    thead {
+        background: #333333;
+        color: #ffffff;
+        height: 35px;
+        line-height: 35px;
+
+        td {
+            border: 1px solid #333333;
+            text-align: center;
+        }
+    }
+
+    tr {
+        margin: 0;
+        padding: 0;
+    }
+
+    tbody td {
+        border: 1px solid #dddddd;
+        height: 35px;
+        line-height: 35px;
+        text-align: center;
+        margin: 0;
+        padding: 10px;
+        line-height: 20px;
+    }
+}
