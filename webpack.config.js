@@ -7,9 +7,7 @@ module.exports = {
     entry: {
         'index': './src/js/index.js',
         'index2': './src/js/index2.js',
-        'colpick': './src/js/color_picker/js/colpick.js',
-        'colpick_plugin': './src/js/color_picker/js/plugin.js',
-        'jq': './src/js/jquery/1.11.0.js'
+        'jq': ['./src/js/jquery/1.11.0.js']
     },
     output: {
         filename: './js/[name].js',
@@ -20,7 +18,7 @@ module.exports = {
             {
                 test: /\.js/,
                 exclude: [
-                   'src/js/color_picker/js/*.js',
+                   'src/js/colorPicker-master/',
                    'src/js/jquery/'
                ],
                 exclude: /node_modules/,
@@ -60,6 +58,16 @@ module.exports = {
                     }
                 ]
             }
+            // ,{
+            //     test: require.resolve('jquery'),
+            //     use: [{
+            //         loader: 'expose-loader',
+            //         options: 'jQuery'
+            //     },{
+            //         loader: 'expose-loader',
+            //         options: '$'
+            //     }]
+            // }
         ]
     },
     devServer: {
@@ -68,7 +76,7 @@ module.exports = {
         port: 9001
     },
     plugins: [
-        new webpack.optimize.UglifyJsPlugin(),
+        // new webpack.optimize.UglifyJsPlugin(),
         new HtmlWebpackPlugin({
             title: 'index',
             filename: 'index.html',
@@ -76,11 +84,14 @@ module.exports = {
             // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
             template: 'src/template/index.html',
             chunksSortMode: 'manual'
-        }),
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery'
         })
+        // ,
+        // new webpack.ProvidePlugin({
+        //     $: 'jquery',
+        //     jQuery: 'jquery',
+        //     'window.jQuery': 'jquery',
+        //     'window.$': 'jquery',
+        // })
     ],
     externals: {
         'jquery' : 'window.jQuery'

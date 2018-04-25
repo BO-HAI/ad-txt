@@ -1,9 +1,6 @@
+
 require('normalize.css');
 require('../sass/screen.scss');
-require('./color_picker/css/colpick.css');
-// const $ = require("jQuery");
-// require('./color_picker/js/colpick.js');
-// require('./color_picker/js/plugin.js');
 
 class Adtxt {
     constructor (id, width, height) {
@@ -84,6 +81,17 @@ class Adtxt {
                 'margin-left': 7 * ((1-this.scale) * 10) * -1 + '%'
             });
         });
+
+        var colors = window.jsColorPicker('input.color', {
+			customBG: '#222',
+			readOnly: true,
+			// patch: false,
+			init: function(elm, colors) { // colors is a different instance (not connected to colorPicker)
+				elm.style.backgroundColor = elm.value;
+				elm.style.color = colors.rgbaMixCustom.luminance > 0.22 ? '#222' : '#ddd';
+			},
+			// appendTo: document.querySelector('.samples')
+		});
     }
 
     /**
@@ -192,6 +200,10 @@ class Adtxt {
 }
 
 window.onload = function () {
+
+}
+
+$(document).ready(function () {
     $('.img-list li').on('click', function () {
         let $that = $(this);
         let width = $that.data('width');
@@ -213,7 +225,4 @@ window.onload = function () {
     $('.close-canvas').on('click', function () {
         $('.container').hide();
     });
-}
-
-$(document).ready(function () {
 });
