@@ -7,7 +7,7 @@ module.exports = {
     entry: {
         'index': './src/js/index.js',
         'index2': './src/js/index2.js',
-        'jq': ['./src/js/jquery/1.11.0.js']
+        'jq': './src/js/jquery/1.11.0.js'
     },
     output: {
         filename: './js/[name].js',
@@ -80,20 +80,29 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'index',
             filename: 'index.html',
-            chunks: ['index', 'index2'],
+            chunks: ['index'],
             // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
             template: 'src/template/index.html',
             chunksSortMode: 'manual'
+        }),
+        new HtmlWebpackPlugin({
+            title: 'index2',
+            filename: 'index2.html',
+            chunks: ['jq', 'index2'],
+            // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
+            template: 'src/template/index2.html',
+            chunksSortMode: 'manual'
         })
-        // ,
-        // new webpack.ProvidePlugin({
-        //     $: 'jquery',
-        //     jQuery: 'jquery',
-        //     'window.jQuery': 'jquery',
-        //     'window.$': 'jquery',
-        // })
-    ],
-    externals: {
-        'jquery' : 'window.jQuery'
-    }
+        ,
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery',
+        })
+    ]
+    // ,
+    // externals: {
+    //     'jquery' : 'window.jQuery'
+    // }
 }

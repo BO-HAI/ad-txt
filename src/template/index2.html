@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script> -->
+    <!-- <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colors.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colorpicker.data.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colorpicker.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/javascript_implementation/jscolor.js"></script> -->
+</head>
+<body>
+    <header>
+        <h1>AD.TXT <span>Alpha</span></h1>
+        <form action="">
+            <div class="form-group">
+                <label for="">选择广告图</label>
+                <select name="" id="imageList">
+                    <option value=""></option>
+                </select>
+            </div>
+        </form>
+    </header>
+    <div class="cantianer">
+        <input class="color" name="fontColor" type="text" value="#333333">
+    </div>
+</body>
+<script id="tpl-option" type="text/x-handlebars-template">
+    {{#each items}}
+    <option value="">{{items.txt}}</option>
+    {{/each}}
+</script>
+</html>
