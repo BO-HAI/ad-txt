@@ -14,22 +14,70 @@
 <body>
     <header>
         <h1>AD.TXT <span>Alpha</span></h1>
-        <form action="">
+    </header>
+    <div class="container">
+        <form class="horizontal" action="">
             <div class="form-group">
-                <label for="">选择广告图</label>
-                <select name="" id="imageList">
+                <label for="">选择广告底图</label>
+                <select name="" id="fileNames">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">装饰配图</label>
+                <select name="" id="fileNames">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">人物配图</label>
+                <select name="" id="fileNames">
                     <option value=""></option>
                 </select>
             </div>
         </form>
-    </header>
-    <div class="cantianer">
-        <input class="color" name="fontColor" type="text" value="#333333">
+        <div class="option-block">
+            <form class="horizontal title-option-form" action="">
+                <div class="form-group">
+                    <label for="title">标题:</label>
+                    <input name="title" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="fontcolor">颜色:</label>
+                    <input class="color small" name="fontColor" type="text" value="#FFFFFF">
+                </div>
+                <div class="form-group">
+                    <label for="fontFamily">字体:</label>
+                    <select name="fontFamily" id="" class="small">
+                        <option value="cnYAHEI" class="cnYAHEI">微软雅黑</option>
+                        <option value="cnZHSRZJ" class="cnZHSRZJ">张海山锐线体简</option>
+                        <option value="enJonahRegular" class="enJonahRegular">Jonah Regular</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fontSize">字号:</label>
+                    <input class="small" name="fontSize" type="text" value="50px">
+                </div>
+                <div class="form-group">
+                    <label for="x">X:</label>
+                    <input class="small" name="x" type="text" value="" placeholder="默认居中">
+                </div>
+                <div class="form-group">
+                    <label for="y">Y:</label>
+                    <input class="small" name="y" type="text" value="" placeholder="默认居中">
+                </div>
+
+                <div class="form-group button-group">
+                    <!-- <a class="button" id="saveImg" href="javascript:;">生成图片</a> -->
+                    <a class="button button-big" id="submitTxt" href="javascript:;">添加</a>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
-<script id="tpl-option" type="text/x-handlebars-template">
-    {{#each items}}
-    <option value="">{{items.txt}}</option>
+<!-- <script id="tpl-option" type="text/x-handlebars-template">
+    {{#each data}}
+    <option value="">{{txt}}</option>
     {{/each}}
-</script>
+</script> -->
 </html>

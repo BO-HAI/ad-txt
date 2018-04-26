@@ -1,6 +1,6 @@
 form {
     font-size: 12px;
-    
+
     .form-group {
         height: 40px;
         line-height: 40px;
@@ -25,7 +25,21 @@ form {
         width: 223px;
     }
 
+    input.small {
+        width: 100px;
+    }
+    
+    select.small {
+        width: 123px;
+    }
+
     .button-group {
         text-align: center;
+    }
+}
+
+form.horizontal {
+    .form-group {
+        display: inline-block;
     }
 }
