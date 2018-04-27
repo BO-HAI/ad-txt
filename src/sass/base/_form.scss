@@ -28,13 +28,18 @@ form {
     input.small {
         width: 100px;
     }
-    
+
     select.small {
         width: 123px;
     }
 
     .button-group {
         text-align: center;
+    }
+
+    input:disabled,
+    select:disabled {
+        background: #dddddd;
     }
 }
 

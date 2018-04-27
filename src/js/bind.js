@@ -1,22 +1,18 @@
-
-const title_tpl = require('./template/title.option.handlebars');
-
-class FileNameSelect {
+class binding {
     constructor () {
         // this.$element = $('#fileNames');
     }
 
-    static loadHtml (data) {
-        const filename_tpl = require('./template/filename.option.handlebars');
-        let $element = $('#fileNames');
-        let html = filename_tpl({data});
+    static loadHtml (select, data, template) {
+        let $element = $(select);
+        let html = template({data});
         $element.html(html);
 
         return this;
     }
 
-    static bindEvent (event, callback) {
-        let $element = $('#fileNames');
+    static bindEvent (select , event, callback) {
+        let $element = $(select);
         $element[event](function (event) {
             callback(this, event);
         });
@@ -25,8 +21,4 @@ class FileNameSelect {
     }
 }
 
-
-
-module.exports = {
-    FileNameSelect
-};
+module.exports = binding;

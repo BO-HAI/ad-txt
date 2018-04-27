@@ -60,7 +60,7 @@ module.exports = {
             },
             {
                 test: /\.handlebars$/,
-                loader: "handlebars-loader"
+                loader: "handlebars-loader?helperDirs[]=" + __dirname + "/src/js/helper"
             }
             // ,{
             //     test: require.resolve('jquery'),

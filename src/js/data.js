@@ -3,18 +3,40 @@ let list = [
         name: '宇宙',
         url: 'http://ykonlinevideo.bs2dl.yy.com/original/c6299568d981433c877de5421cf08218.jpg',
         illustration: true,
+        size: [
+            {
+                w: 1920,
+                h: 450
+            },
+            {
+                w: 1700,
+                h: 398
+            },
+            {
+                w: 1200,
+                h: 281
+            },
+            {
+                w: 1000,
+                h: 234
+            }
+        ],
         title: [
             {
-                txt: '',
-                fontSize: 50,
-                fontFamily: '',
-                fontColor: '#D10101',
+                txt: {
+                    value: '',
+                    placeholder: '这里填写主标题, 长度不能超过15个汉字',
+                    length: 15,
+                    fontSize: 50,
+                    fontFamily: 'cnYAHEI',
+                    fontColor: '#D10101',
+                },
                 x: 807,
                 y: 200,
                 controlFont: {
                     size: false,
-                    color: false,
-                    family: false
+                    color: true,
+                    family: true
                 },
                 controlCoordinate: {
                     x: false,
@@ -22,16 +44,20 @@ let list = [
                 }
             },
             {
-                txt: '',
-                fontSize: 30,
-                fontFamily: '',
-                fontColor: '#9ED101',
+                txt: {
+                    value: '',
+                    placeholder: '这里填写副标题, 长度不能超过30个汉字',
+                    length: null,
+                    fontSize: 50,
+                    fontFamily: 'enJonahRegular',
+                    fontColor: '#D10101',
+                },
                 x: 807,
                 y: 300,
                 controlFont: {
                     size: false,
                     color: false,
-                    family: false
+                    family: true
                 },
                 controlCoordinate: {
                     x: false,
@@ -46,26 +72,25 @@ let list = [
         illustration: true,
         title: [
             {
-                txt: '',
-                fontSize: 50,
-                fontFamily: '',
-                fontColor: '#D10101',
+                txt: {
+                    value: '',
+                    placeholder: '这里填写副标题, 长度不能超过30个汉字',
+                    length: null,
+                    fontSize: 50,
+                    fontFamily: 'enJonahRegular',
+                    fontColor: '#D10101',
+                },
                 x: 807,
                 y: 200,
-                controlFont: true,
-                controlColor: true,
-                controlCoordinate: false
-            },
-            {
-                txt: '',
-                fontSize: 30,
-                fontFamily: '',
-                fontColor: '#9ED101',
-                x: 807,
-                y: 300,
-                controlFont: true,
-                controlColor: true,
-                controlCoordinate: false
+                controlFont: {
+                    size: false,
+                    color: true,
+                    family: true
+                },
+                controlCoordinate: {
+                    x: false,
+                    y: false
+                }
             }
         ]
     }
