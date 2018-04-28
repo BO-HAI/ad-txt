@@ -6,7 +6,7 @@ class binding {
     static loadHtml (select, data, template) {
         let $element = $(select);
         let html = template({data});
-        $element.html(html);
+        $element.html('').html(html);
 
         return this;
     }

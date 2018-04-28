@@ -2,15 +2,15 @@
 <form class="horizontal title-option-form" action="">
     <div class="form-group">
         <label for="title">标题:</label>
-        <input name="title" type="text" placeholder="{{txt.placeholder}}">
+        <input data-index="{{@index}}" name="value" type="text" placeholder="{{txt.placeholder}}">
     </div>
     <div class="form-group">
         <label for="fontcolor">颜色:</label>
-        <input class="color small" name="fontColor" type="text" value="{{txt.fontColor}}" {{#if controlFont.color}}{{else}}disabled="disabled"{{/if}}>
+        <input data-index="{{@index}}" class="color small" name="fontColor" type="text" value="{{txt.fontColor}}" {{#if controlFont.color}}{{else}}disabled="disabled"{{/if}}>
     </div>
     <div class="form-group">
         <label for="fontFamily">字体:</label>
-        <select name="fontFamily" id="" class="small" {{#if controlFont.family}}{{else}}disabled="disabled"{{/if}}>
+        <select data-index="{{@index}}" name="fontFamily" id="" class="small" {{#if controlFont.family}}{{else}}disabled="disabled"{{/if}}>
             <option value="cnYAHEI" {{#compare txt.fontFamily '==' 'cnYAHEI'}}{{/compare}} class="cnYAHEI">微软雅黑</option>
             <option value="cnZHSRZJ" {{#compare txt.fontFamily '==' 'cnZHSRZJ'}}{{/compare}} class="cnZHSRZJ">张海山锐线体简</option>
             <option value="enJonahRegular" {{#compare txt.fontFamily '==' 'enJonahRegular'}}{{/compare}} class="enJonahRegular">Jonah Regular</option>
@@ -18,20 +18,19 @@
     </div>
     <div class="form-group">
         <label for="fontSize">字号:</label>
-        <input class="small" name="fontSize" type="text" value="50px" {{#if controlFont.size}}{{else}}disabled="disabled"{{/if}}>
+        <input data-index="{{@index}}" class="small" name="fontSize" type="text" value="{{txt.fontSize}}" {{#if controlFont.size}}{{else}}disabled="disabled"{{/if}}>
     </div>
     <div class="form-group">
         <label for="x">X:</label>
-        <input class="small" name="x" type="text" value="" placeholder="默认居中" {{#if controlCoordinate.x}}{{else}}disabled="disabled"{{/if}}>
+        <input data-index="{{@index}}" class="small" name="x" type="text" value="{{x}}" placeholder="默认居中" {{#if controlCoordinate.x}}{{else}}disabled="disabled"{{/if}}>
     </div>
     <div class="form-group">
         <label for="y">Y:</label>
-        <input class="small" name="y" type="text" value="" placeholder="默认居中" {{#if controlCoordinate.y}}{{else}}disabled="disabled"{{/if}}>
+        <input data-index="{{@index}}" class="small" name="y" type="text" value="{{y}}" placeholder="默认居中" {{#if controlCoordinate.y}}{{else}}disabled="disabled"{{/if}}>
     </div>
 
-    <div class="form-group button-group">
-        <!-- <a class="button" id="saveImg" href="javascript:;">生成图片</a> -->
+    <!-- <div class="form-group button-group">
         <a data-index="{{@index}}" class="button button-big" id="submitTxt" href="javascript:;">添加</a>
-    </div>
+    </div> -->
 </form>
 {{/each}}
