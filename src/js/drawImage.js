@@ -47,19 +47,25 @@ class DrawImage {
            width: 0
         };
 
-        let x, y;
+        let x;
+        let y;
+        let value;
 
         let isCenter = !data.x ? true : false;
         let isVerticalCenter = !data.y ? true : false;
 
-        //data[2].value, data[3].value, data[1].value, data[0].value, data[4].value, data[5].value, !data[4].value ? true : false
+        if (data.txt.len !== null && data.txt.value.length > data.txt.len) {
+            value = data.txt.value.substring(0, data.txt.len);
+        } else {
+            value = data.txt.value;
+        }
 
         this.context.beginPath();
         this.context.font = 'lighter ' + data.txt.fontSize + 'px' + ' ' + data.txt.fontFamily;
         this.context.fillStyle =  data.txt.fontColor;
 
         if (isCenter) {
-           measureScoreStr = this.context.measureText(data.txt.value);
+           measureScoreStr = this.context.measureText(value);
            x = this.width / 2 - (measureScoreStr.width / 2);
        } else {
            x = data.x;
@@ -71,8 +77,7 @@ class DrawImage {
             y = data.y;
         }
 
-
-        this.context.fillText(data.txt.value, x, y);
+        this.context.fillText(value, x, y);
         this.context.stroke();
     }
 }

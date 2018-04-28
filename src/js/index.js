@@ -29,7 +29,7 @@ $(document).ready(function () {
         }
 
 
-        console.log(data[indexs.fileIndex].size[indexs.sizeIndex].title[titleIndex]);
+        console.log(name);
         createCanvas();
     }
 
@@ -72,7 +72,7 @@ $(document).ready(function () {
         binding.loadHtml('.option-block', data[index].size[imgSizeIndex].title, title_tpl)
             .bindEvent('.button', 'click', createCanvas)
             .bindEvent('input', 'keyup', setData).bindEvent('input', 'blur', setData)
-            .bindEvent('select', 'change', setData);
+            .bindEvent('.title-option-form select', 'change', setData);
 
 
         colors.init();

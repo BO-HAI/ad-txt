@@ -37,7 +37,6 @@ module.exports = function (left, operator, right, options) {
     }
 
     var result = operators[operator](left, right);
-    console.log(result);
     if (result) {
         return 'selected="selected"';
     } else {

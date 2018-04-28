@@ -12,7 +12,7 @@ let list = [
                         txt: {
                             value: '',
                             placeholder: '这里填写主标题, 长度不能超过15个汉字',
-                            length: 15,
+                            len: 15,
                             fontSize: 50,
                             fontFamily: 'cnYAHEI',
                             fontColor: '#D10101',
@@ -33,7 +33,7 @@ let list = [
                         txt: {
                             value: '',
                             placeholder: '这里填写副标题, 长度不能超过30个汉字',
-                            length: null,
+                            len: 30,
                             fontSize: 40,
                             fontFamily: 'enJonahRegular',
                             fontColor: '#D10101',
@@ -60,7 +60,7 @@ let list = [
                         txt: {
                             value: '',
                             placeholder: '这里填写主标题, 长度不能超过15个汉字',
-                            length: 15,
+                            len: 15,
                             fontSize: 30,
                             fontFamily: 'cnYAHEI',
                             fontColor: '#D10101',
@@ -81,7 +81,7 @@ let list = [
                         txt: {
                             value: '',
                             placeholder: '这里填写副标题, 长度不能超过30个汉字',
-                            length: null,
+                            len: null,
                             fontSize: 50,
                             fontFamily: 'enJonahRegular',
                             fontColor: '#D10101',
@@ -115,7 +115,7 @@ let list = [
                         txt: {
                             value: '',
                             placeholder: '这里填写主标题, 长度不能超过15个汉字',
-                            length: 15,
+                            len: 15,
                             fontSize: 50,
                             fontFamily: 'cnYAHEI',
                             fontColor: '#D10101',
@@ -124,8 +124,8 @@ let list = [
                         y: 200,
                         controlFont: {
                             size: false,
-                            color: true,
-                            family: true
+                            color: false,
+                            family: false
                         },
                         controlCoordinate: {
                             x: false,
@@ -136,7 +136,7 @@ let list = [
                         txt: {
                             value: '',
                             placeholder: '这里填写副标题, 长度不能超过30个汉字',
-                            length: null,
+                            len: null,
                             fontSize: 40,
                             fontFamily: 'enJonahRegular',
                             fontColor: '#D10101',
@@ -146,7 +146,7 @@ let list = [
                         controlFont: {
                             size: false,
                             color: false,
-                            family: true
+                            family: false
                         },
                         controlCoordinate: {
                             x: false,
@@ -163,7 +163,7 @@ let list = [
                         txt: {
                             value: '',
                             placeholder: '这里填写主标题, 长度不能超过15个汉字',
-                            length: 15,
+                            len: 15,
                             fontSize: 30,
                             fontFamily: 'cnYAHEI',
                             fontColor: '#D10101',
@@ -184,7 +184,7 @@ let list = [
                         txt: {
                             value: '',
                             placeholder: '这里填写副标题, 长度不能超过30个汉字',
-                            length: null,
+                            len: null,
                             fontSize: 10,
                             fontFamily: 'enJonahRegular',
                             fontColor: '#D10101',
