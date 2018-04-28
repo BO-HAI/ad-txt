@@ -61,7 +61,11 @@ module.exports = {
             {
                 test: /\.handlebars$/,
                 loader: "handlebars-loader?helperDirs[]=" + __dirname + "/src/js/helper"
-            }
+            },
+            {
+                test: /\.json$/,
+                use: 'json-loader'
+             }
             // ,{
             //     test: require.resolve('jquery'),
             //     use: [{
