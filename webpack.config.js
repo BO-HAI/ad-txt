@@ -6,8 +6,8 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         'index': './src/js/index.js',
-        'index2': './src/js/index2.js',
-        'jq': ['./src/js/jquery/1.11.0.js']
+        // 'index2': './src/js/index2.js',
+        'jq': './src/js/jquery/1.11.0.js'
     },
     output: {
         filename: './js/[name].js',
@@ -57,7 +57,15 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.handlebars$/,
+                loader: "handlebars-loader?helperDirs[]=" + __dirname + "/src/js/helper"
+            },
+            {
+                test: /\.json$/,
+                use: 'json-loader'
+             }
             // ,{
             //     test: require.resolve('jquery'),
             //     use: [{
@@ -80,20 +88,29 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'index',
             filename: 'index.html',
-            chunks: ['index', 'index2'],
+            chunks: ['jq', 'index'],
             // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
             template: 'src/template/index.html',
             chunksSortMode: 'manual'
-        })
-        // ,
-        // new webpack.ProvidePlugin({
-        //     $: 'jquery',
-        //     jQuery: 'jquery',
-        //     'window.jQuery': 'jquery',
-        //     'window.$': 'jquery',
+        }),
+        // new HtmlWebpackPlugin({
+        //     title: 'index',
+        //     filename: 'index.html',
+        //     chunks: ['jq', 'index2'],
+        //     // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
+        //     template: 'src/template/index2.html',
+        //     chunksSortMode: 'manual'
         // })
-    ],
-    externals: {
-        'jquery' : 'window.jQuery'
-    }
+        // ,
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery',
+        })
+    ]
+    // ,
+    // externals: {
+    //     'jquery' : 'window.jQuery'
+    // }
 }

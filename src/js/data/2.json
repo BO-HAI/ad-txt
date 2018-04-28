@@ -1,0 +1,103 @@
+{
+    "name": "机场",
+    "url": "http://ykonlinevideo.bs2dl.yy.com/original/5f574bca15744733b73516d5a93b185d.jpg",
+    "illustration": true,
+    "size": [
+        {
+            "w": 1200,
+            "h": 619,
+            "title": [
+                {
+                    "txt": {
+                        "value": "",
+                        "placeholder": "这里填写主标题, 长度不能超过8个汉字",
+                        "len": 8,
+                        "fontSize": 50,
+                        "fontFamily": "cnYAHEI",
+                        "fontColor": "#01D13C"
+                    },
+                    "x": null,
+                    "y": null,
+                    "controlFont": {
+                        "size": true,
+                        "color": true,
+                        "family": true
+                    },
+                    "controlCoordinate": {
+                        "x": true,
+                        "y": true
+                    }
+                },
+                {
+                    "txt": {
+                        "value": "",
+                        "placeholder": "这里填写副标题, 长度不能超过4个汉字",
+                        "len": 4,
+                        "fontSize": 40,
+                        "fontFamily": "enJonahRegular",
+                        "fontColor": "#014AD1"
+                    },
+                    "x": null,
+                    "y": 300,
+                    "controlFont": {
+                        "size": true,
+                        "color": true,
+                        "family": true
+                    },
+                    "controlCoordinate": {
+                        "x": true,
+                        "y": true
+                    }
+                }
+            ]
+        },
+        {
+            "w": 900,
+            "h": 464,
+            "title": [
+                {
+                    "txt": {
+                        "value": "",
+                        "placeholder": "这里填写主标题, 长度不能超过15个汉字",
+                        "len": 15,
+                        "fontSize": 30,
+                        "fontFamily": "cnYAHEI",
+                        "fontColor": "#A13351"
+                    },
+                    "x": null,
+                    "y": 100,
+                    "controlFont": {
+                        "size": true,
+                        "color": true,
+                        "family": true
+                    },
+                    "controlCoordinate": {
+                        "x": true,
+                        "y": true
+                    }
+                },
+                {
+                    "txt": {
+                        "value": "",
+                        "placeholder": "这里填写副标题, 长度不能超过30个汉字",
+                        "len": null,
+                        "fontSize": 50,
+                        "fontFamily": "enJonahRegular",
+                        "fontColor": "#D10101"
+                    },
+                    "x": null,
+                    "y": 200,
+                    "controlFont": {
+                        "size": false,
+                        "color": false,
+                        "family": true
+                    },
+                    "controlCoordinate": {
+                        "x": false,
+                        "y": false
+                    }
+                }
+            ]
+        }
+    ]
+}
