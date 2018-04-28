@@ -10,7 +10,10 @@ const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const list = require('./data/list.json');
 $(document).ready(function () {
-    let promise, data;
+    let promise;
+    let data;
+    let scale = 1;
+
     let getIndex = function () {
         return {
             sizeIndex: $('#imgSize').val() ? $('#imgSize').val() : 0
@@ -30,25 +33,11 @@ $(document).ready(function () {
         createCanvas();
     }
 
-    // let formatForm = function () {
-    //     let forms = $('.title-option-form');
-    //     let i, len;
-    //
-    //     //.serializeArray();
-    //
-    //     for (i = 0, len = forms.length; i < len; i++) {
-    //         // console.log($(forms[i]).serializeArray());
-    //     }
-    // }
-
     let bindImgSize = function (element) {
-        // let fileIndex = $('#fileNames').val();
-        // let index = $(element).val();
         binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', bindTxtOption);
     }
 
     let createCanvas = function () {
-        // let index = $('#fileNames').val();
         let indexs = getIndex();
         let $canvas = $('#autoADTXT');
         let context = $canvas[0].getContext('2d');
@@ -58,19 +47,15 @@ $(document).ready(function () {
         let drawImage = new DrawImage('#autoADTXT', w, h, data, indexs.sizeIndex);
 
         drawImage.init();
-
-        // formatForm();
     }
 
     let bindTxtOption = function (element) {
-        // let index = $('#fileNames').val();
         let indexs = getIndex();
 
         binding.loadHtml('.option-block', data.size[indexs.sizeIndex].title, title_tpl)
             .bindEvent('.button', 'click', createCanvas)
             .bindEvent('input', 'keyup', setData).bindEvent('input', 'blur', setData)
             .bindEvent('.title-option-form select', 'change', setData);
-
 
         colors.init();
         createCanvas();
@@ -85,13 +70,27 @@ $(document).ready(function () {
     });
 
 
-    // promise = $.ajax({
-    //     url: './js/json/list.json',
-    //     type: 'GET',
-    //     dataType: 'json'
-    // });
-    //
-    // promise.done(function (res) {
-    //     console.log(res);
-    // });
+    $('.enlarge-canvas').on('click', () => {
+        if (scale >= 1) {
+            return;
+        }
+
+        scale += 0.1;
+        $('#autoADTXT').css({
+            'transform': 'scale(' + scale + ')',
+            // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
+        });
+    });
+
+    $('.narrow-canvas').on('click', () => {
+        if (scale <= 0.1) {
+            return;
+        }
+
+        scale -= 0.1;
+        $('#autoADTXT').css({
+            'transform': 'scale(' + scale + ')',
+            // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
+        });
+    })
 });
