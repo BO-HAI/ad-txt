@@ -9,9 +9,11 @@ const title_tpl = require('./template/title.option.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const list = require('./data/list.json');
+
 $(document).ready(function () {
     let promise;
     let data;
+    let illustrationData;
     let scale = 1;
 
     let getIndex = function () {
@@ -34,7 +36,43 @@ $(document).ready(function () {
     }
 
     let bindImgSize = function (element) {
-        binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', bindTxtOption);
+        binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', function () {
+            let indexs = getIndex();
+            bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            bindTxtOption();
+        });
+
+    }
+
+    let bindIllustration = function (w, h) {
+        $('#illustrationNames').attr('disabled', false);
+        /**
+         * 配图列表按寄主分辨率区分
+         */
+        try {
+            const illustration_list = require('./data/illustration/' + w + '_' + h + '.json');
+            binding.loadHtml('#illustrationNames', illustration_list, filename_tpl).bindEvent('#illustrationNames', 'change', function (element) {
+                    let val = $(element).val();
+                    illustrationData = null;
+                    if (val) {
+                        illustrationData = require('./data/illustration/' + val + '.json');
+                    }
+
+                    bindTxtOption();
+            });
+        } catch (e) {
+            console.error('illustration（配图）属性为true,但未找到相关json');
+            $('#illustrationNames').attr('disabled', true);
+        } finally {
+
+        }
+
+
+    }
+
+    let unbindIllustration = function () {
+        $('#illustrationNames').attr('disabled', true);
+        binding.loadHtml('#illustrationNames', [], filename_tpl);
     }
 
     let createCanvas = function () {
@@ -44,14 +82,13 @@ $(document).ready(function () {
         let w = data.size[indexs.sizeIndex].w;
         let h = data.size[indexs.sizeIndex].h;
 
-        let drawImage = new DrawImage('#autoADTXT', w, h, data, indexs.sizeIndex);
+        let drawImage = new DrawImage('#autoADTXT', w, h, data, illustrationData, indexs.sizeIndex);
 
         drawImage.init();
     }
 
-    let bindTxtOption = function (element) {
+    let bindTxtOption = function (element, ignore = false) {
         let indexs = getIndex();
-
         binding.loadHtml('.option-block', data.size[indexs.sizeIndex].title, title_tpl)
             .bindEvent('.button', 'click', createCanvas)
             .bindEvent('input', 'keyup', setData).bindEvent('input', 'blur', setData)
@@ -63,11 +100,16 @@ $(document).ready(function () {
 
     binding.loadHtml('#fileNames', list, filename_tpl).bindEvent('#fileNames', 'change', function (element) {
             const val = $(element).val();
+            let indexs = getIndex();
             data = require('./data/' + val + '.json');
-            console.log(data);
             bindImgSize(element);
+            if (data.illustration) {
+                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            }
             bindTxtOption(element);
     });
+
+
 
 
     $('.enlarge-canvas').on('click', () => {

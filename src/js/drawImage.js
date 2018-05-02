@@ -1,11 +1,12 @@
 class DrawImage {
-    constructor (id, width, height, data, imgSizeIndex) {
+    constructor (id, width, height, data, illustrationData, imgSizeIndex) {
         this.id = id;
         this.$canvas = $(id);
         this.context = this.$canvas[0].getContext('2d');
         this.width = width; // 不带单位
         this.height = height; // 不带单位
         this.data = data;
+        this.illustrationData = illustrationData;
         this.imgSizeIndex = imgSizeIndex;
     }
 
@@ -34,6 +35,26 @@ class DrawImage {
         beauty.setAttribute("crossOrigin",'Anonymous');
         beauty.onload = () => {
             this.context.drawImage(beauty, 0, 0, this.width, this.height);
+            this.context.stroke();
+
+            if (this.illustrationData) {
+                this.drawIllstration(fn);
+            } else {
+                fn()
+            }
+
+            // if (fn) {
+            //     fn();
+            // }
+        }
+    }
+
+    drawIllstration (fn) {
+        let beauty = new Image();
+        beauty.src = this.illustrationData.url;
+        beauty.setAttribute("crossOrigin",'Anonymous');
+        beauty.onload = () => {
+            this.context.drawImage(beauty, this.illustrationData.x, this.illustrationData.y, this.illustrationData.w, this.illustrationData.h);
             this.context.stroke();
 
             if (fn) {
