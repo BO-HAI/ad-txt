@@ -8,12 +8,12 @@ const title_tpl = require('./template/title.option.handlebars');
 // const data = require('./data.js');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
-const list = require('./data/list.json');
+// const list = require('./data/list.json');
 
 $(document).ready(function () {
     let promise;
     let data;
-    let illustrationData;
+    let illustration_data;
     let scale = 1;
 
     let getIndex = function () {
@@ -38,6 +38,7 @@ $(document).ready(function () {
     let bindImgSize = function (element) {
         binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', function () {
             let indexs = getIndex();
+
             bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
             bindTxtOption();
         });
@@ -46,19 +47,29 @@ $(document).ready(function () {
 
     let bindIllustration = function (w, h) {
         $('#illustrationNames').attr('disabled', false);
+        illustration_data = null;
         /**
          * 配图列表按寄主分辨率区分
          */
         try {
-            const illustration_list = require('./data/illustration/' + w + '_' + h + '.json');
-            binding.loadHtml('#illustrationNames', illustration_list, filename_tpl).bindEvent('#illustrationNames', 'change', function (element) {
-                    let val = $(element).val();
-                    illustrationData = null;
-                    if (val) {
-                        illustrationData = require('./data/illustration/' + val + '.json');
-                    }
+            let illustration_list;
+            let resList = $.ajax({
+                url: 'http://www.hqwx.com/subject/0000/ad2/illustration/' + w + '_' + h + '.json',
+                type: 'GET',
+                dataType: 'json'
 
-                    bindTxtOption();
+            });
+
+            resList.done(function (res) {
+                illustration_list = res;
+                binding
+                .loadHtml('#illustrationNames', illustration_list, filename_tpl)
+                .bindEvent('#illustrationNames', 'change', illustrationChange);
+            });
+
+            resList.fail(function () {
+                console.error('illustration（配图）属性为true,但未找到相关json');
+                $('#illustrationNames').attr('disabled', true);
             });
         } catch (e) {
             console.error('illustration（配图）属性为true,但未找到相关json');
@@ -66,8 +77,6 @@ $(document).ready(function () {
         } finally {
 
         }
-
-
     }
 
     let unbindIllustration = function () {
@@ -82,7 +91,7 @@ $(document).ready(function () {
         let w = data.size[indexs.sizeIndex].w;
         let h = data.size[indexs.sizeIndex].h;
 
-        let drawImage = new DrawImage('#autoADTXT', w, h, data, illustrationData, indexs.sizeIndex);
+        let drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex);
 
         drawImage.init();
     }
@@ -98,18 +107,62 @@ $(document).ready(function () {
         createCanvas();
     }
 
-    binding.loadHtml('#fileNames', list, filename_tpl).bindEvent('#fileNames', 'change', function (element) {
-            const val = $(element).val();
-            let indexs = getIndex();
-            data = require('./data/' + val + '.json');
+    let fileChange = function (element) {
+        const val = $(element).val();
+        let indexs = getIndex();
+        // data = require('./data/' + val + '.json');
+
+        let resList = $.ajax({
+            url: 'http://www.hqwx.com/subject/0000/ad2/' + val + '.json',
+            type: 'GET',
+            dataType: 'json'
+
+        });
+
+        resList.done(function (res) {
+            data = res;
             bindImgSize(element);
             if (data.illustration) {
                 bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
             }
             bindTxtOption(element);
+        });
+    }
+
+    let illustrationChange = function (element) {
+        let val = $(element).val();
+        illustration_data = null;
+        if (val) {
+            // illustration_data = require('./data/illustration/' + val + '.json');
+            let resList = $.ajax({
+                url: 'http://www.hqwx.com/subject/0000/ad2/illustration/' + val + '.json',
+                type: 'GET',
+                dataType: 'json'
+            });
+
+            resList.done(function (res) {
+                illustration_data = res;
+                bindTxtOption();
+            });
+        } else {
+            bindTxtOption();
+        }
+    }
+
+    let resList = $.ajax({
+        url: 'http://www.hqwx.com/subject/0000/ad2/list.json',
+        type: 'GET',
+        dataType: 'json'
+
     });
 
+    resList.done(function (res) {
+        binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
+    });
 
+    resList.fail(function (e) {
+        console.log(e);
+    });
 
 
     $('.enlarge-canvas').on('click', () => {
