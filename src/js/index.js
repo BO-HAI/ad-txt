@@ -1,14 +1,19 @@
 require('normalize.css');
 require('../sass/screen.scss');
 const colors = require('./colors.js');
-const Handlebars = require('handlebars/dist/handlebars.js');
 const filename_tpl = require('./template/filename.option.handlebars');
 const size_tpl = require('./template/size.option.handlebars');
 const title_tpl = require('./template/title.option.handlebars');
-// const data = require('./data.js');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
-// const list = require('./data/list.json');
+
+
+require('../images/a.jpg');
+require('../images/b.jpg');
+// // const Handlebars = require('handlebars/dist/handlebars.js');
+
+let debug = false;
+let host = debug ? '/data/' : '/subject/0000/ad2/';
 
 $(document).ready(function () {
     let promise;
@@ -54,7 +59,7 @@ $(document).ready(function () {
         try {
             let illustration_list;
             let resList = $.ajax({
-                url: 'http://www.hqwx.com/subject/0000/ad2/illustration/' + w + '_' + h + '.json',
+                url: host + 'illustration/' + w + '_' + h + '.json',
                 type: 'GET',
                 dataType: 'json'
 
@@ -113,7 +118,7 @@ $(document).ready(function () {
         // data = require('./data/' + val + '.json');
 
         let resList = $.ajax({
-            url: 'http://www.hqwx.com/subject/0000/ad2/' + val + '.json',
+            url: host + val + '.json',
             type: 'GET',
             dataType: 'json'
 
@@ -135,7 +140,7 @@ $(document).ready(function () {
         if (val) {
             // illustration_data = require('./data/illustration/' + val + '.json');
             let resList = $.ajax({
-                url: 'http://www.hqwx.com/subject/0000/ad2/illustration/' + val + '.json',
+                url: host + 'illustration/' + val + '.json',
                 type: 'GET',
                 dataType: 'json'
             });
@@ -150,10 +155,9 @@ $(document).ready(function () {
     }
 
     let resList = $.ajax({
-        url: 'http://www.hqwx.com/subject/0000/ad2/list.json',
+        url: host + 'list.json',
         type: 'GET',
         dataType: 'json'
-
     });
 
     resList.done(function (res) {

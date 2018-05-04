@@ -6,8 +6,12 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         'index': './src/js/index.js',
-        // 'index2': './src/js/index2.js',
-        'jq': './src/js/jquery/1.11.0.js'
+        'jq': './src/js/jquery/1.11.0.js',
+        'colors': './src/js/colorpicker-master/colors.js',
+        'colorpicker_data': './src/js/colorpicker-master/colorpicker.data.js',
+        'colorpicker': './src/js/colorpicker-master/colorpicker.js',
+        'jscolor': './src/js/colorpicker-master/javascript_implementation/jscolor.js',
+        'handlebars': 'handlebars/dist/handlebars.js'
     },
     output: {
         filename: './js/[name].js',
@@ -39,6 +43,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
+                            limit: 500,
                             name: '[name].[ext]',
                             outputPath: './images'
                         }
@@ -66,16 +71,6 @@ module.exports = {
                 test: /\.json$/,
                 use: 'json-loader'
              }
-            // ,{
-            //     test: require.resolve('jquery'),
-            //     use: [{
-            //         loader: 'expose-loader',
-            //         options: 'jQuery'
-            //     },{
-            //         loader: 'expose-loader',
-            //         options: '$'
-            //     }]
-            // }
         ]
     },
     devServer: {
@@ -84,24 +79,15 @@ module.exports = {
         port: 9001
     },
     plugins: [
-        // new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.UglifyJsPlugin(),
         new HtmlWebpackPlugin({
             title: 'index',
             filename: 'index.html',
-            chunks: ['jq', 'index'],
+            chunks: ['jq', 'handlebars', 'colors', 'colorpicker_data', 'colorpicker', 'jscolor', 'index'],
             // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
             template: 'src/template/index.html',
             chunksSortMode: 'manual'
         }),
-        // new HtmlWebpackPlugin({
-        //     title: 'index',
-        //     filename: 'index.html',
-        //     chunks: ['jq', 'index2'],
-        //     // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
-        //     template: 'src/template/index2.html',
-        //     chunksSortMode: 'manual'
-        // })
-        // ,
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
@@ -109,8 +95,4 @@ module.exports = {
             'window.$': 'jquery',
         })
     ]
-    // ,
-    // externals: {
-    //     'jquery' : 'window.jQuery'
-    // }
 }
