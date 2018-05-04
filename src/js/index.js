@@ -1,17 +1,24 @@
 require('normalize.css');
 require('../sass/screen.scss');
 const colors = require('./colors.js');
-const Handlebars = require('handlebars/dist/handlebars.js');
 const filename_tpl = require('./template/filename.option.handlebars');
 const size_tpl = require('./template/size.option.handlebars');
 const title_tpl = require('./template/title.option.handlebars');
-// const data = require('./data.js');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
-const list = require('./data/list.json');
+
+
+require('../images/a.jpg');
+require('../images/b.jpg');
+// // const Handlebars = require('handlebars/dist/handlebars.js');
+
+let debug = false;
+let host = debug ? '/data/' : '/subject/0000/ad2/';
+
 $(document).ready(function () {
     let promise;
     let data;
+    let illustration_data;
     let scale = 1;
 
     let getIndex = function () {
@@ -34,7 +41,52 @@ $(document).ready(function () {
     }
 
     let bindImgSize = function (element) {
-        binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', bindTxtOption);
+        binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', function () {
+            let indexs = getIndex();
+
+            bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            bindTxtOption();
+        });
+
+    }
+
+    let bindIllustration = function (w, h) {
+        $('#illustrationNames').attr('disabled', false);
+        illustration_data = null;
+        /**
+         * 配图列表按寄主分辨率区分
+         */
+        try {
+            let illustration_list;
+            let resList = $.ajax({
+                url: host + 'illustration/' + w + '_' + h + '.json',
+                type: 'GET',
+                dataType: 'json'
+
+            });
+
+            resList.done(function (res) {
+                illustration_list = res;
+                binding
+                .loadHtml('#illustrationNames', illustration_list, filename_tpl)
+                .bindEvent('#illustrationNames', 'change', illustrationChange);
+            });
+
+            resList.fail(function () {
+                console.error('illustration（配图）属性为true,但未找到相关json');
+                $('#illustrationNames').attr('disabled', true);
+            });
+        } catch (e) {
+            console.error('illustration（配图）属性为true,但未找到相关json');
+            $('#illustrationNames').attr('disabled', true);
+        } finally {
+
+        }
+    }
+
+    let unbindIllustration = function () {
+        $('#illustrationNames').attr('disabled', true);
+        binding.loadHtml('#illustrationNames', [], filename_tpl);
     }
 
     let createCanvas = function () {
@@ -44,14 +96,13 @@ $(document).ready(function () {
         let w = data.size[indexs.sizeIndex].w;
         let h = data.size[indexs.sizeIndex].h;
 
-        let drawImage = new DrawImage('#autoADTXT', w, h, data, indexs.sizeIndex);
+        let drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex);
 
         drawImage.init();
     }
 
-    let bindTxtOption = function (element) {
+    let bindTxtOption = function (element, ignore = false) {
         let indexs = getIndex();
-
         binding.loadHtml('.option-block', data.size[indexs.sizeIndex].title, title_tpl)
             .bindEvent('.button', 'click', createCanvas)
             .bindEvent('input', 'keyup', setData).bindEvent('input', 'blur', setData)
@@ -61,12 +112,60 @@ $(document).ready(function () {
         createCanvas();
     }
 
-    binding.loadHtml('#fileNames', list, filename_tpl).bindEvent('#fileNames', 'change', function (element) {
-            const val = $(element).val();
-            data = require('./data/' + val + '.json');
-            console.log(data);
+    let fileChange = function (element) {
+        const val = $(element).val();
+        let indexs = getIndex();
+        // data = require('./data/' + val + '.json');
+
+        let resList = $.ajax({
+            url: host + val + '.json',
+            type: 'GET',
+            dataType: 'json'
+
+        });
+
+        resList.done(function (res) {
+            data = res;
             bindImgSize(element);
+            if (data.illustration) {
+                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            }
             bindTxtOption(element);
+        });
+    }
+
+    let illustrationChange = function (element) {
+        let val = $(element).val();
+        illustration_data = null;
+        if (val) {
+            // illustration_data = require('./data/illustration/' + val + '.json');
+            let resList = $.ajax({
+                url: host + 'illustration/' + val + '.json',
+                type: 'GET',
+                dataType: 'json'
+            });
+
+            resList.done(function (res) {
+                illustration_data = res;
+                bindTxtOption();
+            });
+        } else {
+            bindTxtOption();
+        }
+    }
+
+    let resList = $.ajax({
+        url: host + 'list.json',
+        type: 'GET',
+        dataType: 'json'
+    });
+
+    resList.done(function (res) {
+        binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
+    });
+
+    resList.fail(function (e) {
+        console.log(e);
     });
 
 

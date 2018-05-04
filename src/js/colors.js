@@ -1,7 +1,7 @@
-require('./colorPicker-master/colors.js');
-require('./colorPicker-master/colorPicker.data.js');
-require('./colorPicker-master/colorPicker.js');
-require('./colorPicker-master/javascript_implementation/jsColor.js');
+// require('./colorPicker-master/colors.js');
+// require('./colorPicker-master/colorPicker.data.js');
+// require('./colorPicker-master/colorPicker.js');
+// require('./colorPicker-master/javascript_implementation/jsColor.js');
 
 module.exports = {
     init: function () {
