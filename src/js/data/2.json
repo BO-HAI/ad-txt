@@ -15,7 +15,7 @@
                         "placeholder": "考试科目标题, 9-19个汉字",
                         "len": 19,
                         "fontSize": 26,
-                        "fontFamily": "cnYAHEI",
+                        "fontFamily": "cnMSYH",
                         "fontColor": "#ffffff"
                     },
                     "x": null,
@@ -135,6 +135,29 @@
                     },
                     "x": 408,
                     "y": 295,
+                    "controlFont": {
+                        "size": false,
+                        "color": false,
+                        "family": false
+                    },
+                    "controlCoordinate": {
+                        "x": false,
+                        "y": false
+                    }
+                },
+                {
+                    "txt": {
+                        "value": "",
+                        "befor": "主讲老师 ",
+                        "after": "",
+                        "placeholder": "考试科目标题, 9-19个汉字",
+                        "len": 19,
+                        "fontSize": 24,
+                        "fontFamily": "cnMSYH",
+                        "fontColor": "#ffffff"
+                    },
+                    "x": null,
+                    "y": 370,
                     "controlFont": {
                         "size": false,
                         "color": false,

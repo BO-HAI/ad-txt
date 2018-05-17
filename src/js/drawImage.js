@@ -85,6 +85,8 @@ class DrawImage {
         this.context.font = 'lighter ' + data.txt.fontSize + 'px' + ' ' + data.txt.fontFamily;
         this.context.fillStyle =  data.txt.fontColor;
 
+        value = value.trim() !== '' ? data.txt.befor + value + data.txt.after : value;
+
         if (isCenter) {
            measureScoreStr = this.context.measureText(value);
            x = this.width / 2 - (measureScoreStr.width / 2);
@@ -98,7 +100,7 @@ class DrawImage {
             y = data.y;
         }
 
-        this.context.fillText(data.txt.befor + value + data.txt.after, x, y);
+        this.context.fillText(value, x, y);
         this.context.stroke();
     }
 }
