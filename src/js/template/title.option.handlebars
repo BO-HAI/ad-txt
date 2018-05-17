@@ -2,7 +2,7 @@
 <form class="horizontal title-option-form" action="">
     <div class="form-group">
         <label for="title">标题:</label>
-        <input data-index="{{@index}}" name="value" type="text" placeholder="{{txt.placeholder}}">
+        <input value="{{txt.value}}" data-index="{{@index}}" name="value" type="text" placeholder="{{txt.placeholder}}">
     </div>
     <div class="form-group">
         <label for="fontcolor">颜色:</label>
@@ -11,7 +11,9 @@
     <div class="form-group">
         <label for="fontFamily">字体:</label>
         <select data-index="{{@index}}" name="fontFamily" id="" class="small" {{#if controlFont.family}}{{else}}disabled="disabled"{{/if}}>
-            <option value="cnYAHEI" {{#compare txt.fontFamily '==' 'cnYAHEI'}}{{/compare}} class="cnYAHEI">微软雅黑</option>
+            <option value="cnYAHEI" {{#compare txt.fontFamily '==' 'cnMSYH'}}{{/compare}} class="cnYAHEI">微软雅黑细</option>
+            <option value="cnYAHEI" {{#compare txt.fontFamily '==' 'cnMSYHBD'}}{{/compare}} class="cnYAHEI">微软雅黑粗</option>
+            <option value="cnYAHEI" {{#compare txt.fontFamily '==' 'cnFZZCHJT'}}{{/compare}} class="cnFZZCHJT">方正正粗黑简体</option>
             <option value="cnZHSRZJ" {{#compare txt.fontFamily '==' 'cnZHSRZJ'}}{{/compare}} class="cnZHSRZJ">张海山锐线体简</option>
             <option value="enJonahRegular" {{#compare txt.fontFamily '==' 'enJonahRegular'}}{{/compare}} class="enJonahRegular">Jonah Regular</option>
         </select>

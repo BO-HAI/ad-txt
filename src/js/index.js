@@ -7,12 +7,22 @@ const title_tpl = require('./template/title.option.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 
+// require('./data/list.json');
+// require('./data/0.json');
+// require('./data/1.json');
+// require('./data/2.json');
+// require('./data/illustration/1000_234.json');
+// require('./data/illustration/1920_450.json');
+// require('./data/illustration/lijuan_1000.json');
+// require('./data/illustration/lijuan_1920.json');
+// require('./data/illustration/wanglili_1920.json');
 
 require('../images/a.jpg');
 require('../images/b.jpg');
+require('../images/c.jpg');
 // // const Handlebars = require('handlebars/dist/handlebars.js');
 
-let debug = false;
+let debug = true;
 let host = debug ? '/data/' : '/subject/0000/ad2/';
 
 $(document).ready(function () {
@@ -22,10 +32,11 @@ $(document).ready(function () {
     let scale = 1;
 
     let getIndex = function () {
+        let value = $('#imgSize').val();
         return {
-            sizeIndex: $('#imgSize').val() ? $('#imgSize').val() : 0
+            sizeIndex: value ? value : 0
         }
-    }
+    };
 
     let setData = function (element) {
         let indexs = getIndex();
@@ -38,7 +49,7 @@ $(document).ready(function () {
             data.size[indexs.sizeIndex].title[titleIndex].txt[name] = $(element).val();
         }
         createCanvas();
-    }
+    };
 
     let bindImgSize = function (element) {
         binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', function () {
@@ -48,7 +59,7 @@ $(document).ready(function () {
             bindTxtOption();
         });
 
-    }
+    };
 
     let bindIllustration = function (w, h) {
         $('#illustrationNames').attr('disabled', false);
@@ -82,12 +93,12 @@ $(document).ready(function () {
         } finally {
 
         }
-    }
+    };
 
-    let unbindIllustration = function () {
-        $('#illustrationNames').attr('disabled', true);
-        binding.loadHtml('#illustrationNames', [], filename_tpl);
-    }
+    // let unbindIllustration = function () {
+    //     $('#illustrationNames').attr('disabled', true);
+    //     binding.loadHtml('#illustrationNames', [], filename_tpl);
+    // };
 
     let createCanvas = function () {
         let indexs = getIndex();
@@ -99,7 +110,7 @@ $(document).ready(function () {
         let drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex);
 
         drawImage.init();
-    }
+    };
 
     let bindTxtOption = function (element, ignore = false) {
         let indexs = getIndex();
@@ -110,7 +121,7 @@ $(document).ready(function () {
 
         colors.init();
         createCanvas();
-    }
+    };
 
     let fileChange = function (element) {
         const val = $(element).val();
@@ -132,7 +143,7 @@ $(document).ready(function () {
             }
             bindTxtOption(element);
         });
-    }
+    };
 
     let illustrationChange = function (element) {
         let val = $(element).val();
@@ -152,7 +163,7 @@ $(document).ready(function () {
         } else {
             bindTxtOption();
         }
-    }
+    };
 
     let resList = $.ajax({
         url: host + 'list.json',

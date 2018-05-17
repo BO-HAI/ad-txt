@@ -75,7 +75,7 @@ class DrawImage {
         let isCenter = !data.x ? true : false;
         let isVerticalCenter = !data.y ? true : false;
 
-        if (data.txt.len !== null && data.txt.value.length > data.txt.len) {
+        if (data.txt.len !== null && (data.txt.value.length - data.txt.befor.length - data.txt.after.length) > data.txt.len) {
             value = data.txt.value.substring(0, data.txt.len);
         } else {
             value = data.txt.value;
@@ -98,7 +98,7 @@ class DrawImage {
             y = data.y;
         }
 
-        this.context.fillText(value, x, y);
+        this.context.fillText(data.txt.befor + value + data.txt.after, x, y);
         this.context.stroke();
     }
 }
