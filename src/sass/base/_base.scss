@@ -98,7 +98,8 @@ header {
 
         .enlarge-canvas,
         .narrow-canvas,
-        .close-canvas {
+        .close-canvas,
+        .simulation-app {
             position: absolute;
             left: 20px;
             z-index: 999;
@@ -118,6 +119,10 @@ header {
             }
         }
 
+        // .simulation-app {
+        //     display: none;
+        // }
+
         .close-canvas {
             top: 20px;
         }
@@ -128,6 +133,10 @@ header {
 
         .narrow-canvas {
             top: 100px;
+        }
+
+        .simulation-app {
+            top: 140px;
         }
     }
 }

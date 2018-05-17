@@ -8,4 +8,39 @@
         float: right;
         width: 50%;
     }
+
+    .simulation {
+        .app-mask {
+            background-image: url('../images/app_bg.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            // width: 1106px;
+            // height: 1900px;
+            width: 400px;
+            height: 686px;
+            z-index: 999999;
+            position: relative;
+        }
+
+        #autoADTXT {
+            position: absolute !important;
+            top: -85px !important;
+            left: -180px !important;
+            transform: scale(0.365) !important;
+        }
+
+        .enlarge-canvas,
+        .narrow-canvas,
+        .close-canvas {
+            display: none;
+        }
+
+        .simulation-app {
+            display: inline-block;
+            top: 20px;
+            right: 0;
+            left: auto;
+        }
+    }
 }

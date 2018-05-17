@@ -202,5 +202,18 @@ $(document).ready(function () {
             'transform': 'scale(' + scale + ')',
             // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
         });
-    })
+    });
+
+    $('.simulation-app').on('click', function () {
+        let $block = $('.canvas-block');
+        let $this = $(this);
+
+        if ($block.hasClass('simulation')) {
+            $block.removeClass('simulation');
+            $this.text('+v');
+        } else {
+            $block.addClass('simulation');
+            $this.text('-v');
+        }
+    });
 });
