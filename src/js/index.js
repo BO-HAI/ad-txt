@@ -1,219 +1,219 @@
 require('normalize.css');
 require('../sass/screen.scss');
-require('./color_picker/css/colpick.css');
-// const $ = require("jQuery");
-// require('./color_picker/js/colpick.js');
-// require('./color_picker/js/plugin.js');
+const colors = require('./colors.js');
+const filename_tpl = require('./template/filename.option.handlebars');
+const size_tpl = require('./template/size.option.handlebars');
+const title_tpl = require('./template/title.option.handlebars');
+const binding = require('./bind.js');
+const DrawImage = require('./drawImage.js');
 
-class Adtxt {
-    constructor (id, width, height) {
-        this.id = id;
-        this.canvas = document.getElementById(id);
-        this.context = this.canvas.getContext('2d');
-        this.width = width; // 不带单位
-        this.height = height; // 不带单位
-        this.titleList = [];
-        this.imageUrl = '';
-        this.scale = 1;
-    }
+// require('./data/list.json');
+// require('./data/0.json');
+// require('./data/1.json');
+// require('./data/2.json');
+// require('./data/illustration/1000_234.json');
+// require('./data/illustration/1920_450.json');
+// require('./data/illustration/lijuan_1000.json');
+// require('./data/illustration/lijuan_1920.json');
+// require('./data/illustration/wanglili_1920.json');
 
-    init (url) {
-        this.imageUrl = url;
+require('../images/a.jpg');
+require('../images/b.jpg');
+require('../images/c.jpg');
+// // const Handlebars = require('handlebars/dist/handlebars.js');
 
-        this.context.fillStyle = '#2b2b2b';
-        this.context.fillRect(0, 0, this.width, this.height);
-        // this.context.stroke();
-        this.drawBG(url);
-
-        let tableHtml =
-                `<table>
-                    <thead>
-                        <tr>
-                            <td width="40%">标题</td>
-                            <td width="10%">颜色</td>
-                            <td width="10%">字体</td>
-                            <td width="5%">字号</td>
-                            <td width="10%">X轴坐标</td>
-                            <td width="10%">Y轴坐标</td>
-                            <td>操作</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>`;
-
-        $('.history-block').html('').append(tableHtml);
-
-        $('select[name="fontFamily"]').change(function () {
-            var $this = $(this);
-
-            $('#autoADTXT').css({
-                'font-family': $this.val()
-            });
-        });
-
-        $('#submitTxt').on('click', () => {
-            var data = $('#titleForm').serializeArray();
-            this.draw(url, data);
-        });
-
-        $('#saveImg').on('click', () => {
-            this.generatePNG();
-        });
-
-        $('.enlarge-canvas').on('click', () => {
-            if (this.scale >= 1) {
-                return;
-            }
-
-            this.scale += 0.1;
-            $('#' + this.id).css({
-                'transform': 'scale(' + this.scale + ')',
-                'margin-left': 7 * ((1-this.scale) * 10) * -1 + '%'
-            });
-        });
-
-        $('.narrow-canvas').on('click', () => {
-            if (this.scale <= 0.1) {
-                return;
-            }
-
-            this.scale -= 0.1;
-            $('#' + this.id).css({
-                'transform': 'scale(' + this.scale + ')',
-                'margin-left': 7 * ((1-this.scale) * 10) * -1 + '%'
-            });
-        });
-    }
-
-    /**
-     * 描绘背景
-     * @param  {String}   url      [description]
-     * @param  {Function} callback [description]
-     */
-    drawBG (url, callback) {
-        let beauty = new Image();
-        beauty.src = url;
-        beauty.setAttribute("crossOrigin",'Anonymous');
-        beauty.onload = () => {
-            this.context.drawImage(beauty, 0, 0, this.width, this.height);
-            this.context.stroke();
-
-            if (callback) {
-                callback();
-            }
-        }
-    }
-
-    /**
-     * 向画布添加标题
-     * @param {Array[Object]} data [description]
-     */
-    addTxt (data) {
-        let measureScoreStr = {
-           width: 0
-        };
-
-        let isCenter = !data[4].value ? true : false;
-        let isVerticalCenter = !data[5].value ? true : false;
-
-        //data[2].value, data[3].value, data[1].value, data[0].value, data[4].value, data[5].value, !data[4].value ? true : false
-
-        this.context.beginPath();
-        this.context.font = 'lighter ' + data[3].value + ' ' + data[2].value;
-        this.context.fillStyle =  data[1].value;
-
-        if (isCenter) {
-           measureScoreStr = this.context.measureText(data[0].value);
-           data[4].value = this.width / 2 - (measureScoreStr.width / 2);
-        }
-
-        if (isVerticalCenter) {
-            data[5].value = this.height / 2 - (parseInt(data[3].value.replace('px', '')) / 2);
-        }
-
-
-        this.context.fillText(data[0].value, data[4].value, data[5].value);
-        this.context.stroke();
-    }
-
-    /**
-     * 画
-     * @param  {[type]} data [description]
-     * @return {[type]}      [description]
-     */
-    draw (url, data) {
-        let that = this;
-        let appendHTML = (item, index) => {
-            $('.history-block tbody').append(
-                `<tr>
-                    <td class="title" style="font-family:${item[2].value}">${item[0].value}</td>
-                    <td>${item[1].value}<span class="color" style="background:${item[1].value}"></span></td>
-                    <td style="font-family:${item[2].value}">${item[2].value}</td>
-                    <td>${item[3].value}</td>
-                    <td>${item[4].value}</td>
-                    <td>${item[5].value}</td>
-                    <td>
-                        <a class="del" href="javascript:;" data-index="${index}">删除</a>
-                        <a class="modify" href="javascript:;" data-index="${index}">修改</a>
-                    </td>
-                </tr>`
-            );
-        }
-
-        let bindDel = function () {
-            let $that = $(this);
-            that.titleList.splice($that.data('index'), 1)
-            that.draw(that.imageUrl, undefined);
-        }
-
-        this.context.clearRect(0, 0, this.width + 'px', this.height + 'px');
-        if (data) {
-            this.titleList.push(data);
-        }
-
-        // console.log(this.titleList);
-        this.drawBG(url, () => {
-            $('.history-block tbody').html('');
-            this.titleList.forEach((item, index) => {
-                this.addTxt(item);
-                appendHTML(item, index);
-            });
-
-            $('.del').on('click', bindDel);
-        });
-    }
-
-    generatePNG () {
-        let newImg = new Image();
-
-        $('img').attr('src', this.canvas.toDataURL("image/png"));
-    }
-}
-
-window.onload = function () {
-    $('.img-list li').on('click', function () {
-        let $that = $(this);
-        let width = $that.data('width');
-        let height = $that.data('height');
-        let url = $that.data('url');
-
-        $('#autoADTXT').attr('width', width + 'px');
-        $('#autoADTXT').attr('height', height + 'px');
-        $('#autoADTXT').css({
-            width,
-            height
-        });
-
-        let c = new Adtxt('autoADTXT', width, height);
-        c.init(url);
-        $('.container').show();
-    });
-
-    $('.close-canvas').on('click', function () {
-        $('.container').hide();
-    });
-}
+let debug = true;
+let host = debug ? '/data/' : '/subject/0000/ad2/';
 
 $(document).ready(function () {
+    let promise;
+    let data;
+    let illustration_data;
+    let scale = 1;
+
+    let getIndex = function () {
+        let value = $('#imgSize').val();
+        return {
+            sizeIndex: value ? value : 0
+        }
+    };
+
+    let setData = function (element) {
+        let indexs = getIndex();
+        let titleIndex = $(element).data('index');
+        let name = $(element).attr('name');
+
+        if (name === 'x' || name === 'y') {
+            data.size[indexs.sizeIndex].title[titleIndex][name] = $(element).val();
+        } else {
+            data.size[indexs.sizeIndex].title[titleIndex].txt[name] = $(element).val();
+        }
+        createCanvas();
+    };
+
+    let bindImgSize = function (element) {
+        binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', function () {
+            let indexs = getIndex();
+
+            bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            bindTxtOption();
+        });
+
+    };
+
+    let bindIllustration = function (w, h) {
+        $('#illustrationNames').attr('disabled', false);
+        illustration_data = null;
+        /**
+         * 配图列表按寄主分辨率区分
+         */
+        try {
+            let illustration_list;
+            let resList = $.ajax({
+                url: host + 'illustration/' + w + '_' + h + '.json',
+                type: 'GET',
+                dataType: 'json'
+
+            });
+
+            resList.done(function (res) {
+                illustration_list = res;
+                binding
+                .loadHtml('#illustrationNames', illustration_list, filename_tpl)
+                .bindEvent('#illustrationNames', 'change', illustrationChange);
+            });
+
+            resList.fail(function () {
+                console.error('illustration（配图）属性为true,但未找到相关json');
+                $('#illustrationNames').attr('disabled', true);
+            });
+        } catch (e) {
+            console.error('illustration（配图）属性为true,但未找到相关json');
+            $('#illustrationNames').attr('disabled', true);
+        } finally {
+
+        }
+    };
+
+    // let unbindIllustration = function () {
+    //     $('#illustrationNames').attr('disabled', true);
+    //     binding.loadHtml('#illustrationNames', [], filename_tpl);
+    // };
+
+    let createCanvas = function () {
+        let indexs = getIndex();
+        let $canvas = $('#autoADTXT');
+        let context = $canvas[0].getContext('2d');
+        let w = data.size[indexs.sizeIndex].w;
+        let h = data.size[indexs.sizeIndex].h;
+
+        let drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex);
+
+        drawImage.init();
+    };
+
+    let bindTxtOption = function (element, ignore = false) {
+        let indexs = getIndex();
+        binding.loadHtml('.option-block', data.size[indexs.sizeIndex].title, title_tpl)
+            .bindEvent('.button', 'click', createCanvas)
+            .bindEvent('input', 'keyup', setData).bindEvent('input', 'blur', setData)
+            .bindEvent('.title-option-form select', 'change', setData);
+
+        colors.init();
+        createCanvas();
+    };
+
+    let fileChange = function (element) {
+        const val = $(element).val();
+        let indexs = getIndex();
+        // data = require('./data/' + val + '.json');
+
+        let resList = $.ajax({
+            url: host + val + '.json',
+            type: 'GET',
+            dataType: 'json'
+
+        });
+
+        resList.done(function (res) {
+            data = res;
+            bindImgSize(element);
+            if (data.illustration) {
+                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            }
+            bindTxtOption(element);
+        });
+    };
+
+    let illustrationChange = function (element) {
+        let val = $(element).val();
+        illustration_data = null;
+        if (val) {
+            // illustration_data = require('./data/illustration/' + val + '.json');
+            let resList = $.ajax({
+                url: host + 'illustration/' + val + '.json',
+                type: 'GET',
+                dataType: 'json'
+            });
+
+            resList.done(function (res) {
+                illustration_data = res;
+                bindTxtOption();
+            });
+        } else {
+            bindTxtOption();
+        }
+    };
+
+    let resList = $.ajax({
+        url: host + 'list.json',
+        type: 'GET',
+        dataType: 'json'
+    });
+
+    resList.done(function (res) {
+        binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
+    });
+
+    resList.fail(function (e) {
+        console.log(e);
+    });
+
+
+    $('.enlarge-canvas').on('click', () => {
+        if (scale >= 1) {
+            return;
+        }
+
+        scale += 0.1;
+        $('#autoADTXT').css({
+            'transform': 'scale(' + scale + ')',
+            // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
+        });
+    });
+
+    $('.narrow-canvas').on('click', () => {
+        if (scale <= 0.1) {
+            return;
+        }
+
+        scale -= 0.1;
+        $('#autoADTXT').css({
+            'transform': 'scale(' + scale + ')',
+            // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
+        });
+    });
+
+    $('.simulation-app').on('click', function () {
+        let $block = $('.canvas-block');
+        let $this = $(this);
+
+        if ($block.hasClass('simulation')) {
+            $block.removeClass('simulation');
+            $this.text('+v');
+        } else {
+            $block.addClass('simulation');
+            $this.text('-v');
+        }
+    });
 });

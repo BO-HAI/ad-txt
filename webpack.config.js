@@ -6,10 +6,12 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         'index': './src/js/index.js',
-        'index2': './src/js/index2.js',
-        'colpick': './src/js/color_picker/js/colpick.js',
-        'colpick_plugin': './src/js/color_picker/js/plugin.js',
-        'jq': './src/js/jquery/1.11.0.js'
+        'jq': './src/js/jquery/1.11.0.js',
+        'colors': './src/js/colorpicker-master/colors.js',
+        'colorpicker_data': './src/js/colorpicker-master/colorpicker.data.js',
+        'colorpicker': './src/js/colorpicker-master/colorpicker.js',
+        'jscolor': './src/js/colorpicker-master/javascript_implementation/jscolor.js',
+        'handlebars': 'handlebars/dist/handlebars.js'
     },
     output: {
         filename: './js/[name].js',
@@ -20,7 +22,7 @@ module.exports = {
             {
                 test: /\.js/,
                 exclude: [
-                   'src/js/color_picker/js/*.js',
+                   'src/js/colorPicker-master/',
                    'src/js/jquery/'
                ],
                 exclude: /node_modules/,
@@ -41,6 +43,7 @@ module.exports = {
                     {
                         loader: 'file-loader',
                         options: {
+                            limit: 500,
                             name: '[name].[ext]',
                             outputPath: './images'
                         }
@@ -59,7 +62,21 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.handlebars$/,
+                loader: "handlebars-loader?helperDirs[]=" + __dirname + "/src/js/helper"
+            },
+            {
+                test: /\.json$/,
+                use: {
+                    loader: 'json-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: './data'
+                    }
+                }
+             }
         ]
     },
     devServer: {
@@ -72,17 +89,16 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'index',
             filename: 'index.html',
-            chunks: ['index', 'index2'],
+            chunks: ['jq', 'handlebars', 'colors', 'colorpicker_data', 'colorpicker', 'jscolor', 'index'],
             // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
             template: 'src/template/index.html',
             chunksSortMode: 'manual'
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
-            jQuery: 'jquery'
+            jQuery: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery',
         })
-    ],
-    externals: {
-        'jquery' : 'window.jQuery'
-    }
+    ]
 }

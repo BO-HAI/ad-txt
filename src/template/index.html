@@ -2,133 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
-    <script src="http://www.hqwx.com/subject/0000/color_picker/js/colpick.js"></script>
-    <script src="http://www.hqwx.com/subject/0000/color_picker/js/plugin.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script> -->
+    <!-- <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colors.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colorpicker.data.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colorpicker.js"></script>
+    <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/javascript_implementation/jscolor.js"></script> -->
 </head>
 <body>
     <header>
         <h1>AD.TXT <span>Alpha</span></h1>
     </header>
-    <ul class="img-list">
-        <li data-width="1920" data-height="450" data-url="http://ykonlinevideo.bs2dl.yy.com/original/c6299568d981433c877de5421cf08218.jpg" style="background-image: url('http://ykonlinevideo.bs2dl.yy.com/original/c6299568d981433c877de5421cf08218.jpg')">
-            <span>1920*450</span>
-        </li>
-        <li data-width="800" data-height="650" data-url="http://ykonlinevideo.bs2dl.yy.com/original/d2ed5e84e3fb4d618e1c7773d44913bc.jpg" style="background-image: url('http://ykonlinevideo.bs2dl.yy.com/original/d2ed5e84e3fb4d618e1c7773d44913bc.jpg')">
-            <span>800*650</span>
-        </li>
-    </ul>
-    <div class="container clearFix">
-        <div class="canvas-wrap">
-            <span class="close-canvas">X</span>
-            <span class="enlarge-canvas">＋</span>
-            <span class="narrow-canvas">－</span>
+    <div class="container app_container">
+        <form class="horizontal" action="">
+            <div class="form-group">
+                <label for="">选择广告底图</label>
+                <select name="" id="fileNames">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">分辨率</label>
+                <select name="" id="imgSize">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="">配图</label>
+                <select name="" id="illustrationNames">
+                    <option value=""></option>
+                </select>
+            </div>
+            <hidden class="cnMSYH"></hidden>
+            <hidden class="cnMSYHBD"></hidden>
+            <hidden class="cnFZZCHJT"></hidden>
+            <hidden class="cnZHSRZJ"></hidden>
+            <hidden class="enJonahRegular"></hidden>
+        </form>
+        <div class="option-block">
+        </div>
+        <div class="canvas-block">
+            <div>
+
+            </div>
+            <div class="app-mask">
+                <span class="enlarge-canvas">＋</span>
+                <span class="narrow-canvas">－</span>
+                <span class="simulation-app">-v</span>
+            </div>
             <canvas id="autoADTXT"></canvas>
         </div>
-
-        <img id="outImg" src="" alt="">
-        <div class="option-block">
-            <form action="" id="titleForm">
-                <div class="form-group">
-                    <label for="title">标题:</label>
-                    <input name="title" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="fontcolor">颜色:</label>
-                    <input name="fontColor" type="text" value="#333333">
-                    <a href="javascript:;" id="picker"  class="button">取色</a>
-                </div>
-
-                <div class="form-group">
-                    <label for="fontFamily">字体:</label>
-                    <select name="fontFamily" id="">
-                        <option value="cnYAHEI" class="cnYAHEI">微软雅黑</option>
-                        <option value="cnZHSRZJ" class="cnZHSRZJ">张海山锐线体简</option>
-                        <option value="enJonahRegular" class="enJonahRegular">Jonah Regular</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fontSize">字号:</label>
-                    <input name="fontSize" type="text" value="50px">
-                </div>
-                <div class="form-group">
-                    <label for="x">X:</label>
-                    <input name="x" type="text" value="" placeholder="默认居中">
-                </div>
-                <div class="form-group">
-                    <label for="y">Y:</label>
-                    <input name="y" type="text" value="" placeholder="默认居中">
-                </div>
-
-                <div class="form-group button-group">
-                    <!-- <a class="button" id="saveImg" href="javascript:;">生成图片</a> -->
-                    <a class="button button-big" id="submitTxt" href="javascript:;">添加</a>
-                </div>
-            </form>
-        </div>
-        <div class="history-block">
-
-        </div>
     </div>
-    <!-- <footer>
-        <div class="option-block">
-            <form action="" id="titleForm">
-                <div class="form-group">
-                    <label for="title">标题:</label>
-                    <input name="title" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="fontcolor">颜色:</label>
-                    <input name="fontColor" type="text" value="#333333">
-                    <a href="javascript:;" id="picker"  class="button">取色</a>
-                </div>
-
-                <div class="form-group">
-                    <label for="fontFamily">字体:</label>
-                    <select name="fontFamily" id="">
-                        <option value="cnYAHEI" class="cnYAHEI">微软雅黑</option>
-                        <option value="cnZHSRZJ" class="cnZHSRZJ">张海山锐线体简</option>
-                        <option value="enJonahRegular" class="enJonahRegular">Jonah Regular</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="fontSize">字号:</label>
-                    <input name="fontSize" type="text" value="50px">
-                </div>
-                <div class="form-group">
-                    <label for="x">X:</label>
-                    <input name="x" type="text" value="" placeholder="默认居中">
-                </div>
-                <div class="form-group">
-                    <label for="y">Y:</label>
-                    <input name="y" type="text" value="" placeholder="默认居中">
-                </div>
-
-                <div class="form-group button-group">
-                    <a class="button" id="saveImg" href="javascript:;">生成图片</a>
-                    <a class="button button-big" id="submitTxt" href="javascript:;">添加</a>
-                </div>
-            </form>
-        </div>
-        <div class="history-block">
-
-        </div>
-    </footer> -->
 </body>
-<script type="text/javascript">
-$(document).ready(function () {
-    $('#picker').colpick();
-    $('.colpick_submit').on('click', function () {
-        var value = '#' + $('.colpick_hex_field').find('input').val();
-        $('input[name="fontColor"]').val(value);
-        $('#picker').css({
-            'background': value
-        });
-        $('.colpick').hide();
-    });
-});
-</script>
+<!-- <script id="tpl-option" type="text/x-handlebars-template">
+    {{#each data}}
+    <option value="">{{txt}}</option>
+    {{/each}}
+</script> -->
 </html>
