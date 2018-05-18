@@ -2,7 +2,8 @@ class DrawImage {
     constructor (id, width, height, data, illustrationData, imgSizeIndex) {
         this.id = id;
         this.$canvas = $(id);
-        this.context = this.$canvas[0].getContext('2d');
+        this.canvas = this.$canvas[0],
+        this.context = this.canvas.getContext('2d');
         this.width = width; // 不带单位
         this.height = height; // 不带单位
         this.data = data;
@@ -75,7 +76,7 @@ class DrawImage {
         let isCenter = !data.x ? true : false;
         let isVerticalCenter = !data.y ? true : false;
 
-        if (data.txt.len !== null && data.txt.value.length > data.txt.len) {
+        if (data.txt.len !== null && (data.txt.value.length - data.txt.befor.length - data.txt.after.length) > data.txt.len) {
             value = data.txt.value.substring(0, data.txt.len);
         } else {
             value = data.txt.value;
@@ -84,6 +85,9 @@ class DrawImage {
         this.context.beginPath();
         this.context.font = 'lighter ' + data.txt.fontSize + 'px' + ' ' + data.txt.fontFamily;
         this.context.fillStyle =  data.txt.fontColor;
+        // this.canvas.style.letterSpacing = '100';
+
+        value = value.trim() !== '' ? data.txt.befor + value + data.txt.after : value;
 
         if (isCenter) {
            measureScoreStr = this.context.measureText(value);

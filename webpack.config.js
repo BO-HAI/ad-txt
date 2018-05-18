@@ -69,7 +69,13 @@ module.exports = {
             },
             {
                 test: /\.json$/,
-                use: 'json-loader'
+                use: {
+                    loader: 'json-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: './data'
+                    }
+                }
              }
         ]
     },

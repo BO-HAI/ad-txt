@@ -13,7 +13,29 @@
     font-style: normal;
 }
 
-/*造字工坊悦黑 纤细超长体*/
+/*方正正粗黑简体*/
+@font-face {
+    font-family: "cnFZZCHJT";
+    src: url("../font/fzzchjt.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "cnMSYH";
+    src: url("../font/msyh.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "cnMSYHBD";
+    src: url("../font/msyhbd.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// /*造字工坊悦黑 纤细超长体*/
 // @font-face {
 //     font-family: "cnZZGFYHQXCCT";
 //     src: url("../font/zzgf_yh_6.ttf") format('truetype');
@@ -22,9 +44,9 @@
 // }
 
 
-.cnYAHEI {
-    font-family: 'microsoft yahei' !important;
-}
+// .cnYAHEI {
+//     font-family: 'microsoft yahei' !important;
+// }
 
 .cnZHSRZJ {
     font-family: 'cnZHSRZJ' !important;
@@ -32,6 +54,18 @@
 
 .enJonahRegular {
     font-family: 'enJonahRegular' !important;
+}
+
+.cnFZZCHJT {
+    font-family: 'cnFZZCHJT' !important;
+}
+
+.cnMSYH {
+    font-family: 'cnMSYH' !important;
+}
+
+.cnMSYHBD {
+    font-family: 'cnMSYHBD' !important;
 }
 
 // .cnZZGFYHQXCCT {
