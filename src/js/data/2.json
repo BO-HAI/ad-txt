@@ -9,7 +9,7 @@
             "title": [
                 {
                     "txt": {
-                        "value": "",
+                        "value": "2018年 初级会计职称",
                         "befor": "",
                         "after": "",
                         "placeholder": "考试科目标题, 9-19个汉字",
@@ -33,7 +33,7 @@
                 },
                 {
                     "txt": {
-                        "value": "",
+                        "value": "初级会计实务全科",
                         "befor": "",
                         "after": "",
                         "placeholder": "商品主名称标题, 5-9个汉字",
@@ -57,18 +57,18 @@
                 },
                 {
                     "txt": {
-                        "value": "",
-                        "befor": "• ",
+                        "value": "课程知识点1",
+                        "befor": "",
                         "after": "",
                         "placeholder": "知识点1, 6个汉字",
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
                         "fontColor": "#ffffff",
-                        "spacing": 5
+                        "spacing": 10
                     },
-                    "x": 150,
-                    "y": 250,
+                    "x": 170,
+                    "y": 245,
                     "controlFont": {
                         "size": false,
                         "color": false,
@@ -81,18 +81,18 @@
                 },
                 {
                     "txt": {
-                        "value": "",
-                        "befor": "• ",
+                        "value": "课程知识点2",
+                        "befor": "",
                         "after": "",
                         "placeholder": "知识点2, 6个汉字",
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
                         "fontColor": "#ffffff",
-                        "spacing": 5
+                        "spacing": 10
                     },
-                    "x": 408,
-                    "y": 250,
+                    "x": 430,
+                    "y": 245,
                     "controlFont": {
                         "size": false,
                         "color": false,
@@ -105,18 +105,18 @@
                 },
                 {
                     "txt": {
-                        "value": "",
-                        "befor": "• ",
+                        "value": "课程知识点3",
+                        "befor": "",
                         "after": "",
                         "placeholder": "知识点3, 6个汉字",
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
                         "fontColor": "#ffffff",
-                        "spacing": 5
+                        "spacing": 10
                     },
-                    "x": 150,
-                    "y": 295,
+                    "x": 170,
+                    "y": 287,
                     "controlFont": {
                         "size": false,
                         "color": false,
@@ -129,18 +129,18 @@
                 },
                 {
                     "txt": {
-                        "value": "",
-                        "befor": "• ",
+                        "value": "课程知识点4",
+                        "befor": "",
                         "after": "",
                         "placeholder": "知识点4, 6个汉字",
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
                         "fontColor": "#ffffff",
-                        "spacing": 5
+                        "spacing": 10
                     },
-                    "x": 408,
-                    "y": 295,
+                    "x": 430,
+                    "y": 287,
                     "controlFont": {
                         "size": false,
                         "color": false,
@@ -153,7 +153,7 @@
                 },
                 {
                     "txt": {
-                        "value": "",
+                        "value": "李娟",
                         "befor": "主讲老师 ",
                         "after": "",
                         "placeholder": "考试科目标题, 9-19个汉字",
@@ -174,32 +174,6 @@
                         "x": false,
                         "y": false
                     }
-                }
-            ],
-            "illustration": [
-                {
-                    "name": "阴影背景",
-                    "url": "./images/750_422_shadow_1.png",
-                    "w": 750,
-                    "h": 422,
-                    "x": 0,
-                    "y": 0
-                },
-                {
-                    "name": "两个圆点",
-                    "url": "./images/750_422_dot*2.png",
-                    "w": 750,
-                    "h": 422,
-                    "x": 0,
-                    "y": 0
-                },
-                {
-                    "name": "四个圆点",
-                    "url": "./images/750_422_dot*4.png",
-                    "w": 750,
-                    "h": 422,
-                    "x": 0,
-                    "y": 0
                 }
             ]
         }

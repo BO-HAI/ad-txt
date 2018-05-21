@@ -12,6 +12,7 @@ class DrawImage {
     }
 
     init () {
+        this.context.clearRect(0, 0, this.width, this.height);
         this.$canvas.css({
             width: this.width,
             height: this.height
@@ -38,7 +39,7 @@ class DrawImage {
             this.context.drawImage(beauty, x, y, w, h);
             this.context.stroke();
 
-            if (this.illustrationData) {
+            if (this.illustrationData.length > 0) {
                 this.drawIllstration(fn);
             } else {
                 fn()
@@ -47,17 +48,22 @@ class DrawImage {
     }
 
     drawIllstration (fn) {
-        let beauty = new Image();
-        beauty.src = this.illustrationData.url;
-        beauty.setAttribute("crossOrigin",'Anonymous');
-        beauty.onload = () => {
-            this.context.drawImage(beauty, this.illustrationData.x, this.illustrationData.y, this.illustrationData.w, this.illustrationData.h);
-            this.context.stroke();
+        for (let i = 0, len = this.illustrationData.length;i < len; i++) {
+            let item = this.illustrationData[i];
 
-            if (fn) {
-                fn();
+            let beauty = new Image();
+            beauty.src = item.url;
+            beauty.setAttribute("crossOrigin",'Anonymous');
+            beauty.onload = () => {
+                this.context.drawImage(beauty, item.x, item.y, item.w, item.h);
+                this.context.stroke();
+
+                if (fn) {
+                    fn();
+                }
             }
         }
+
     }
 
     drawTxt (data) {
@@ -86,7 +92,7 @@ class DrawImage {
         // this.canvas.style.letterSpacing = '100';
 
         value = value.trim() !== '' ? data.txt.befor + value + data.txt.after : value;
-        console.log(data.txt.value);
+        
         if (isCenter) {
            measureScoreStr = this.context.measureText(value);
 
@@ -117,9 +123,6 @@ class DrawImage {
 
                 this.context.fillText(item, x, y);
                 this.context.stroke();
-
-                console.log(item + ':' + x);
-                console.log(mss.width);
                 temp = item;
             });
         } else {

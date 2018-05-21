@@ -31,7 +31,7 @@ let host = debug ? '/data/' : '/subject/0000/ad2/';
 $(document).ready(function () {
     let promise;
     let data; // data 是页面编辑内容对象
-    let illustration_data;
+    let illustration_data = [];
     let scale = 1;
 
     let getIndex = function () {
@@ -40,6 +40,18 @@ $(document).ready(function () {
             sizeIndex: value ? value : 0
         }
     };
+
+    let compareIllustrationData = function (obj) {
+        let c = false;
+        illustration_data.forEach((item) => {
+            if (item.url === obj.url) {
+                c = true;
+                return c;
+            }
+        });
+
+        return c;
+    }
 
     let setData = function (element) {
         let indexs = getIndex();
@@ -66,7 +78,7 @@ $(document).ready(function () {
 
     let bindIllustration = function (w, h) {
         $('#illustrationNames').attr('disabled', false);
-        illustration_data = null;
+        // illustration_data = null;
         /**
          * 配图列表按寄主分辨率区分
          */
@@ -150,7 +162,7 @@ $(document).ready(function () {
 
     let illustrationChange = function (element) {
         let val = $(element).val();
-        illustration_data = null;
+        // illustration_data = null;
         if (val) {
             // illustration_data = require('./data/illustration/' + val + '.json');
             let resList = $.ajax({
@@ -160,7 +172,10 @@ $(document).ready(function () {
             });
 
             resList.done(function (res) {
-                illustration_data = res;
+                // 如果配图重复则跳过，不在重复添加
+                if (!compareIllustrationData(res)) {
+                    illustration_data.push(res);
+                }
                 bindTxtOption();
             });
         } else {
