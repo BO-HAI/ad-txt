@@ -72,6 +72,8 @@ class DrawImage {
         let x;
         let y;
         let value;
+        let strArr;
+        let spacing = data.txt.spacing;
 
         let isCenter = !data.x ? true : false;
         let isVerticalCenter = !data.y ? true : false;
@@ -88,10 +90,14 @@ class DrawImage {
         // this.canvas.style.letterSpacing = '100';
 
         value = value.trim() !== '' ? data.txt.befor + value + data.txt.after : value;
-
+        console.log(data.txt.value);
         if (isCenter) {
            measureScoreStr = this.context.measureText(value);
-           x = this.width / 2 - (measureScoreStr.width / 2);
+
+           // value.length * 5 为 字间距总长度
+           x = spacing === 0 ?
+               this.width / 2 - (measureScoreStr.width / 2) :
+               this.width / 2 - ((measureScoreStr.width + value.length * spacing) / 2);
        } else {
            x = data.x;
        }
@@ -102,8 +108,28 @@ class DrawImage {
             y = data.y;
         }
 
-        this.context.fillText(value, x, y);
-        this.context.stroke();
+        strArr = value.split('');
+
+        if (spacing !== 0) {
+            let temp;
+            // 逐字渲染，控制字间距
+            strArr.forEach((item, index) => {
+                let mss = this.context.measureText(temp);
+                if (index > 0) {
+                    x = x + mss.width + spacing;
+                }
+
+                this.context.fillText(item, x, y);
+                this.context.stroke();
+
+                console.log(item + ':' + x);
+                console.log(mss.width);
+                temp = item;
+            });
+        } else {
+            this.context.fillText(value, x, y);
+            this.context.stroke();
+        }
     }
 }
 
