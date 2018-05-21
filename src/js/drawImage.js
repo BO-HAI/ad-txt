@@ -23,19 +23,19 @@ class DrawImage {
         this.context.fillStyle = '#2b2b2b';
         this.context.fillRect(0, 0, this.width, this.height);
 
-        this.drawBg(() => {
+        this.drawBg(this.data.url, 0, 0, this.width, this.height, () => {
             this.data.size[this.imgSizeIndex].title.forEach((item) => {
                 this.drawTxt(item);
             });
         });
     }
 
-    drawBg (fn) {
+    drawBg (url, x, y, w, h, fn) {
         let beauty = new Image();
-        beauty.src = this.data.url;
+        beauty.src = url;
         beauty.setAttribute("crossOrigin",'Anonymous');
         beauty.onload = () => {
-            this.context.drawImage(beauty, 0, 0, this.width, this.height);
+            this.context.drawImage(beauty, x, y, w, h);
             this.context.stroke();
 
             if (this.illustrationData) {
@@ -43,10 +43,6 @@ class DrawImage {
             } else {
                 fn()
             }
-
-            // if (fn) {
-            //     fn();
-            // }
         }
     }
 
@@ -73,7 +69,7 @@ class DrawImage {
         let y;
         let value;
         let strArr;
-        let spacing = data.txt.spacing;
+        let spacing = data.txt.spacing ? data.txt.spacing : 0;
 
         let isCenter = !data.x ? true : false;
         let isVerticalCenter = !data.y ? true : false;
@@ -110,7 +106,7 @@ class DrawImage {
 
         strArr = value.split('');
 
-        if (spacing !== 0) {
+        if (spacing && spacing !== 0) {
             let temp;
             // 逐字渲染，控制字间距
             strArr.forEach((item, index) => {

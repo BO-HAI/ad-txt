@@ -10,6 +10,8 @@
                 {
                     "txt": {
                         "value": "",
+                        "befor": "",
+                        "after": "",
                         "placeholder": "这里填写主标题, 长度不能超过15个汉字",
                         "len": 15,
                         "fontSize": 50,
@@ -31,6 +33,8 @@
                 {
                     "txt": {
                         "value": "",
+                        "befor": "",
+                        "after": "",
                         "placeholder": "这里填写副标题, 长度不能超过30个汉字",
                         "len": 30,
                         "fontSize": 40,
@@ -59,6 +63,8 @@
                 {
                     "txt": {
                         "value": "",
+                        "befor": "",
+                        "after": "",
                         "placeholder": "这里填写主标题, 长度不能超过15个汉字",
                         "len": 15,
                         "fontSize": 30,
@@ -80,6 +86,8 @@
                 {
                     "txt": {
                         "value": "",
+                        "befor": "",
+                        "after": "",
                         "placeholder": "这里填写副标题, 长度不能超过30个汉字",
                         "len": 30,
                         "fontSize": 50,

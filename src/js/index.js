@@ -20,6 +20,9 @@ const DrawImage = require('./drawImage.js');
 require('../images/a.jpg');
 require('../images/b.jpg');
 require('../images/c.jpg');
+require('../images/750_422_dot*2.png');
+require('../images/750_422_dot*4.png');
+require('../images/750_422_shadow_1.png');
 // // const Handlebars = require('handlebars/dist/handlebars.js');
 
 let debug = true;

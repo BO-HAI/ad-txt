@@ -16,7 +16,8 @@
                         "len": 19,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
-                        "fontColor": "#ffffff"
+                        "fontColor": "#ffffff",
+                        "spacing": 5
                     },
                     "x": null,
                     "y": 88,
@@ -39,7 +40,8 @@
                         "len": 9,
                         "fontSize": 70,
                         "fontFamily": "cnFZZCHJT",
-                        "fontColor": "#ffffff"
+                        "fontColor": "#ffffff",
+                        "spacing": 5
                     },
                     "x": null,
                     "y": 180,
@@ -62,7 +64,8 @@
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
-                        "fontColor": "#ffffff"
+                        "fontColor": "#ffffff",
+                        "spacing": 5
                     },
                     "x": 150,
                     "y": 250,
@@ -85,7 +88,8 @@
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
-                        "fontColor": "#ffffff"
+                        "fontColor": "#ffffff",
+                        "spacing": 5
                     },
                     "x": 408,
                     "y": 250,
@@ -108,7 +112,8 @@
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
-                        "fontColor": "#ffffff"
+                        "fontColor": "#ffffff",
+                        "spacing": 5
                     },
                     "x": 150,
                     "y": 295,
@@ -131,7 +136,8 @@
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
-                        "fontColor": "#ffffff"
+                        "fontColor": "#ffffff",
+                        "spacing": 5
                     },
                     "x": 408,
                     "y": 295,
@@ -154,7 +160,8 @@
                         "len": 19,
                         "fontSize": 24,
                         "fontFamily": "cnMSYH",
-                        "fontColor": "#ffffff"
+                        "fontColor": "#ffffff",
+                        "spacing": 5
                     },
                     "x": null,
                     "y": 370,
@@ -167,6 +174,32 @@
                         "x": false,
                         "y": false
                     }
+                }
+            ],
+            "illustration": [
+                {
+                    "name": "阴影背景",
+                    "url": "./images/750_422_shadow_1.png",
+                    "w": 750,
+                    "h": 422,
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "name": "两个圆点",
+                    "url": "./images/750_422_dot*2.png",
+                    "w": 750,
+                    "h": 422,
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "name": "四个圆点",
+                    "url": "./images/750_422_dot*4.png",
+                    "w": 750,
+                    "h": 422,
+                    "x": 0,
+                    "y": 0
                 }
             ]
         }
