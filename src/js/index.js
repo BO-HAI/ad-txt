@@ -27,7 +27,7 @@ let host = debug ? '/data/' : '/subject/0000/ad2/';
 
 $(document).ready(function () {
     let promise;
-    let data;
+    let data; // data 是页面编辑内容对象
     let illustration_data;
     let scale = 1;
 
