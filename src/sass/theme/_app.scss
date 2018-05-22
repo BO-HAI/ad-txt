@@ -2,6 +2,8 @@
     .option-block {
         float: left;
         width: 50%;
+        min-height: 100vh;
+        background: #f7f7f7;
     }
 
     .canvas-block {
@@ -21,12 +23,13 @@
             height: 686px;
             z-index: 999999;
             position: relative;
+            // margin: auto;
         }
 
         #autoADTXT {
             position: absolute !important;
-            top: -85px !important;
-            left: -180px !important;
+            top: -35px !important;
+            left: -162px !important;
             transform: scale(0.365) !important;
         }
 

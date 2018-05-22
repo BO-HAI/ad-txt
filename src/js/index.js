@@ -4,6 +4,7 @@ const colors = require('./colors.js');
 const filename_tpl = require('./template/filename.option.handlebars');
 const size_tpl = require('./template/size.option.handlebars');
 const title_tpl = require('./template/title.option.handlebars');
+const illustration_tpl = require('./template/illustration.item.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 
@@ -20,19 +21,31 @@ const DrawImage = require('./drawImage.js');
 require('../images/a.jpg');
 require('../images/b.jpg');
 require('../images/c.jpg');
-require('../images/750_422_dot*2.png');
-require('../images/750_422_dot*4.png');
+require('../images/750_422_dotx2.png');
+require('../images/750_422_dotx4.png');
 require('../images/750_422_shadow_1.png');
 // // const Handlebars = require('handlebars/dist/handlebars.js');
 
-let debug = true;
+let debug = false;
 let host = debug ? '/data/' : '/subject/0000/ad2/';
 
 $(document).ready(function () {
     let promise;
     let data; // data 是页面编辑内容对象
-    let illustration_data = [];
+    let illustration_data = []; // 被选择插图集合
     let scale = 1;
+
+    let printIllustration = function (index) {
+        if (index < 0) {
+            $('#illustrationNames').html('');
+            illustration_data = [];
+            binding.loadHtml('.illustration-list', illustration_data, illustration_tpl);
+        } else {
+            illustration_data.splice(index, 1);
+            binding.loadHtml('.illustration-list', illustration_data, illustration_tpl);
+            bindTxtOption();
+        }
+    }
 
     let getIndex = function () {
         let value = $('#imgSize').val();
@@ -110,11 +123,6 @@ $(document).ready(function () {
         }
     };
 
-    // let unbindIllustration = function () {
-    //     $('#illustrationNames').attr('disabled', true);
-    //     binding.loadHtml('#illustrationNames', [], filename_tpl);
-    // };
-
     let createCanvas = function () {
         let indexs = getIndex();
         let $canvas = $('#autoADTXT');
@@ -141,6 +149,7 @@ $(document).ready(function () {
     let fileChange = function (element) {
         const val = $(element).val();
         let indexs = getIndex();
+        printIllustration(-1);
         // data = require('./data/' + val + '.json');
 
         let resList = $.ajax({
@@ -175,6 +184,7 @@ $(document).ready(function () {
                 // 如果配图重复则跳过，不在重复添加
                 if (!compareIllustrationData(res)) {
                     illustration_data.push(res);
+                    binding.loadHtml('.illustration-list', illustration_data, illustration_tpl);
                 }
                 bindTxtOption();
             });
@@ -228,10 +238,31 @@ $(document).ready(function () {
 
         if ($block.hasClass('simulation')) {
             $block.removeClass('simulation');
-            $this.text('+v');
+            $this.text('ov');
+            $this.attr('title', '打开虚拟环境');
         } else {
             $block.addClass('simulation');
-            $this.text('-v');
+            $this.text('cv');
+            $this.attr('title', '关闭虚拟环境');
         }
+    });
+
+    $('.right100').on('click', function () {
+        let $container = $('.container');
+        if ($container.hasClass('r')) {
+            $('.container').removeClass('r');
+            $('.right100').text('R100');
+            $('.right100').attr('title', '100%显示');
+        } else {
+            $('.container').addClass('r');
+            $('.right100').text('R50');
+            $('.right100').attr('title', '50%显示');
+        }
+    });
+
+    $(document).on('click', '.illustration-list li .close', function () {
+        let $this = $(this);
+        let index = $this.data('index');
+        printIllustration(index);
     });
 });
