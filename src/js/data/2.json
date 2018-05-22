@@ -1,7 +1,7 @@
 {
-    "name": "App_Banner",
-    "url": "./images/c.jpg",
-    "illustration": false,
+    "name": "简－红色",
+    "url": "./images/j_red.jpg",
+    "illustration": true,
     "size": [
         {
             "w": 750,
@@ -157,7 +157,7 @@
                         "befor": "主讲老师 ",
                         "after": "",
                         "placeholder": "考试科目标题, 9-19个汉字",
-                        "len": 19,
+                        "len": 4,
                         "fontSize": 24,
                         "fontFamily": "cnMSYH",
                         "fontColor": "#ffffff",

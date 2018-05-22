@@ -7,24 +7,22 @@ const title_tpl = require('./template/title.option.handlebars');
 const illustration_tpl = require('./template/illustration.item.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
-
-// require('./data/list.json');
-// require('./data/0.json');
-// require('./data/1.json');
-// require('./data/2.json');
-// require('./data/illustration/1000_234.json');
-// require('./data/illustration/1920_450.json');
-// require('./data/illustration/lijuan_1000.json');
-// require('./data/illustration/lijuan_1920.json');
-// require('./data/illustration/wanglili_1920.json');
-
-require('../images/a.jpg');
-require('../images/b.jpg');
-require('../images/c.jpg');
+// const fileList = ['j_blue.jpg', 'j_purple.jpg'];
+//
+// fileList.forEach((item) => {
+//     console.log(item);
+//     require('../images/' + item);
+// });
+require('../images/j_blue.jpg');
+require('../images/j_purple.jpg');
+require('../images/j_red.jpg');
+require('../images/k_blue.jpg');
+require('../images/k_purple.jpg');
+require('../images/k_orange.jpg');
 require('../images/750_422_dotx2.png');
 require('../images/750_422_dotx4.png');
 require('../images/750_422_shadow_1.png');
-// // const Handlebars = require('handlebars/dist/handlebars.js');
+
 
 let debug = false;
 let host = debug ? '/data/' : '/subject/0000/ad2/';
@@ -83,7 +81,10 @@ $(document).ready(function () {
         binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', function () {
             let indexs = getIndex();
 
-            bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            if (data.illustration) {
+                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            }
+
             bindTxtOption();
         });
 
@@ -162,9 +163,9 @@ $(document).ready(function () {
         resList.done(function (res) {
             data = res;
             bindImgSize(element);
-            if (data.illustration) {
-                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
-            }
+            // if (data.illustration) {
+            //     bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            // }
             bindTxtOption(element);
         });
     };
