@@ -4,7 +4,8 @@ class storage {
     }
 
     static load (key) {
-        return localStorage.getItem(key);
+        let val = localStorage.getItem(key);
+        return val ? val : '';
     }
 }
 

@@ -116,7 +116,7 @@ $(document).ready(function () {
 
             bindTxtOption();
         });
-
+        $('#imgSize').val(0).trigger('change');
     };
 
     /**
@@ -271,6 +271,7 @@ $(document).ready(function () {
 
     resList.done(function (res) {
         binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
+        $('#fileNames').val(0).trigger('change');
     });
 
     resList.fail(function (e) {

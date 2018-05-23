@@ -9,10 +9,11 @@
             "title": [
                 {
                     "txt": {
+                        "label": "考试科目标题",
                         "value": "2018年 初级会计职称",
                         "befor": "",
                         "after": "",
-                        "placeholder": "考试科目标题, 9-19个汉字",
+                        "placeholder": "9-19个汉字",
                         "len": 19,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
@@ -33,6 +34,7 @@
                 },
                 {
                     "txt": {
+                        "label": "商品主名称标题",
                         "value": "初级会计实务全科",
                         "befor": "",
                         "after": "",
@@ -57,10 +59,11 @@
                 },
                 {
                     "txt": {
+                        "label": "知识点1",
                         "value": "课程知识点1",
                         "befor": "",
                         "after": "",
-                        "placeholder": "知识点1, 6个汉字",
+                        "placeholder": "6个汉字",
                         "len": 6,
                         "fontSize": 26,
                         "fontFamily": "cnMSYH",
@@ -81,6 +84,7 @@
                 },
                 {
                     "txt": {
+                        "label": "知识点2",
                         "value": "课程知识点2",
                         "befor": "",
                         "after": "",
@@ -105,6 +109,7 @@
                 },
                 {
                     "txt": {
+                        "label": "知识点3",
                         "value": "课程知识点3",
                         "befor": "",
                         "after": "",
@@ -129,6 +134,7 @@
                 },
                 {
                     "txt": {
+                        "label": "知识点4",
                         "value": "课程知识点4",
                         "befor": "",
                         "after": "",
@@ -153,10 +159,11 @@
                 },
                 {
                     "txt": {
+                        "label": "主讲老师",
                         "value": "李娟",
                         "befor": "主讲老师 ",
                         "after": "",
-                        "placeholder": "考试科目标题, 9-19个汉字",
+                        "placeholder": "",
                         "len": 4,
                         "fontSize": 24,
                         "fontFamily": "cnMSYH",

@@ -80,6 +80,10 @@ header {
         float: left;
         width: 96%;
 
+        .value-label {
+            width: 100px;
+        }
+
         &:nth-child(3),
         &:nth-child(4),
         &:nth-child(5),
