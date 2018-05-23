@@ -7,6 +7,7 @@ const title_tpl = require('./template/title.option.handlebars');
 const illustration_tpl = require('./template/illustration.item.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
+const storage = require('./storage.js');
 // const fileList = ['j_blue.jpg', 'j_purple.jpg'];
 //
 // fileList.forEach((item) => {
@@ -24,8 +25,9 @@ require('../images/750_422_dotx4.png');
 require('../images/750_422_shadow_1.png');
 
 
-let debug = false;
-let host = debug ? '/data/' : '/subject/0000/ad2/';
+// let debug = true;
+// let host = debug ? './js/data/' : '/subject/0000/ad2/';
+let host = './js/data/';
 
 $(document).ready(function () {
     let promise;
@@ -33,25 +35,40 @@ $(document).ready(function () {
     let illustration_data = []; // 被选择插图集合
     let scale = 1;
 
-    let printIllustration = function (index) {
+    /**
+     * 清除插图
+     * @param  {Number} index illustration_data 插图下标
+     * @return {null}
+     */
+    let clearIllustration = function (index) {
         if (index < 0) {
             $('#illustrationNames').html('');
             illustration_data = [];
-            binding.loadHtml('.illustration-list', illustration_data, illustration_tpl);
         } else {
             illustration_data.splice(index, 1);
-            binding.loadHtml('.illustration-list', illustration_data, illustration_tpl);
-            bindTxtOption();
         }
+
+        binding.loadHtml('.illustration-list', illustration_data, illustration_tpl);
     }
 
+    /**
+     * 获取下拉框value
+     * @return {Object}
+     */
     let getIndex = function () {
-        let value = $('#imgSize').val();
+        let fileNameValue = $('#fileNames').val();
+        let imgSizeValue = $('#imgSize').val();
         return {
-            sizeIndex: value ? value : 0
+            sizeIndex: imgSizeValue ? imgSizeValue : 0,
+            fileNameIndex: fileNameValue ? fileNameValue : 0
         }
     };
 
+    /**
+     * 比较插图对象，判读目标对象是否存在
+     * @param  {Object} obj illustration对象
+     * @return {Boolear}
+     */
     let compareIllustrationData = function (obj) {
         let c = false;
         illustration_data.forEach((item) => {
@@ -64,10 +81,17 @@ $(document).ready(function () {
         return c;
     }
 
+    /**
+     * 用户输入数据赋值到对象，并执行绘制操作
+     * @param  {Element} element 元素对象
+     * @return {null}
+     */
     let setData = function (element) {
+        let $element = $(element);
         let indexs = getIndex();
-        let titleIndex = $(element).data('index');
-        let name = $(element).attr('name');
+        let titleIndex = $element.data('index');
+        let name = $element.attr('name');
+        storage.save($element.data('index'), $(element).val());
 
         if (name === 'x' || name === 'y') {
             data.size[indexs.sizeIndex].title[titleIndex][name] = $(element).val();
@@ -77,6 +101,11 @@ $(document).ready(function () {
         createCanvas();
     };
 
+    /**
+     * 绑定图片分辨率
+     * @param  {Element} element 元素对象
+     * @return {null}
+     */
     let bindImgSize = function (element) {
         binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', function () {
             let indexs = getIndex();
@@ -90,6 +119,12 @@ $(document).ready(function () {
 
     };
 
+    /**
+     * 绑定插图
+     * @param  {Number} w 图片分辨率宽
+     * @param  {Number} h 图片分辨率高
+     * @return {null}
+     */
     let bindIllustration = function (w, h) {
         $('#illustrationNames').attr('disabled', false);
         // illustration_data = null;
@@ -124,6 +159,10 @@ $(document).ready(function () {
         }
     };
 
+    /**
+     * 创建画布，创建核心对象
+     * @return {null}
+     */
     let createCanvas = function () {
         let indexs = getIndex();
         let $canvas = $('#autoADTXT');
@@ -136,6 +175,12 @@ $(document).ready(function () {
         drawImage.init();
     };
 
+    /**
+     * 绑定文本选项html及事件
+     * @param  {Element}  element
+     * @param  {Boolean} [ignore=false]
+     * @return {null}
+     */
     let bindTxtOption = function (element, ignore = false) {
         let indexs = getIndex();
         binding.loadHtml('.option-block', data.size[indexs.sizeIndex].title, title_tpl)
@@ -147,10 +192,15 @@ $(document).ready(function () {
         createCanvas();
     };
 
+    /**
+     * 选择广告图
+     * @param  {Element} element
+     * @return {null}
+     */
     let fileChange = function (element) {
         const val = $(element).val();
         let indexs = getIndex();
-        printIllustration(-1);
+        clearIllustration(-1);
         // data = require('./data/' + val + '.json');
 
         let resList = $.ajax({
@@ -162,16 +212,28 @@ $(document).ready(function () {
 
         resList.done(function (res) {
             data = res;
+
+            if ($('#history').prop('checked')) {
+                // 读取上一次输入的结果
+                res.size.forEach((item) => {
+                    item.title.forEach((item2, index) => {
+                        item2.txt.value = storage.load(index);
+                    });
+                });
+            }
             bindImgSize(element);
-            // if (data.illustration) {
-            //     bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
-            // }
             bindTxtOption(element);
         });
     };
 
+    /**
+     * 选择插图
+     * @param  {Element} element
+     * @return {null}
+     */
     let illustrationChange = function (element) {
-        let val = $(element).val();
+        let $this = $(element);
+        let val = $this.val();
         // illustration_data = null;
         if (val) {
             // illustration_data = require('./data/illustration/' + val + '.json');
@@ -192,8 +254,15 @@ $(document).ready(function () {
         } else {
             bindTxtOption();
         }
+        // 这里解决两个问题
+        // 1.配图选择后，要重复选择，必须先选择其他选项才能再次选择上一次选项
+        // 2.重复渲染问题，半透明图层最突出，累加渲染导致不在透明
+        $this.val('-1');
     };
 
+    /**
+     * 入口
+     */
     let resList = $.ajax({
         url: host + 'list.json',
         type: 'GET',
@@ -208,7 +277,9 @@ $(document).ready(function () {
         console.log(e);
     });
 
-
+    /**
+     * dom
+     */
     $('.enlarge-canvas').on('click', () => {
         if (scale >= 1) {
             return;
@@ -264,6 +335,7 @@ $(document).ready(function () {
     $(document).on('click', '.illustration-list li .close', function () {
         let $this = $(this);
         let index = $this.data('index');
-        printIllustration(index);
+        clearIllustration(index);
+        bindTxtOption();
     });
 });
