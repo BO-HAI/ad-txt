@@ -4,44 +4,94 @@ const colors = require('./colors.js');
 const filename_tpl = require('./template/filename.option.handlebars');
 const size_tpl = require('./template/size.option.handlebars');
 const title_tpl = require('./template/title.option.handlebars');
+const illustration_tpl = require('./template/illustration.item.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
+const storage = require('./storage.js');
+// const fileList = ['j_blue.jpg', 'j_purple.jpg'];
+//
+// fileList.forEach((item) => {
+//     console.log(item);
+//     require('../images/' + item);
+// });
+require('../images/j_blue.jpg');
+require('../images/j_purple.jpg');
+require('../images/j_red.jpg');
+require('../images/k_blue.jpg');
+require('../images/k_purple.jpg');
+require('../images/k_orange.jpg');
+require('../images/750_422_dotx2.png');
+require('../images/750_422_dotx4.png');
+require('../images/750_422_shadow_1.png');
 
-// require('./data/list.json');
-// require('./data/0.json');
-// require('./data/1.json');
-// require('./data/2.json');
-// require('./data/illustration/1000_234.json');
-// require('./data/illustration/1920_450.json');
-// require('./data/illustration/lijuan_1000.json');
-// require('./data/illustration/lijuan_1920.json');
-// require('./data/illustration/wanglili_1920.json');
 
-require('../images/a.jpg');
-require('../images/b.jpg');
-require('../images/c.jpg');
-// // const Handlebars = require('handlebars/dist/handlebars.js');
-
-let debug = true;
-let host = debug ? '/data/' : '/subject/0000/ad2/';
+// let debug = true;
+// let host = debug ? './js/data/' : '/subject/0000/ad2/';
+let host = './js/data/';
 
 $(document).ready(function () {
     let promise;
     let data; // data 是页面编辑内容对象
-    let illustration_data;
+    let illustration_data = []; // 被选择插图集合
     let scale = 1;
 
+    /**
+     * 清除插图
+     * @param  {Number} index illustration_data 插图下标
+     * @return {null}
+     */
+    let clearIllustration = function (index) {
+        if (index < 0) {
+            $('#illustrationNames').html('');
+            illustration_data = [];
+        } else {
+            illustration_data.splice(index, 1);
+        }
+
+        binding.loadHtml('.illustration-list', illustration_data, illustration_tpl);
+    }
+
+    /**
+     * 获取下拉框value
+     * @return {Object}
+     */
     let getIndex = function () {
-        let value = $('#imgSize').val();
+        let fileNameValue = $('#fileNames').val();
+        let imgSizeValue = $('#imgSize').val();
         return {
-            sizeIndex: value ? value : 0
+            sizeIndex: imgSizeValue ? imgSizeValue : 0,
+            fileNameIndex: fileNameValue ? fileNameValue : 0
         }
     };
 
+    /**
+     * 比较插图对象，判读目标对象是否存在
+     * @param  {Object} obj illustration对象
+     * @return {Boolear}
+     */
+    let compareIllustrationData = function (obj) {
+        let c = false;
+        illustration_data.forEach((item) => {
+            if (item.url === obj.url) {
+                c = true;
+                return c;
+            }
+        });
+
+        return c;
+    }
+
+    /**
+     * 用户输入数据赋值到对象，并执行绘制操作
+     * @param  {Element} element 元素对象
+     * @return {null}
+     */
     let setData = function (element) {
+        let $element = $(element);
         let indexs = getIndex();
-        let titleIndex = $(element).data('index');
-        let name = $(element).attr('name');
+        let titleIndex = $element.data('index');
+        let name = $element.attr('name');
+        storage.save($element.data('index'), $(element).val());
 
         if (name === 'x' || name === 'y') {
             data.size[indexs.sizeIndex].title[titleIndex][name] = $(element).val();
@@ -51,19 +101,33 @@ $(document).ready(function () {
         createCanvas();
     };
 
+    /**
+     * 绑定图片分辨率
+     * @param  {Element} element 元素对象
+     * @return {null}
+     */
     let bindImgSize = function (element) {
         binding.loadHtml('#imgSize', data.size, size_tpl).bindEvent('#imgSize', 'change', function () {
             let indexs = getIndex();
 
-            bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            if (data.illustration) {
+                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+            }
+
             bindTxtOption();
         });
-
+        $('#imgSize').val(0).trigger('change');
     };
 
+    /**
+     * 绑定插图
+     * @param  {Number} w 图片分辨率宽
+     * @param  {Number} h 图片分辨率高
+     * @return {null}
+     */
     let bindIllustration = function (w, h) {
         $('#illustrationNames').attr('disabled', false);
-        illustration_data = null;
+        // illustration_data = null;
         /**
          * 配图列表按寄主分辨率区分
          */
@@ -95,11 +159,10 @@ $(document).ready(function () {
         }
     };
 
-    // let unbindIllustration = function () {
-    //     $('#illustrationNames').attr('disabled', true);
-    //     binding.loadHtml('#illustrationNames', [], filename_tpl);
-    // };
-
+    /**
+     * 创建画布，创建核心对象
+     * @return {null}
+     */
     let createCanvas = function () {
         let indexs = getIndex();
         let $canvas = $('#autoADTXT');
@@ -112,6 +175,12 @@ $(document).ready(function () {
         drawImage.init();
     };
 
+    /**
+     * 绑定文本选项html及事件
+     * @param  {Element}  element
+     * @param  {Boolean} [ignore=false]
+     * @return {null}
+     */
     let bindTxtOption = function (element, ignore = false) {
         let indexs = getIndex();
         binding.loadHtml('.option-block', data.size[indexs.sizeIndex].title, title_tpl)
@@ -123,9 +192,15 @@ $(document).ready(function () {
         createCanvas();
     };
 
+    /**
+     * 选择广告图
+     * @param  {Element} element
+     * @return {null}
+     */
     let fileChange = function (element) {
         const val = $(element).val();
         let indexs = getIndex();
+        clearIllustration(-1);
         // data = require('./data/' + val + '.json');
 
         let resList = $.ajax({
@@ -137,17 +212,29 @@ $(document).ready(function () {
 
         resList.done(function (res) {
             data = res;
-            bindImgSize(element);
-            if (data.illustration) {
-                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+
+            if ($('#history').prop('checked')) {
+                // 读取上一次输入的结果
+                res.size.forEach((item) => {
+                    item.title.forEach((item2, index) => {
+                        item2.txt.value = storage.load(index);
+                    });
+                });
             }
+            bindImgSize(element);
             bindTxtOption(element);
         });
     };
 
+    /**
+     * 选择插图
+     * @param  {Element} element
+     * @return {null}
+     */
     let illustrationChange = function (element) {
-        let val = $(element).val();
-        illustration_data = null;
+        let $this = $(element);
+        let val = $this.val();
+        // illustration_data = null;
         if (val) {
             // illustration_data = require('./data/illustration/' + val + '.json');
             let resList = $.ajax({
@@ -157,14 +244,25 @@ $(document).ready(function () {
             });
 
             resList.done(function (res) {
-                illustration_data = res;
+                // 如果配图重复则跳过，不在重复添加
+                if (!compareIllustrationData(res)) {
+                    illustration_data.push(res);
+                    binding.loadHtml('.illustration-list', illustration_data, illustration_tpl);
+                }
                 bindTxtOption();
             });
         } else {
             bindTxtOption();
         }
+        // 这里解决两个问题
+        // 1.配图选择后，要重复选择，必须先选择其他选项才能再次选择上一次选项
+        // 2.重复渲染问题，半透明图层最突出，累加渲染导致不在透明
+        $this.val('-1');
     };
 
+    /**
+     * 入口
+     */
     let resList = $.ajax({
         url: host + 'list.json',
         type: 'GET',
@@ -173,13 +271,16 @@ $(document).ready(function () {
 
     resList.done(function (res) {
         binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
+        $('#fileNames').val(0).trigger('change');
     });
 
     resList.fail(function (e) {
         console.log(e);
     });
 
-
+    /**
+     * dom
+     */
     $('.enlarge-canvas').on('click', () => {
         if (scale >= 1) {
             return;
@@ -210,10 +311,32 @@ $(document).ready(function () {
 
         if ($block.hasClass('simulation')) {
             $block.removeClass('simulation');
-            $this.text('+v');
+            $this.text('ov');
+            $this.attr('title', '打开虚拟环境');
         } else {
             $block.addClass('simulation');
-            $this.text('-v');
+            $this.text('cv');
+            $this.attr('title', '关闭虚拟环境');
         }
+    });
+
+    $('.right100').on('click', function () {
+        let $container = $('.container');
+        if ($container.hasClass('r')) {
+            $('.container').removeClass('r');
+            $('.right100').text('R100');
+            $('.right100').attr('title', '100%显示');
+        } else {
+            $('.container').addClass('r');
+            $('.right100').text('R50');
+            $('.right100').attr('title', '50%显示');
+        }
+    });
+
+    $(document).on('click', '.illustration-list li .close', function () {
+        let $this = $(this);
+        let index = $this.data('index');
+        clearIllustration(index);
+        bindTxtOption();
     });
 });

@@ -12,6 +12,7 @@ class DrawImage {
     }
 
     init () {
+        this.context.clearRect(0, 0, this.width, this.height);
         this.$canvas.css({
             width: this.width,
             height: this.height
@@ -23,45 +24,46 @@ class DrawImage {
         this.context.fillStyle = '#2b2b2b';
         this.context.fillRect(0, 0, this.width, this.height);
 
-        this.drawBg(() => {
+        this.drawBg(this.data.url, 0, 0, this.width, this.height, () => {
             this.data.size[this.imgSizeIndex].title.forEach((item) => {
                 this.drawTxt(item);
             });
         });
     }
 
-    drawBg (fn) {
+    drawBg (url, x, y, w, h, fn) {
         let beauty = new Image();
-        beauty.src = this.data.url;
+        beauty.src = url;
         beauty.setAttribute("crossOrigin",'Anonymous');
         beauty.onload = () => {
-            this.context.drawImage(beauty, 0, 0, this.width, this.height);
+            this.context.drawImage(beauty, x, y, w, h);
             this.context.stroke();
 
-            if (this.illustrationData) {
+            if (this.illustrationData.length > 0) {
                 this.drawIllstration(fn);
             } else {
                 fn()
             }
-
-            // if (fn) {
-            //     fn();
-            // }
         }
     }
 
     drawIllstration (fn) {
-        let beauty = new Image();
-        beauty.src = this.illustrationData.url;
-        beauty.setAttribute("crossOrigin",'Anonymous');
-        beauty.onload = () => {
-            this.context.drawImage(beauty, this.illustrationData.x, this.illustrationData.y, this.illustrationData.w, this.illustrationData.h);
-            this.context.stroke();
+        for (let i = 0, len = this.illustrationData.length;i < len; i++) {
+            let item = this.illustrationData[i];
 
-            if (fn) {
-                fn();
+            let beauty = new Image();
+            beauty.src = item.url;
+            beauty.setAttribute("crossOrigin",'Anonymous');
+            beauty.onload = () => {
+                this.context.drawImage(beauty, item.x, item.y, item.w, item.h);
+                this.context.stroke();
+
+                if (fn) {
+                    fn();
+                }
             }
         }
+
     }
 
     drawTxt (data) {
@@ -73,12 +75,12 @@ class DrawImage {
         let y;
         let value;
         let strArr;
-        let spacing = data.txt.spacing;
+        let spacing = data.txt.spacing ? data.txt.spacing : 0;
 
         let isCenter = !data.x ? true : false;
         let isVerticalCenter = !data.y ? true : false;
 
-        if (data.txt.len !== null && (data.txt.value.length - data.txt.befor.length - data.txt.after.length) > data.txt.len) {
+        if (data.txt.len !== null && (data.txt.value.length > data.txt.len)) {
             value = data.txt.value.substring(0, data.txt.len);
         } else {
             value = data.txt.value;
@@ -90,7 +92,7 @@ class DrawImage {
         // this.canvas.style.letterSpacing = '100';
 
         value = value.trim() !== '' ? data.txt.befor + value + data.txt.after : value;
-        console.log(data.txt.value);
+
         if (isCenter) {
            measureScoreStr = this.context.measureText(value);
 
@@ -110,7 +112,7 @@ class DrawImage {
 
         strArr = value.split('');
 
-        if (spacing !== 0) {
+        if (spacing && spacing !== 0) {
             let temp;
             // 逐字渲染，控制字间距
             strArr.forEach((item, index) => {
@@ -121,9 +123,6 @@ class DrawImage {
 
                 this.context.fillText(item, x, y);
                 this.context.stroke();
-
-                console.log(item + ':' + x);
-                console.log(mss.width);
                 temp = item;
             });
         } else {
