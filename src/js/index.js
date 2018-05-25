@@ -5,6 +5,7 @@ const filename_tpl = require('./template/filename.option.handlebars');
 const size_tpl = require('./template/size.option.handlebars');
 const title_tpl = require('./template/title.option.handlebars');
 const illustration_tpl = require('./template/illustration.item.handlebars');
+const classify_tpl = require('./template/classify.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
@@ -24,16 +25,17 @@ require('../images/750_422_dotx2.png');
 require('../images/750_422_dotx4.png');
 require('../images/750_422_shadow_1.png');
 
-
 // let debug = true;
 // let host = debug ? './js/data/' : '/subject/0000/ad2/';
-let host = './js/data/';
 
 $(document).ready(function () {
     let promise;
-    let data; // data 是页面编辑内容对象
+    let host = './js/data/';
+    let data;                   // data 是页面编辑内容对象
     let illustration_data = []; // 被选择插图集合
-    let scale = 1;
+    let classifyId = '';          // 当前分类
+    let theme = 'a';             // 主题
+    let scale = 1;              // 缩放比例
 
     /**
      * 清除插图
@@ -183,7 +185,7 @@ $(document).ready(function () {
      */
     let bindTxtOption = function (element, ignore = false) {
         let indexs = getIndex();
-        binding.loadHtml('.option-block', data.size[indexs.sizeIndex].title, title_tpl)
+        binding.loadHtml('.edit-block', data.size[indexs.sizeIndex].title, title_tpl)
             .bindEvent('.button', 'click', createCanvas)
             .bindEvent('input', 'keyup', setData).bindEvent('input', 'blur', setData)
             .bindEvent('.title-option-form select', 'change', setData);
@@ -204,7 +206,7 @@ $(document).ready(function () {
         // data = require('./data/' + val + '.json');
 
         let resList = $.ajax({
-            url: host + val + '.json',
+            url: host + 'classify/' + 'theme_' + theme + '/' + classifyId + '/' + val + '.json',
             type: 'GET',
             dataType: 'json'
 
@@ -231,8 +233,8 @@ $(document).ready(function () {
      * @param  {Element} element
      * @return {null}
      */
-    let illustrationChange = function (element) {
-        let $this = $(element);
+    let illustrationChange = function ($element) {
+        let $this = $element;
         let val = $this.val();
         // illustration_data = null;
         if (val) {
@@ -260,22 +262,72 @@ $(document).ready(function () {
         $this.val('-1');
     };
 
+    let getDataByClassifyId = function () {
+        let listPromise = $.ajax({
+            url: host + 'classify/' + 'theme_' + theme + '/' + classifyId + '/' + 'list.json',
+            type: 'GET',
+            dataType: 'json'
+        });
+
+        listPromise.done(function (res) {
+            console.log(res);
+            binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
+            $('#fileNames').val(0).trigger('change');
+        });
+
+        listPromise.fail(function (e) {
+            console.log(e);
+            alert('分类主题不存在');
+        });
+    }
+
     /**
      * 入口
      */
-    let resList = $.ajax({
-        url: host + 'list.json',
+    let classifyPromise = $.ajax({
+        url: host + 'classify.json',
         type: 'GET',
         dataType: 'json'
     });
+    // 分类绑定
+    classifyPromise.done(function (res) {
+        console.log(res);
+        binding.loadHtml('.option-block ul', res, classify_tpl).bindEvent('.classify-0', 'click', function ($element) {
+            let $this = $element;
+            let id = $this.data('id');
+            let num = 0;
+            let $ul = $this.siblings('.first-list');
 
-    resList.done(function (res) {
-        binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
-        $('#fileNames').val(0).trigger('change');
+            // 计算高度
+            res[id].child.forEach((item) => {
+                num++;
+                item.child.forEach(() => {
+                    num++;
+                });
+            });
+
+            // 手风琴切换
+            if ($ul.hasClass('show')) {
+                $ul.css({
+                    height: 0
+                }).removeClass('show');
+
+                $this.find('span').text('+');
+            } else {
+                $ul.css({
+                    height: num * 42
+                }).addClass('show');
+
+                $this.find('span').text('-');
+            }
+
+        });
+
+        $('.classify-0').trigger('click');
     });
 
-    resList.fail(function (e) {
-        console.log(e);
+    classifyPromise.fail(function () {
+        alert('分类未找到');
     });
 
     /**
@@ -289,7 +341,7 @@ $(document).ready(function () {
         scale += 0.1;
         $('#autoADTXT').css({
             'transform': 'scale(' + scale + ')',
-            // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
+            // 'margin-left': 5 * ((1 - scale) * 10) * -1 + '%'
         });
     });
 
@@ -301,7 +353,7 @@ $(document).ready(function () {
         scale -= 0.1;
         $('#autoADTXT').css({
             'transform': 'scale(' + scale + ')',
-            // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
+            // 'margin-left': 5 * ((1 - scale) * 10) * -1 + '%'
         });
     });
 
@@ -338,5 +390,24 @@ $(document).ready(function () {
         let index = $this.data('index');
         clearIllustration(index);
         bindTxtOption();
+    });
+
+    // 分类选择
+    $(document).on('click', '.classify-2', function () {
+        let $this = $(this);
+
+        classifyId = $this.data('id');
+        $('#themeNames').val('a').trigger('change');
+    });
+
+    $('#themeNames').on('change', function () {
+        let $this = $(this);
+        theme = $this.val();
+        if (classifyId !== '') {
+            getDataByClassifyId();
+        } else {
+            alert('请选择分类');
+            $this.val('-1');
+        }
     });
 });

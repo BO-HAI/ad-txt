@@ -13,8 +13,9 @@ class binding {
 
     static bindEvent (select , event, callback) {
         let $element = $(select);
-        $element[event](function (event) {
-            callback(this, event);
+        $element.on(event, function () {
+            let $this = $(this);
+            callback($this);
         });
 
         return this;

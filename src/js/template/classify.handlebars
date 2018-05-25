@@ -1,0 +1,22 @@
+{{#each data}}
+<li>
+    <p class="classify-0 gray-bg cify-{{@index}}" data-id="{{id}}">
+        {{name}}
+        <span>+</span>
+    </p>
+    <ul class="first-list">
+        {{#each child}}
+            <li>
+                <p  class="classify-1" data-id="{{id}}">{{name}}</p>
+                <ul>
+                    {{#each child}}
+                        <li>
+                            <p class="classify-2" data-id="{{id}}">{{name}}</p>
+                        </li>
+                    {{/each}}
+                </ul>
+            </li>
+        {{/each}}
+    </ul>
+</li>
+{{/each}}

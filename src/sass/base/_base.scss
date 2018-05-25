@@ -1,5 +1,10 @@
 $bgColor: #2b2b2b;
 
+.gray-bg {
+    background: #2b2b2b;
+    color: #ffffff;
+}
+
 .clearFix {
     &:before, &:after {
         content: "";
@@ -40,6 +45,7 @@ header {
     padding: 0 30px;
     background: $bgColor;
     color: #ffffff;
+    border-bottom: 1px solid #a37520;
 
     h1 {
         padding: 0;
@@ -63,6 +69,7 @@ header {
 .container {
     background: #ffffff;
     width: 100%;
+    overflow: hidden;
 
     form {
         padding-top: 20px;
@@ -168,6 +175,9 @@ header {
         // }
 
         .illustration-list {
+            text-align: center;
+            margin: 20px;
+            
             li {
                 display: inline-block;
                 width: 102px;
@@ -199,13 +209,13 @@ header {
         }
     }
 
-    .option-block {
+    .edit-block {
         transition: all .5s;
     }
 }
 
 .container.r {
-    .option-block {
+    .edit-block {
         width: 0 !important;
     }
 
