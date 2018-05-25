@@ -52,6 +52,7 @@ header {
         margin: 0;
         height: 100%;
         display: inline-block;
+        float: left;
         // font-family: "enJonahRegular"
     }
 
@@ -177,7 +178,7 @@ header {
         .illustration-list {
             text-align: center;
             margin: 20px;
-            
+
             li {
                 display: inline-block;
                 width: 102px;

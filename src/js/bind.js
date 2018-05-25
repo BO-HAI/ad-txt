@@ -13,7 +13,7 @@ class binding {
 
     static bindEvent (select , event, callback) {
         let $element = $(select);
-        $element.on(event, function () {
+        $element.unbind(event).on(event, function () {
             let $this = $(this);
             callback($this);
         });

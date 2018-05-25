@@ -15,6 +15,7 @@ const storage = require('./storage.js');
 //     console.log(item);
 //     require('../images/' + item);
 // });
+require('../images/logo.png');
 require('../images/j_blue.jpg');
 require('../images/j_purple.jpg');
 require('../images/j_red.jpg');
@@ -237,6 +238,7 @@ $(document).ready(function () {
         let $this = $element;
         let val = $this.val();
         // illustration_data = null;
+        console.log(val);
         if (val) {
             // illustration_data = require('./data/illustration/' + val + '.json');
             let resList = $.ajax({
