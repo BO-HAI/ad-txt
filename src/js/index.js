@@ -272,7 +272,6 @@ $(document).ready(function () {
         });
 
         listPromise.done(function (res) {
-            console.log(res);
             binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
             $('#fileNames').val(0).trigger('change');
         });
@@ -293,8 +292,9 @@ $(document).ready(function () {
     });
     // 分类绑定
     classifyPromise.done(function (res) {
-        console.log(res);
-        binding.loadHtml('.option-block ul', res, classify_tpl).bindEvent('.classify-0', 'click', function ($element) {
+        binding
+        .loadHtml('.option-block ul', res, classify_tpl)
+        .bindEvent('.classify-0', 'click', function ($element) {
             let $this = $element;
             let id = $this.data('id');
             let num = 0;
@@ -322,10 +322,11 @@ $(document).ready(function () {
 
                 $this.find('span').text('-');
             }
-
         });
 
         $('.classify-0').trigger('click');
+    }, function () {
+        $($('.classify-2')[0]).click();
     });
 
     classifyPromise.fail(function () {
@@ -397,9 +398,20 @@ $(document).ready(function () {
     // 分类选择
     $(document).on('click', '.classify-2', function () {
         let $this = $(this);
+        let id = $this.parent().data('index');
 
         classifyId = $this.data('id');
         $('#themeNames').val('a').trigger('change');
+
+        $this.siblings('span').addClass('dot');
+
+        $('.classify-2-item').each(function () {
+            let $t = $(this);
+
+            if ($t.data('index') !== id) {
+                $t.find('span').removeClass('dot');
+            }
+        });
     });
 
     $('#themeNames').on('change', function () {
@@ -412,4 +424,7 @@ $(document).ready(function () {
             $this.val('-1');
         }
     });
+
+    // $($('.classify-2-item')[0]).trigger('click');
+    // $($('.classify-2-item')[0]).click();
 });

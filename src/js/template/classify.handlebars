@@ -6,11 +6,12 @@
     </p>
     <ul class="first-list">
         {{#each child}}
-            <li>
+            <li class="classify-1-item">
                 <p  class="classify-1" data-id="{{id}}">{{name}}</p>
                 <ul>
                     {{#each child}}
-                        <li>
+                        <li class="classify-2-item" data-index="{{id}}">
+                            <span data-id="{{id}}"></span>
                             <p class="classify-2" data-id="{{id}}">{{name}}</p>
                         </li>
                     {{/each}}
