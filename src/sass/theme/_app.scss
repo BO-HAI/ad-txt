@@ -1,6 +1,20 @@
 .option-block {
     float: left;
     width: 15%;
+    position: relative;
+    transition: all .5s;
+
+    > span {
+        position: absolute;
+        top: 0;
+        right: -22px;
+        display: block;
+        width: 22px;
+        height: 42px;
+        background: #4b4b4b;
+        z-index: 99;
+        display: none;
+    }
 
     @for $i from 0 through 2 {
         .classify-#{$i} {
@@ -51,7 +65,7 @@
         position: relative;
 
         span {
-            display: none;   
+            display: none;
         }
 
         .dot {
@@ -71,6 +85,7 @@
 .app_container {
     width: 85%;
     float: right;
+    transition: all .5s;
 
     .horizontal {
         transition: all .5s;
