@@ -11,6 +11,10 @@ class DrawImage {
         this.imgSizeIndex = imgSizeIndex;
     }
 
+    clear () {
+        this.context.clearRect(0, 0, this.width, this.height);
+    }
+
     init () {
         this.context.clearRect(0, 0, this.width, this.height);
         this.$canvas.css({

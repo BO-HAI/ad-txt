@@ -31,6 +31,7 @@ require('../images/750_422_shadow_1.png');
 
 $(document).ready(function () {
     let promise;
+    let drawImage; // 绘制对象
     let host = './js/data/';
     let data;                   // data 是页面编辑内容对象
     let illustration_data = []; // 被选择插图集合
@@ -173,7 +174,7 @@ $(document).ready(function () {
         let w = data.size[indexs.sizeIndex].w;
         let h = data.size[indexs.sizeIndex].h;
 
-        let drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex);
+        drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex);
 
         drawImage.init();
     };
@@ -278,6 +279,11 @@ $(document).ready(function () {
 
         listPromise.fail(function (e) {
             console.log(e);
+            drawImage.clear();
+            $('#fileNames').html('');
+            $('#imgSize').html('');
+            $('#illustrationNames').html('');
+            $('.edit-block').html('');
             alert('分类主题不存在');
         });
     }
@@ -326,7 +332,7 @@ $(document).ready(function () {
 
         $('.classify-0').trigger('click');
     }, function () {
-        $($('.classify-2')[0]).click();
+        $($('.classify-2')[8]).click();
     });
 
     classifyPromise.fail(function () {
