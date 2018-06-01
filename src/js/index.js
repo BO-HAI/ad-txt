@@ -9,6 +9,7 @@ const classify_tpl = require('./template/classify.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
+const validateFn = require('./validate.js');
 // const fileList = ['j_blue.jpg', 'j_purple.jpg'];
 //
 // fileList.forEach((item) => {
@@ -16,6 +17,7 @@ const storage = require('./storage.js');
 //     require('../images/' + item);
 // });
 require('../images/logo.png');
+require('../images/warning.png');
 require('../images/j_blue.jpg');
 require('../images/j_purple.jpg');
 require('../images/j_red.jpg');
@@ -174,7 +176,7 @@ $(document).ready(function () {
         let w = data.size[indexs.sizeIndex].w;
         let h = data.size[indexs.sizeIndex].h;
 
-        drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex);
+        drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex, validateFn);
 
         drawImage.init();
     };
@@ -221,7 +223,8 @@ $(document).ready(function () {
                 // 读取上一次输入的结果
                 res.size.forEach((item) => {
                     item.title.forEach((item2, index) => {
-                        item2.txt.value = storage.load(index);
+                        let str = storage.load(index);
+                        item2.txt.value = str.length > 0 ? str : item2.txt.value;
                     });
                 });
             }
@@ -239,7 +242,6 @@ $(document).ready(function () {
         let $this = $element;
         let val = $this.val();
         // illustration_data = null;
-        console.log(val);
         if (val) {
             // illustration_data = require('./data/illustration/' + val + '.json');
             let resList = $.ajax({
