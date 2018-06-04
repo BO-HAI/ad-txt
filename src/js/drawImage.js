@@ -134,8 +134,6 @@ class DrawImage {
             value = data.txt.value;
         }
 
-        console.log(data.txt.value);
-
         this.context.beginPath();
         this.context.font = 'lighter ' + data.txt.fontSize + 'px' + ' ' + data.txt.fontFamily;
         this.context.fillStyle =  data.txt.fontColor;
