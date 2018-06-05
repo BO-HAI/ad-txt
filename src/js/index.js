@@ -374,11 +374,11 @@ $(document).ready(function () {
 
         if ($block.hasClass('simulation')) {
             $block.removeClass('simulation');
-            $this.text('ov');
+            $this.text('虚拟环境');
             $this.attr('title', '打开虚拟环境');
         } else {
             $block.addClass('simulation');
-            $this.text('cv');
+            $this.text('原图');
             $this.attr('title', '关闭虚拟环境');
         }
     });
@@ -387,11 +387,11 @@ $(document).ready(function () {
         let $container = $('.container');
         if ($container.hasClass('r')) {
             $('.container').removeClass('r');
-            $('.right100').text('R100');
+            $('.right100').text('展开');
             $('.right100').attr('title', '100%显示');
         } else {
             $('.container').addClass('r');
-            $('.right100').text('R50');
+            $('.right100').text('收起');
             $('.right100').attr('title', '50%显示');
         }
     });
@@ -433,6 +433,32 @@ $(document).ready(function () {
         }
     });
 
-    // $($('.classify-2-item')[0]).trigger('click');
-    // $($('.classify-2-item')[0]).click();
+    $('#saveImg').on('click', function () {
+        let href = $('#outImg').attr('src');
+
+        // 生成一个a元素
+        let a = document.createElement('a');
+        // 创建一个单击事件
+        let event = new MouseEvent('click');
+
+        // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
+        a.download = '广告图' || '下载图片名称';
+        // 将生成的URL设置为a.href属性
+        a.href = href;
+
+        // 触发a的单击事件
+        a.dispatchEvent(event);
+    });
+
+    function downloadFile(fileName, content){
+        // var aLink = document.createElement('a');
+        // var blob = new Blob([content]);
+        // var evt = document.createEvent("HTMLEvents");
+        // evt.initEvent("click", false, false);//initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
+        // aLink.download = fileName;
+        // aLink.href = URL.createObjectURL(blob);
+        // aLink.dispatchEvent(evt);
+
+
+    }
 });

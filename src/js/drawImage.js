@@ -179,6 +179,9 @@ class DrawImage {
         }
 
         this.completeNum++;
+
+        let src = this.canvas.toDataURL("images/png");
+        $('#outImg').attr('src', src);
     }
 }
 
