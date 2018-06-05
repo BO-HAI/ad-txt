@@ -228,6 +228,13 @@ $(document).ready(function () {
                     });
                 });
             }
+
+            if (data.describe) {
+                $('#describe').text('注意事项：' + data.describe);
+            } else {
+                $('#describe').text('');
+            }
+
             bindImgSize(element);
             bindTxtOption(element);
         });

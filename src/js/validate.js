@@ -5,7 +5,11 @@ class V {
 
     static printError (info) {
         this.errorInfo = info;
-        $('.error-info').text(this.errorInfo);
+        if (info.length > 0) {
+            $('#error-info').text('错误：' + this.errorInfo);
+        } else {
+            $('#error-info').text('');
+        }
     }
 
     /**
@@ -25,7 +29,7 @@ class V {
                 let min = item.txt.minLen;
                 if (len > max || len < min) {
                     v = false;
-                    this.printError(item.txt.label + '格式错误：' + item.txt.placeholder);
+                    this.printError(item.txt.label + '格式错误 -- ' + item.txt.placeholder);
                 }
             }
         })
@@ -42,6 +46,7 @@ class V {
         let v = true;
         let that = this;
         let $list = $('.illustration-list img');
+        let igonre = '';
         // 分辨率750*422
         if (data.h === 422 && data.w === 750 && $list.length > 0) {
             $list.each(function () {
@@ -53,19 +58,20 @@ class V {
                         v = false;
                         that.printError('选择双点配图,知识点3、4不能存在');
                     } else {
+                        igonre = '4,5';
                         // 下标4、5 被忽略
-                        v = that.base(data, '4,5');
+                        v = that.base(data, igonre);
                     }
                 }
                 // 选择四点
                 if ($this.attr('src').indexOf('750_422_dotx4') > -1) {
-                    v = that.base(data);
+                    v = that.base(data, igonre);
                 }
             });
 
             return v;
         } else {
-            return that.base(data);
+            return that.base(data, igonre);
         }
     }
 }

@@ -1,7 +1,8 @@
 {
     "name": "简－蓝色",
-    "url": "./images/j_blue.jpg",
+    "url": "./images/theme/a/j_blue.jpg",
     "illustration": true,
+    "describe": "本图需要分配4个知识点且成对出现，选择双点配图就不可出现知识点3、4",
     "size": [
         {
             "w": 750,
@@ -91,7 +92,7 @@
                         "value": "课程知识点2",
                         "befor": "",
                         "after": "",
-                        "placeholder": "知识点2, 6个汉字",
+                        "placeholder": "6个汉字",
                         "maxLen": 6,
                         "minLen": 6,
                         "fontSize": 26,
@@ -117,7 +118,7 @@
                         "value": "课程知识点3",
                         "befor": "",
                         "after": "",
-                        "placeholder": "知识点3, 6个汉字",
+                        "placeholder": "6个汉字",
                         "maxLen": 6,
                         "minLen": 6,
                         "fontSize": 26,
@@ -143,7 +144,7 @@
                         "value": "课程知识点4",
                         "befor": "",
                         "after": "",
-                        "placeholder": "知识点4, 6个汉字",
+                        "placeholder": "6个汉字",
                         "maxLen": 6,
                         "minLen": 6,
                         "fontSize": 26,

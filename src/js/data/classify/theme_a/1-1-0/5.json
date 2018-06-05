@@ -1,7 +1,8 @@
 {
     "name": "块－橙色",
-    "url": "./images/k_orange.jpg",
+    "url": "./images/theme/a/k_orange.jpg",
     "illustration": true,
+    "describe": "本图需要分配4个知识点且成对出现，选择双点配图就不可出现知识点3、4",
     "size": [
         {
             "w": 750,

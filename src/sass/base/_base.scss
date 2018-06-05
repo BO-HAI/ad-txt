@@ -227,9 +227,14 @@ header {
             display:none;
         }
 
-        .error-info {
+        #error-info {
             margin: 20px;
             color: red;
+        }
+
+        #describe {
+            margin: 20px;
+            color: yellow;
         }
 
         .app-mask {
