@@ -26,3 +26,12 @@ npm run build
 ```html
 <hidden class="cnMSYH"></hidden>
 ```
+
+#### 图片路径
+
+图片路径需要包含
+
+```
+src/images/illustration/分辨率宽_分辨率高/*.png
+src/images/theme/主题名/*.jpg
+```
