@@ -5,35 +5,32 @@ const filename_tpl = require('./template/filename.option.handlebars');
 const size_tpl = require('./template/size.option.handlebars');
 const title_tpl = require('./template/title.option.handlebars');
 const illustration_tpl = require('./template/illustration.item.handlebars');
+const classify_tpl = require('./template/classify.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
+const validateFn = require('./validate.js');
 // const fileList = ['j_blue.jpg', 'j_purple.jpg'];
 //
 // fileList.forEach((item) => {
 //     console.log(item);
 //     require('../images/' + item);
 // });
-require('../images/j_blue.jpg');
-require('../images/j_purple.jpg');
-require('../images/j_red.jpg');
-require('../images/k_blue.jpg');
-require('../images/k_purple.jpg');
-require('../images/k_orange.jpg');
-require('../images/750_422_dotx2.png');
-require('../images/750_422_dotx4.png');
-require('../images/750_422_shadow_1.png');
-
+require('../images/logo.png');
+require('../images/warning.png');
 
 // let debug = true;
 // let host = debug ? './js/data/' : '/subject/0000/ad2/';
-let host = './js/data/';
 
 $(document).ready(function () {
     let promise;
-    let data; // data 是页面编辑内容对象
+    let drawImage; // 绘制对象
+    let host = './js/data/';
+    let data;                   // data 是页面编辑内容对象
     let illustration_data = []; // 被选择插图集合
-    let scale = 1;
+    let classifyId = '';          // 当前分类
+    let theme = 'a';             // 主题
+    let scale = 1;              // 缩放比例
 
     /**
      * 清除插图
@@ -144,7 +141,9 @@ $(document).ready(function () {
                 illustration_list = res;
                 binding
                 .loadHtml('#illustrationNames', illustration_list, filename_tpl)
-                .bindEvent('#illustrationNames', 'change', illustrationChange);
+                .bindEvent('#illustrationNames', 'change', (element) => {
+                    illustrationChange(element, w, h);
+                });
             });
 
             resList.fail(function () {
@@ -170,7 +169,7 @@ $(document).ready(function () {
         let w = data.size[indexs.sizeIndex].w;
         let h = data.size[indexs.sizeIndex].h;
 
-        let drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex);
+        drawImage = new DrawImage('#autoADTXT', w, h, data, illustration_data, indexs.sizeIndex, validateFn);
 
         drawImage.init();
     };
@@ -183,7 +182,7 @@ $(document).ready(function () {
      */
     let bindTxtOption = function (element, ignore = false) {
         let indexs = getIndex();
-        binding.loadHtml('.option-block', data.size[indexs.sizeIndex].title, title_tpl)
+        binding.loadHtml('.edit-block', data.size[indexs.sizeIndex].title, title_tpl)
             .bindEvent('.button', 'click', createCanvas)
             .bindEvent('input', 'keyup', setData).bindEvent('input', 'blur', setData)
             .bindEvent('.title-option-form select', 'change', setData);
@@ -204,7 +203,7 @@ $(document).ready(function () {
         // data = require('./data/' + val + '.json');
 
         let resList = $.ajax({
-            url: host + val + '.json',
+            url: host + 'classify/' + 'theme_' + theme + '/' + classifyId + '/' + val + '.json',
             type: 'GET',
             dataType: 'json'
 
@@ -217,10 +216,18 @@ $(document).ready(function () {
                 // 读取上一次输入的结果
                 res.size.forEach((item) => {
                     item.title.forEach((item2, index) => {
-                        item2.txt.value = storage.load(index);
+                        let str = storage.load(index);
+                        item2.txt.value = str.length > 0 ? str : item2.txt.value;
                     });
                 });
             }
+
+            if (data.describe) {
+                $('#describe').text('注意事项：' + data.describe);
+            } else {
+                $('#describe').text('');
+            }
+
             bindImgSize(element);
             bindTxtOption(element);
         });
@@ -231,14 +238,16 @@ $(document).ready(function () {
      * @param  {Element} element
      * @return {null}
      */
-    let illustrationChange = function (element) {
-        let $this = $(element);
+    let illustrationChange = function ($element, w, h) {
+        let $this = $element;
         let val = $this.val();
         // illustration_data = null;
+        console.log(w);
+        console.log(h);
         if (val) {
             // illustration_data = require('./data/illustration/' + val + '.json');
             let resList = $.ajax({
-                url: host + 'illustration/' + val + '.json',
+                url: host + 'illustration/' + w + '_' + h + '/' + val + '.json',
                 type: 'GET',
                 dataType: 'json'
             });
@@ -260,22 +269,78 @@ $(document).ready(function () {
         $this.val('-1');
     };
 
+    let getDataByClassifyId = function () {
+        let listPromise = $.ajax({
+            url: host + 'classify/' + 'theme_' + theme + '/' + classifyId + '/' + 'list.json',
+            type: 'GET',
+            dataType: 'json'
+        });
+
+        listPromise.done(function (res) {
+            binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
+            $('#fileNames').val(0).trigger('change');
+        });
+
+        listPromise.fail(function (e) {
+            console.log(e);
+            drawImage.clear();
+            $('#fileNames').html('');
+            $('#imgSize').html('');
+            $('#illustrationNames').html('');
+            $('.edit-block').html('');
+            alert('分类主题不存在');
+        });
+    }
+
     /**
      * 入口
      */
-    let resList = $.ajax({
-        url: host + 'list.json',
+    let classifyPromise = $.ajax({
+        url: host + 'classify.json',
         type: 'GET',
         dataType: 'json'
     });
+    // 分类绑定
+    classifyPromise.done(function (res) {
+        binding
+        .loadHtml('.option-block ul', res, classify_tpl)
+        .bindEvent('.classify-0', 'click', function ($element) {
+            let $this = $element;
+            let id = $this.data('id');
+            let num = 0;
+            let $ul = $this.siblings('.first-list');
 
-    resList.done(function (res) {
-        binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
-        $('#fileNames').val(0).trigger('change');
+            // 计算高度
+            res[id].child.forEach((item) => {
+                num++;
+                item.child.forEach(() => {
+                    num++;
+                });
+            });
+
+            // 手风琴切换
+            if ($ul.hasClass('show')) {
+                $ul.css({
+                    height: 0
+                }).removeClass('show');
+
+                $this.find('span').text('+');
+            } else {
+                $ul.css({
+                    height: num * 42
+                }).addClass('show');
+
+                $this.find('span').text('-');
+            }
+        });
+
+        $('.classify-0').trigger('click');
+    }, function () {
+        $($('.classify-2')[8]).click();
     });
 
-    resList.fail(function (e) {
-        console.log(e);
+    classifyPromise.fail(function () {
+        alert('分类未找到');
     });
 
     /**
@@ -289,7 +354,7 @@ $(document).ready(function () {
         scale += 0.1;
         $('#autoADTXT').css({
             'transform': 'scale(' + scale + ')',
-            // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
+            // 'margin-left': 5 * ((1 - scale) * 10) * -1 + '%'
         });
     });
 
@@ -301,7 +366,7 @@ $(document).ready(function () {
         scale -= 0.1;
         $('#autoADTXT').css({
             'transform': 'scale(' + scale + ')',
-            // 'margin-left': 7 * ((1 - scale) * 10) * -1 + '%'
+            // 'margin-left': 5 * ((1 - scale) * 10) * -1 + '%'
         });
     });
 
@@ -311,11 +376,11 @@ $(document).ready(function () {
 
         if ($block.hasClass('simulation')) {
             $block.removeClass('simulation');
-            $this.text('ov');
+            $this.text('虚拟环境');
             $this.attr('title', '打开虚拟环境');
         } else {
             $block.addClass('simulation');
-            $this.text('cv');
+            $this.text('原图');
             $this.attr('title', '关闭虚拟环境');
         }
     });
@@ -324,11 +389,11 @@ $(document).ready(function () {
         let $container = $('.container');
         if ($container.hasClass('r')) {
             $('.container').removeClass('r');
-            $('.right100').text('R100');
+            $('.right100').text('展开');
             $('.right100').attr('title', '100%显示');
         } else {
             $('.container').addClass('r');
-            $('.right100').text('R50');
+            $('.right100').text('收起');
             $('.right100').attr('title', '50%显示');
         }
     });
@@ -339,4 +404,63 @@ $(document).ready(function () {
         clearIllustration(index);
         bindTxtOption();
     });
+
+    // 分类选择
+    $(document).on('click', '.classify-2', function () {
+        let $this = $(this);
+        let id = $this.parent().data('index');
+
+        classifyId = $this.data('id');
+        $('#themeNames').val('a').trigger('change');
+
+        $this.siblings('span').addClass('dot');
+
+        $('.classify-2-item').each(function () {
+            let $t = $(this);
+
+            if ($t.data('index') !== id) {
+                $t.find('span').removeClass('dot');
+            }
+        });
+    });
+
+    $('#themeNames').on('change', function () {
+        let $this = $(this);
+        theme = $this.val();
+        if (classifyId !== '') {
+            getDataByClassifyId();
+        } else {
+            alert('请选择分类');
+            $this.val('-1');
+        }
+    });
+
+    $('#saveImg').on('click', function () {
+        let href = $('#outImg').attr('src');
+
+        // 生成一个a元素
+        let a = document.createElement('a');
+        // 创建一个单击事件
+        let event = new MouseEvent('click');
+
+        // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
+        a.download = '广告图' || '下载图片名称';
+        // 将生成的URL设置为a.href属性
+        a.href = href;
+
+        // 触发a的单击事件
+        a.dispatchEvent(event);
+    });
+
+    function downloadFile(fileName, content){
+        // var aLink = document.createElement('a');
+        // var blob = new Blob([content]);
+        // var evt = document.createEvent("HTMLEvents");
+        // evt.initEvent("click", false, false);//initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
+        // aLink.download = fileName;
+        // aLink.href = URL.createObjectURL(blob);
+        // aLink.dispatchEvent(evt);
+
+
+    }
 });
