@@ -18,15 +18,6 @@ const validateFn = require('./validate.js');
 // });
 require('../images/logo.png');
 require('../images/warning.png');
-require('../images/j_blue.jpg');
-require('../images/j_purple.jpg');
-require('../images/j_red.jpg');
-require('../images/k_blue.jpg');
-require('../images/k_purple.jpg');
-require('../images/k_orange.jpg');
-require('../images/750_422_dotx2.png');
-require('../images/750_422_dotx4.png');
-require('../images/750_422_shadow_1.png');
 
 // let debug = true;
 // let host = debug ? './js/data/' : '/subject/0000/ad2/';
@@ -150,7 +141,9 @@ $(document).ready(function () {
                 illustration_list = res;
                 binding
                 .loadHtml('#illustrationNames', illustration_list, filename_tpl)
-                .bindEvent('#illustrationNames', 'change', illustrationChange);
+                .bindEvent('#illustrationNames', 'change', (element) => {
+                    illustrationChange(element, w, h);
+                });
             });
 
             resList.fail(function () {
@@ -245,14 +238,16 @@ $(document).ready(function () {
      * @param  {Element} element
      * @return {null}
      */
-    let illustrationChange = function ($element) {
+    let illustrationChange = function ($element, w, h) {
         let $this = $element;
         let val = $this.val();
         // illustration_data = null;
+        console.log(w);
+        console.log(h);
         if (val) {
             // illustration_data = require('./data/illustration/' + val + '.json');
             let resList = $.ajax({
-                url: host + 'illustration/' + val + '.json',
+                url: host + 'illustration/' + w + '_' + h + '/' + val + '.json',
                 type: 'GET',
                 dataType: 'json'
             });
