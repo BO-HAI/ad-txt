@@ -1,5 +1,5 @@
 class DrawImage {
-    constructor (id, width, height, data, illustrationData, imgSizeIndex) {
+    constructor (id, width, height, data, illustrationData, imgSizeIndex, validateFn) {
         this.id = id;
         this.$canvas = $(id);
         this.canvas = this.$canvas[0],
@@ -9,6 +9,13 @@ class DrawImage {
         this.data = data;
         this.illustrationData = illustrationData;
         this.imgSizeIndex = imgSizeIndex;
+        this.validateFn = validateFn;
+        this.completeNum = 0; // 文本渲染完成数量，判断所有内容渲染完成
+        this.timer = null;
+    }
+
+    clear () {
+        this.context.clearRect(0, 0, this.width, this.height);
     }
 
     init () {
@@ -25,10 +32,31 @@ class DrawImage {
         this.context.fillRect(0, 0, this.width, this.height);
 
         this.drawBg(this.data.url, 0, 0, this.width, this.height, () => {
+            this.completeNum = 0;
             this.data.size[this.imgSizeIndex].title.forEach((item) => {
                 this.drawTxt(item);
             });
+
+            let vali = this.validateFn(this.data.size[this.imgSizeIndex]);
+            if (!vali) {
+                this.drawWarning();
+            }
         });
+
+
+
+        // if (this.timer === null) {
+        //     this.timer = setInterval(() => {
+        //         if (this.completeNum >= this.data.size[this.imgSizeIndex].title.length) {
+        //             let vali = this.validateFn(this.data.size[this.imgSizeIndex]);
+        //             if (!vali && !this.isDrawWarngin) {
+        //                 this.drawWarning();
+        //                 clearInterval(this.timer);
+        //                 this.timer = null;
+        //             }
+        //         }
+        //     }, 1500);
+        // }
     }
 
     drawBg (url, x, y, w, h, fn) {
@@ -66,6 +94,26 @@ class DrawImage {
 
     }
 
+    drawWarning () {
+        let url = './images/warning.png';
+
+        let len = parseInt(this.width / 110);
+        let i = 0;
+        for (i, len; i < len + 1; i++) {
+            let beauty = new Image();
+            beauty.src = url;
+            beauty.i = i;
+            let x = 0 + (beauty.i * 110);
+            beauty.setAttribute("crossOrigin",'Anonymous');
+            beauty.onload = () => {
+                this.context.fillStyle = this.context.createPattern(beauty, 'repeat-x');
+                this.context.drawImage(beauty, x, 200, 110, 45);
+                this.context.stroke();
+            }
+        }
+
+    }
+
     drawTxt (data) {
         let measureScoreStr = {
            width: 0
@@ -80,8 +128,8 @@ class DrawImage {
         let isCenter = !data.x ? true : false;
         let isVerticalCenter = !data.y ? true : false;
 
-        if (data.txt.len !== null && (data.txt.value.length > data.txt.len)) {
-            value = data.txt.value.substring(0, data.txt.len);
+        if (data.txt.value.length > data.txt.maxLen) {
+            value = data.txt.value.substring(0, data.txt.maxLen);
         } else {
             value = data.txt.value;
         }
@@ -129,6 +177,11 @@ class DrawImage {
             this.context.fillText(value, x, y);
             this.context.stroke();
         }
+
+        this.completeNum++;
+
+        let src = this.canvas.toDataURL("images/png");
+        $('#outImg').attr('src', src);
     }
 }
 

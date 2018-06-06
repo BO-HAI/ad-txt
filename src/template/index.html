@@ -11,12 +11,30 @@
     <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/colorpicker.js"></script>
     <script type="text/javascript" src="http://www.hqwx.com/subject/0000/colorPicker-master/javascript_implementation/jscolor.js"></script> -->
 </head>
-<body>
+<body style="padding:0;margin:0">
     <header>
-        <h1>AD.TXT <span>Alpha</span></h1>
+        <img src="./images/logo.png" alt="">
+        <h1>AD工厂<span>版本1.0</span></h1>
     </header>
-    <div class="container app_container">
-        <form class="horizontal" action="">
+    <div class="option-block">
+        <span></span>
+        <ul>
+        </ul>
+    </div>
+    <div class="container app_container clearFix">
+        <form class="horizontal gray-bg" action="">
+            <div class="form-group">
+                <label for="">选择主题</label>
+                <select name="" id="themeNames">
+                    <option value="-1">请选择</option>
+                    <option value="a">基础</option>
+                    <option value="b">强化</option>
+                    <option value="c">冲刺</option>
+                    <option value="d">报名指导</option>
+                    <option value="e">解析</option>
+                    <option value="f">听课指南</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="">选择广告底图</label>
                 <select name="" id="fileNames">
@@ -51,7 +69,7 @@
                 <li>APP</li>
             </ul>
         </div> -->
-        <div class="option-block">
+        <div class="edit-block">
         </div>
         <div class="canvas-block">
             <div>
@@ -60,10 +78,14 @@
             <div class="app-mask">
                 <span class="square-button enlarge-canvas" title="放大">＋</span>
                 <span class="square-button narrow-canvas" title="缩小">－</span>
-                <span class="square-button right100" title="100%显示">R100</span>
-                <span class="square-button simulation-app" title="打开虚拟环境">ov</span>
+                <span class="square-button right100" title="100%显示">展开</span>
+                <span class="square-button simulation-app" title="打开虚拟环境">虚拟环境</span>
+                <span class="square-button save" id="saveImg">保存图片</span>
             </div>
             <canvas id="autoADTXT"></canvas>
+            <img id="outImg" src="" alt="">
+            <p id="describe" class="describe"></p>
+            <p id="error-info" class="error-info"></p>
             <ul class="illustration-list">
 
             </ul>

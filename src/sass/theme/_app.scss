@@ -1,14 +1,119 @@
+.option-block {
+    float: left;
+    width: 15%;
+    position: relative;
+    transition: all .5s;
+
+    > span {
+        position: absolute;
+        top: 0;
+        right: -22px;
+        display: block;
+        width: 22px;
+        height: 42px;
+        background: #4b4b4b;
+        z-index: 99;
+        display: none;
+    }
+
+    @for $i from 0 through 2 {
+        .classify-#{$i} {
+            text-indent: 10% * ($i + 1);
+            height: 42px;
+            line-height: 42px;
+
+            @if $i == 0 {
+                position: relative;
+                cursor: pointer;
+
+                span {
+                    position: absolute;
+                    right: 0;
+                    width: 42px;
+                    height: 42px;
+                    line-height: 42px;
+                    text-align: center;
+                    text-indent: 0;
+                }
+
+                &:hover {
+                    background: #414141;
+                }
+            }
+
+            @if $i == 2 {
+                cursor: pointer;
+
+                &:hover {
+                    background: #f7f7f7;
+                }
+            }
+        }
+    }
+
+    .first-list {
+        transition: all .5s;
+        height: 0;
+        overflow: hidden;
+    }
+
+    .first-list.show {
+        height: auto;
+    }
+
+    .classify-2-item {
+        position: relative;
+
+        span {
+            display: none;
+        }
+
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            background: #b75858;
+            top: 50%;
+            margin-top: -5px;
+            left: 10px;
+            border-radius: 50%;
+        }
+    }
+}
+
 .app_container {
-    .option-block {
+    width: 85%;
+    float: right;
+    transition: all .5s;
+
+    .horizontal {
+        transition: all .5s;
+
+        select {
+            background: #5b5b5b;
+            color: #ffffff;
+            border: 1px solid #5b5b5b;
+            width: 160px;
+        }
+
+        #history {
+            width: 20px;
+        }
+    }
+
+    .edit-block {
         float: left;
         width: 50%;
         min-height: 100vh;
         background: #f7f7f7;
+        transition: all .5s;
     }
 
     .canvas-block {
         float: right;
         width: 50%;
+        transition: all .5s;
     }
 
     .simulation {
