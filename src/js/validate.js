@@ -52,7 +52,7 @@ class V {
             $list.each(function () {
                 var $this = $(this)
                 // 选择双点 2345
-                if ($this.attr('src').indexOf('750_422_dotx2') > -1) {
+                if ($this.attr('src').indexOf('dotx2') > -1) {
                     //双点 不应该存在下标4、5的文本说明
                     if (data.title[4].txt.value.length !== 0 || data.title[5].txt.value.length !== 0) {
                         v = false;
@@ -64,7 +64,7 @@ class V {
                     }
                 }
                 // 选择四点
-                if ($this.attr('src').indexOf('750_422_dotx4') > -1) {
+                if ($this.attr('src').indexOf('dotx4') > -1) {
                     v = that.base(data, igonre);
                 }
             });

@@ -74,7 +74,7 @@
                         "fontColor": "#ffffff",
                         "spacing": 10
                     },
-                    "x": 170,
+                    "x": 150,
                     "y": 245,
                     "controlFont": {
                         "size": false,
@@ -126,7 +126,7 @@
                         "fontColor": "#ffffff",
                         "spacing": 10
                     },
-                    "x": 170,
+                    "x": 150,
                     "y": 287,
                     "controlFont": {
                         "size": false,
