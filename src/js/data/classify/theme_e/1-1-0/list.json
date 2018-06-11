@@ -1,22 +1,27 @@
 [
     {
         "name": "01",
-        "value": "0"
+        "value": "0",
+        "src": "./images/theme/e/01.png"
     },
     {
         "name": "02",
-        "value": "1"
+        "value": "1",
+        "src": "./images/theme/e/02.png"
     },
     {
         "name": "03",
-        "value": "2"
+        "value": "2",
+        "src": "./images/theme/e/03.png"
     },
     {
         "name": "04",
-        "value": "3"
+        "value": "3",
+        "src": "./images/theme/e/04.png"
     },
     {
         "name": "05",
-        "value": "4"
+        "value": "4",
+        "src": "./images/theme/e/05.png"
     }
 ]
