@@ -11,17 +11,9 @@ const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
 const validateFn = require('./validate.js');
-// const fileList = ['j_blue.jpg', 'j_purple.jpg'];
-//
-// fileList.forEach((item) => {
-//     console.log(item);
-//     require('../images/' + item);
-// });
+
 require('../images/logo.png');
 require('../images/warning.png');
-
-// let debug = true;
-// let host = debug ? './js/data/' : '/subject/0000/ad2/';
 
 $(document).ready(function () {
     let promise;
@@ -272,7 +264,9 @@ $(document).ready(function () {
         $this.val('-1');
     };
 
-    // 根据分类id获取图片列表
+    /**
+     * 根据分类id获取图片列表
+     */
     let getDataByClassifyId = function () {
         let listPromise = $.ajax({
             url: host + 'classify/' + 'theme_' + theme + '/' + classifyId + '/' + 'list.json',
@@ -466,16 +460,4 @@ $(document).ready(function () {
         // 触发a的单击事件
         a.dispatchEvent(event);
     });
-
-    function downloadFile(fileName, content){
-        // var aLink = document.createElement('a');
-        // var blob = new Blob([content]);
-        // var evt = document.createEvent("HTMLEvents");
-        // evt.initEvent("click", false, false);//initEvent 不加后两个参数在FF下会报错, 感谢 Barret Lee 的反馈
-        // aLink.download = fileName;
-        // aLink.href = URL.createObjectURL(blob);
-        // aLink.dispatchEvent(evt);
-
-
-    }
 });
