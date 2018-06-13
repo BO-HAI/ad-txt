@@ -1,18 +1,22 @@
 [
     {
         "name": "01",
-        "value": "0"
+        "value": "0",
+        "src": "./images/theme/f/01.png"
     },
     {
         "name": "02",
-        "value": "1"
+        "value": "1",
+        "src": "./images/theme/f/02.png"
     },
     {
         "name": "03",
-        "value": "2"
+        "value": "2",
+        "src": "./images/theme/f/03.png"
     },
     {
         "name": "04",
-        "value": "3"
+        "value": "3",
+        "src": "./images/theme/f/04.png"
     }
 ]

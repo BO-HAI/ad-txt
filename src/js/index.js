@@ -6,6 +6,7 @@ const size_tpl = require('./template/size.option.handlebars');
 const title_tpl = require('./template/title.option.handlebars');
 const illustration_tpl = require('./template/illustration.item.handlebars');
 const classify_tpl = require('./template/classify.handlebars');
+const thumbnail_tpl = require('./template/thumbnail.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
@@ -212,6 +213,8 @@ $(document).ready(function () {
         resList.done(function (res) {
             data = res;
 
+            $('.thumbnailImages-block').removeClass('show');
+
             if ($('#history').prop('checked')) {
                 // 读取上一次输入的结果
                 res.size.forEach((item) => {
@@ -269,6 +272,7 @@ $(document).ready(function () {
         $this.val('-1');
     };
 
+    // 根据分类id获取图片列表
     let getDataByClassifyId = function () {
         let listPromise = $.ajax({
             url: host + 'classify/' + 'theme_' + theme + '/' + classifyId + '/' + 'list.json',
@@ -277,8 +281,19 @@ $(document).ready(function () {
         });
 
         listPromise.done(function (res) {
-            binding.loadHtml('#fileNames', res, filename_tpl).bindEvent('#fileNames', 'change', fileChange);
+            binding.loadHtml('#fileNames', res, filename_tpl)
+            .bindEvent('#fileNames', 'change', fileChange)
+            .bindEvent('#fileNames', 'click', function () {
+                $('.thumbnailImages-block').addClass('show');
+            });
             $('#fileNames').val(0).trigger('change');
+            $('.thumbnailImages-block').addClass('show');
+
+            binding.loadHtml('.thumbnailImages-block ul', res, thumbnail_tpl).bindEvent('.thumbnail', 'click', function ($element) {
+                let val = $element.data('val');
+                $('#fileNames').val(val).change();
+                $('.thumbnailImages-block').removeClass('show');
+            });
         });
 
         listPromise.fail(function (e) {
