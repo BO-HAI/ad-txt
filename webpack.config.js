@@ -7,6 +7,7 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         'index': './src/js/index.js',
+        'db': './src/js/db.js',
         'jq': './src/js/jquery/1.11.0.js',
         'colors': './src/js/colorpicker-master/colors.js',
         'colorpicker_data': './src/js/colorpicker-master/colorpicker.data.js',
@@ -23,10 +24,10 @@ module.exports = {
             {
                 test: /\.js/,
                 exclude: [
-                   'src/js/colorPicker-master/',
-                   'src/js/jquery/'
+                    'src/js/colorPicker-master/',
+                    'src/js/jquery/',
+                    'node_modules/'
                ],
-                exclude: /node_modules/,
                 loader: 'babel-loader'
             },
             {
@@ -92,11 +93,18 @@ module.exports = {
     plugins: [
         new webpack.optimize.UglifyJsPlugin(),
         new HtmlWebpackPlugin({
-            title: 'index',
+            title: '设计部广告工厂',
             filename: 'index.html',
             chunks: ['jq', 'handlebars', 'colors', 'colorpicker_data', 'colorpicker', 'jscolor', 'index'],
             // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
             template: 'src/template/index.html',
+            chunksSortMode: 'manual'
+        }),
+        new HtmlWebpackPlugin({
+            title: '设计部广告工厂-数据同步',
+            filename: 'db.html',
+            chunks: ['jq', 'handlebars', 'db'],
+            template: 'src/template/db.html',
             chunksSortMode: 'manual'
         }),
         new webpack.ProvidePlugin({
@@ -105,6 +113,6 @@ module.exports = {
             'window.jQuery': 'jquery',
             'window.$': 'jquery',
         }),
-        new ExtractTextPlugin('./css/style.css')
+        new ExtractTextPlugin('./css/[name].css')
     ]
-}
+};

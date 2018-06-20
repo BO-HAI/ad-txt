@@ -1,5 +1,6 @@
 require('normalize.css');
 require('../sass/screen.scss');
+require('../sass/app.scss');
 const colors = require('./colors.js');
 const filename_tpl = require('./template/filename.option.handlebars');
 const size_tpl = require('./template/size.option.handlebars');
