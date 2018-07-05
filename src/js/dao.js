@@ -30,11 +30,17 @@ class Dao {
             });
             console.log('Classify对象仓库创建成功');
 
-            let themeFileStore = this.idb.createObjectStore('themeFile', {
+            let themeStore = this.idb.createObjectStore('theme', {
                 keyPath: 'id',
                 autoIncrement: false
             });
-            console.log('themeFile对象仓库创建成功');
+            console.log('theme对象仓库创建成功');
+
+            let imageStore = this.idb.createObjectStore('image', {
+                keyPath: 'id',
+                autoIncrement: false
+            });
+            console.log('image对象仓库创建成功');
         };
     }
 
