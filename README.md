@@ -55,7 +55,7 @@ npm run build
 
 ```
 src/images/illustration/分辨率宽_分辨率高/*.png
-src/images/theme/主题名/分类id/*.jpg
+src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据格式说明 classify.json
 
 // src/images/illustration/750_422/*.png
 // src/images/theme/a/0-0-0/0.jpg
@@ -187,7 +187,7 @@ src/images/theme/主题名/分类id/*.jpg
 `txt.value`: [String] 默认值
 `txt.befor`: [String] 在value前面加入的内容
 `txt.after`: [String] 在value后面加入的内容
-`txt.placeholder`: [String] 提示语 
+`txt.placeholder`: [String] 提示语
 `txt.maxLen`: [String] 最大字数
 `txt.minLen`: [String] 最小字数
 `txt.fontSize`: [String] 字号
@@ -203,5 +203,3 @@ src/images/theme/主题名/分类id/*.jpg
 `controlCoordinate`: [Object] 控制坐标对象
 `controlCoordinate.x`: [Boolean] x坐标是否可变
 `controlCoordinate.y`: [Boolean] y坐标是否可变
-
-
