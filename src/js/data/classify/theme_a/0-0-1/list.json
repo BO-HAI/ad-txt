@@ -3,5 +3,10 @@
         "name": "纯色背景1",
         "value": "0",
         "src": "./images/theme/a/0-0-1/01.png"
+    },
+    {
+        "name": "02",
+        "value": "1",
+        "src": "./images/theme/a/0-0-1/02.png"
     }
 ]
