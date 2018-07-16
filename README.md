@@ -1,5 +1,7 @@
 # 广告工厂
 
+#### http://ad-txt.hqwx.com/
+
 ```
 // 热加载
 npm run start:dev
@@ -124,9 +126,13 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 ```
 
 `name`: [String] 图片名称
+
 `url`: [String] 图片地址
+
 `illustration`: [Boolean] 图片是否可配插图
+
 `describe`: [String] 图片描述
+
 `size`: [Array] 按分辨率分类的图片属性集合
 
 ##### size 属性
@@ -144,7 +150,9 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 ```
 
 `w`: [Number] 分辨率宽
+
 `h`: [Number] 分辨率高
+
 `title`: [Array] 该图片此分辨率下的标题属性集合
 
 ##### title 属性
@@ -183,23 +191,39 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 ```
 
 `txt`: [Object] 文案对象
+
 `txt.label`: [String] 标签，说明该字段作用
+
 `txt.value`: [String] 默认值
+
 `txt.befor`: [String] 在value前面加入的内容
+
 `txt.after`: [String] 在value后面加入的内容
+
 `txt.placeholder`: [String] 提示语
+
 `txt.maxLen`: [String] 最大字数
+
 `txt.minLen`: [String] 最小字数
+
 `txt.fontSize`: [String] 字号
+
 `txt.fontFamily`: [String] 字体名称
+
 `txt.fontColor`: [String] 字体颜色
+
 `txt.spacing`: [String] 字间距
 
 `controlFont`: [Object] 控制字体对象
+
 `controlFont.size`: [Boolean] 字号是否可变
+
 `controlFont.color`: [Boolean] 字体颜色是否可变
+
 `controlFont.family`: [Boolean] 字体是否可变
 
 `controlCoordinate`: [Object] 控制坐标对象
+
 `controlCoordinate.x`: [Boolean] x坐标是否可变
+
 `controlCoordinate.y`: [Boolean] y坐标是否可变
