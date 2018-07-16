@@ -1,0 +1,92 @@
+{
+    "name": "14",
+    "url": "./images/theme/c/0-0-1/14.png",
+    "illustration": false,
+    "describe": "",
+    "size": [
+        {
+            "w": 580,
+            "h": 326,
+            "title": [
+                {
+                    "txt": {
+                        "label": "商品主标题1",
+                        "value": "9节课",
+                        "befor": "",
+                        "after": "",
+                        "placeholder": "1-6个汉字",
+                        "maxLen": 6,
+                        "minLen": 1,
+                        "fontSize": 40,
+                        "fontFamily": "GBK_FZ_LT_DH",
+                        "fontColor": "#ffffff",
+                        "spacing": 3
+                    },
+                    "x": 50,
+                    "y": 130,
+                    "controlFont": {
+                        "size": false,
+                        "color": false,
+                        "family": false
+                    },
+                    "controlCoordinate": {
+                        "x": false,
+                        "y": false
+                    }
+                },
+                {
+                    "txt": {
+                        "label": "商品主标题2",
+                        "value": "暑期逆袭攻略",
+                        "befor": "",
+                        "after": "",
+                        "placeholder": "1-6个汉字",
+                        "maxLen": 6,
+                        "minLen": 1,
+                        "fontSize": 40,
+                        "fontFamily": "GBK_FZ_LT_DH",
+                        "fontColor": "#ffffff",
+                        "spacing": 3
+                    },
+                    "x": 50,
+                    "y": 177,
+                    "controlFont": {
+                        "size": false,
+                        "color": false,
+                        "family": false
+                    },
+                    "controlCoordinate": {
+                        "x": false,
+                        "y": false
+                    }
+                },
+                {
+                    "txt": {
+                        "label": "商品副标题",
+                        "value": "考神助攻 神技在手备考不愁",
+                        "befor": "",
+                        "after": "",
+                        "placeholder": "8-13个汉字",
+                        "maxLen": 13,
+                        "minLen": 8,
+                        "fontSize": 18,
+                        "fontFamily": "cnMSYH",
+                        "fontColor": "#ffffff",
+                        "spacing": 3
+                    },
+                    "x": 50,
+                    "y": 220,
+                    "controlFont": {
+                        "size": false,
+                        "color": false,
+                        "family": false
+                    },
+                    "controlCoordinate": {
+                        "x": false,
+                        "y": false
+                    }
+                }
+            ]
+        }
+    ]
+}
