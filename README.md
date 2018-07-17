@@ -11,13 +11,41 @@ http://localhost:9001/
 // 编译
 npm run build
 ```
-### 一、关于主题
+### 一、主题设置
 
 主题分类及对应的编号：
 
-基础(a)、强化(b)、冲刺(c)、报名指导(d)、解析(e)、听课指南(f)
+主题id为英文小写字母：a－z
 
-### 二、增加新字体
+js/template/theme.option.handlebars  维护不同的主题名称
+
+根据classifyId返回不同的名称
+
+```
+{{#compare data.id '==' '0-0-1'}}
+    <option value="-1">请选择</option>
+    <option value="a">建筑工程</option>
+    <option value="b">财会经济</option>
+    <option value="c">医药卫生</option>
+    <option value="d">职业资格</option>
+    <option value="e">教师公考</option>
+    <option value="f">考研学历</option>
+    <option value="g">外语考试</option>
+{{/compare}}
+
+{{#compare data.id '!=' '0-0-1'}}
+    <option value="-1">请选择</option>
+    <option value="a">基础</option>
+    <option value="b">强化</option>
+    <option value="c">冲刺</option>
+    <option value="d">报名指导</option>
+    <option value="e">解析</option>
+    <option value="f">听课指南</option>
+{{/compare}}
+
+```
+
+### 二、如何增加新字体
 
 #### sass/base/_font.scss
 
@@ -227,3 +255,47 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 `controlCoordinate.x`: [Boolean] x坐标是否可变
 
 `controlCoordinate.y`: [Boolean] y坐标是否可变
+
+#### 插图
+
+图片描述json中的`illustration`属性描述该图片是否可配插图
+
+插图按照分辨率来分类(v1.2.x以前)
+
+插图列表JSON:
+
+```javascript
+// /js/data/illustration/分辨率宽_分辨率高.json
+
+
+// /js/data/illustration/580_326.json
+```
+
+插图描述JSON:
+
+
+```json
+// /js/data/illustration/分辨率宽_分辨率高/XX.json
+
+
+// /js/data/illustration/580_326/a.json
+
+
+{
+    "url": "./images/illustration/580_326/ckjj_gyj.png",
+    "w": 580,
+    "h": 326,
+    "x": 0,
+    "y": 0
+}
+```
+
+`url`: [String] 插图地址
+
+`w`: [Array] 插图宽
+
+`h`: [Array] 插图高
+
+`x`: [Array] 插图x坐标
+
+`y`: [Array] 插图y坐标
