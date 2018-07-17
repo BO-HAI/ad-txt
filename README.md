@@ -265,10 +265,21 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 
 插图列表JSON:
 
-```javascript
+```json
 // /js/data/illustration/分辨率宽_分辨率高.json
 
 // /js/data/illustration/580_326.json
+
+[
+    {
+        "name": "知识点＊2",
+        "value": "dotx2"
+    },
+    {
+        "name": "知识点＊4",
+        "value": "dotx4"
+    }
+]
 ```
 
 插图描述JSON:
@@ -277,10 +288,10 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 ```json
 // /js/data/illustration/分辨率宽_分辨率高/XX.json
 
-// /js/data/illustration/580_326/a.json
+// /js/data/illustration/580_326/dotx2.json
 
 {
-    "url": "./images/illustration/580_326/ckjj_gyj.png",
+    "url": "./images/illustration/580_326/dotx2.png",
     "w": 580,
     "h": 326,
     "x": 0,
