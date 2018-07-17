@@ -256,6 +256,7 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 
 `controlCoordinate.y`: [Boolean] y坐标是否可变
 
+
 #### 插图
 
 图片描述json中的`illustration`属性描述该图片是否可配插图
@@ -267,7 +268,6 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 ```javascript
 // /js/data/illustration/分辨率宽_分辨率高.json
 
-
 // /js/data/illustration/580_326.json
 ```
 
@@ -277,9 +277,7 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 ```json
 // /js/data/illustration/分辨率宽_分辨率高/XX.json
 
-
 // /js/data/illustration/580_326/a.json
-
 
 {
     "url": "./images/illustration/580_326/ckjj_gyj.png",
