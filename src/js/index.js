@@ -33,6 +33,19 @@ $(document).ready(function () {
     let classifyId = '';          // 当前分类
     let theme = 'a';             // 主题
     let scale = 1;              // 缩放比例
+    let history_version = storage.load('ad_version');
+    let now_version = 'v1.2.2';
+
+    console.log(history_version);
+
+    if (now_version !== history_version) {
+        $('#dialog').show();
+        $('.dialog-footer button').on('click', function () {
+            storage.save('ad_version', now_version);
+            $('#dialog').hide();
+        });
+    }
+
 
     /**
      * 清除插图
