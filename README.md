@@ -308,3 +308,47 @@ src/images/theme/主题名/分类id/*.jpg // 分类id详见第四大点：数据
 `x`: [Array] 插图x坐标
 
 `y`: [Array] 插图y坐标
+
+
+### 验证
+
+#### js/validate.js
+
+validate.js包括 `V` 静态对象，V对象内部包含了两个固定的函数`printError` 打印错误信息 和 `base` 基础验证函数
+
+#### printError函数
+
+该函数只接受一个参数，就是错误信息，并输出到页面指定位置；
+
+#### base函数
+
+`data`: [Object] 指定分辨率的图片数据
+
+`igonre`: [String] 需要忽略验证的文案下标字符串，逗号分割；例如我不需要验证`data`图片第2个和第3个标题标题，那么传入'1,2'即可;
+
+
+#### 在V对象内添加静态验证函数，为每种分辨率设置验证方法
+
+函数命名规范：w + 图片宽度 ＋ h ＋ 图片高度 
+
+`w750h422`
+
+
+```javascript
+class V {
+    static w750h422 (data) {
+        let v;
+        let that = this;
+        let igonre = '';
+        
+        // 必须执行base函数
+        v = that.base(data, igonre);
+        
+        // 自定义验证过程
+        // 返回验证结果（覆盖v的值）
+        
+        return v;
+    }
+}
+```
+
