@@ -7,6 +7,7 @@ const title_tpl = require('./template/title.option.handlebars');
 const illustration_tpl = require('./template/illustration.item.handlebars');
 const classify_tpl = require('./template/classify.handlebars');
 const thumbnail_tpl = require('./template/thumbnail.handlebars');
+const theme_tpl = require('./template/theme.option.handlebars');
 const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
@@ -32,6 +33,19 @@ $(document).ready(function () {
     let classifyId = '';          // 当前分类
     let theme = 'a';             // 主题
     let scale = 1;              // 缩放比例
+    let history_version = storage.load('ad_version');
+    let now_version = 'v1.2.2';
+
+    console.log(history_version);
+
+    if (now_version !== history_version) {
+        $('#dialog').show();
+        $('.dialog-footer button').on('click', function () {
+            storage.save('ad_version', now_version);
+            $('#dialog').hide();
+        });
+    }
+
 
     /**
      * 清除插图
@@ -426,7 +440,20 @@ $(document).ready(function () {
         let id = $this.parent().data('index');
 
         classifyId = $this.data('id');
-        $('#themeNames').val('a').trigger('change');
+        // 绑定不同主题
+        binding.loadHtml('#themeNames', {id: classifyId}, theme_tpl).bindEvent('#themeNames', 'change', function ($element) {
+            theme = $element.val();
+            if (classifyId !== '') {
+                getDataByClassifyId();
+            } else {
+                alert('请选择分类');
+                $element.val('-1');
+            }
+        }, function () {
+            $('#themeNames').val('a').trigger('change');
+        });
+
+        // $('#themeNames').val('a').trigger('change');
 
         $this.siblings('span').addClass('dot');
 

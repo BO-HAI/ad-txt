@@ -21,7 +21,7 @@ class binding {
         });
 
         if (callback) {
-            callback();
+            callback($element);
         }
         return this;
     }

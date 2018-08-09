@@ -35,6 +35,14 @@
     font-style: normal;
 }
 
+/*方正兰亭大黑*/
+@font-face {
+    font-family: "GBK_FZ_LT_DH";
+    src: url("../font/GBK_FZ_LT_DH.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 // /*造字工坊悦黑 纤细超长体*/
 // @font-face {
 //     font-family: "cnZZGFYHQXCCT";
@@ -66,6 +74,10 @@
 
 .cnMSYHBD {
     font-family: 'cnMSYHBD' !important;
+}
+
+.GBK_FZ_LT_DH {
+    font-family: 'GBK_FZ_LT_DH' !important;
 }
 
 // .cnZZGFYHQXCCT {

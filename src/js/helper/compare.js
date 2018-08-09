@@ -38,8 +38,8 @@ module.exports = function (left, operator, right, options) {
 
     var result = operators[operator](left, right);
     if (result) {
-        return 'selected="selected"';
+        return options.fn(this);
     } else {
-        return '';
+        return options.inverse(this);
     }
 }

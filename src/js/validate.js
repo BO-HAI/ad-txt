@@ -60,34 +60,69 @@ class V {
                     } else {
                         igonre = '4,5';
                         // 下标4、5 被忽略
+
                         v = that.base(data, igonre);
+                        console.log(v);
                     }
                 }
                 // 选择四点
                 if ($this.attr('src').indexOf('dotx4') > -1) {
+                    igonre = '';
                     v = that.base(data, igonre);
                 }
             });
-
             return v;
         } else {
             return that.base(data, igonre);
         }
     }
+
+    static w580h326 (data) {
+
+        let len = $('.illustration-list').find('li').length;
+        let optionLen = $('#illustrationNames').find('option').length;
+        let v = this.base(data);
+        if (optionLen === 0 && v) {
+            // this.printError('');
+            return true;
+        }
+
+        if (!v) {
+            return false;
+        }
+
+        if (len !== 1) {
+            this.printError('必须选择一张配图，且只能选择一张');
+            return false;
+        } else if (!v) {
+            return false;
+        } else {
+            // this.printError('');
+            return true;
+        }
+    }
 }
 
 module.exports = function (data) {
-    let v = true;
-    v = V.base(data);
-    if (data.h === 422 && data.w === 750) {
-        v = V.w750h422(data);
-    }
+    // let strVali = true;
+    let imgVali = true;
+    // strVali = V.base(data);
+    // if (data.h === 422 && data.w === 750) {
+    //     v = V.w750h422(data);
+    // }
+    //
+    // if (data.h === 326 && data.w === 580) {
+    //     v = V.w580h326(data);
+    // }
 
-    if (!v) {
+    imgVali = V['w' + data.w + 'h' + data.h](data);
+
+    if (!imgVali) {
         $('#saveImg').hide();
+        return false;
     } else {
         $('#saveImg').show();
+        V.printError('');
+        return true;
     }
-
-    return v;
 }
