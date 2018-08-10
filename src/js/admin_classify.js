@@ -37,10 +37,10 @@ module.exports = function (host, binding) {
         let name = $($inputs[0]).val();
         let id = $($inputs[1]).val();
         let parentId = $($inputs[2]).val();
-        let theme = $($inputs[3]).val();
+        let themeId = $($inputs[3]).val();
 
         let obj = {
-            name, id, parentId, theme,
+            name, id, parentId, themeId,
             _method: 'PUT'
         };
 
@@ -104,7 +104,7 @@ module.exports = function (host, binding) {
         let id = $('input[name="id"]').val();
         let name = $('input[name="name"]').val();
         let parentId = $('input[name="parentId"]').val();
-        let theme = $('input[name="theme"]').val();
+        let themeId = $('input[name="themeId"]').val();
 
         $.ajax({
             url: host + '/classify',
@@ -114,7 +114,7 @@ module.exports = function (host, binding) {
                 id,
                 name,
                 parentId,
-                theme
+                themeId
             },
             success: function (res) {
 
