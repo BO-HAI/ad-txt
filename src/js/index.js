@@ -366,7 +366,7 @@ $(document).ready(function () {
 
         $('.classify-0').trigger('click');
     }, function () {
-        $($('.classify-2')[8]).click();
+        // $($('.classify-2')[8]).click();
     });
 
     classifyPromise.fail(function () {

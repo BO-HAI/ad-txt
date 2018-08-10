@@ -101,10 +101,10 @@ module.exports = function (host, binding) {
     // 添加分类
     $('.add-classify').on('click', function () {
 
-        let id = $('input[name="id"]').val();
-        let name = $('input[name="name"]').val();
-        let parentId = $('input[name="parentId"]').val();
-        let themeId = $('input[name="themeId"]').val();
+        let id = $('.add-classify-form input[name="id"]').val();
+        let name = $('.add-classify-form input[name="name"]').val();
+        let parentId = $('.add-classify-form input[name="parentId"]').val();
+        let themeId = $('.add-classify-form input[name="themeId"]').val();
 
         $.ajax({
             url: host + '/classify',
