@@ -1,0 +1,64 @@
+.admin {
+
+    tbody td {
+        position: relative;
+        overflow: hidden;
+    }
+
+    input:disabled {
+        border: 0;
+    }
+
+    .classify-button {
+        cursor: pointer;
+    }
+
+    .option-button {
+        display: block;
+        height: 32px;
+        line-height: 32px;
+
+        position: absolute;
+        top: 0;
+        color: #ffffff;
+        transition: all .5s;
+    }
+
+    .yes-button {
+        left: -40%;
+        width: 40%;
+        background: #da7070;
+
+    }
+
+    .no-button {
+        right: -60%;
+        width: 60%;
+        background: #8c8c8c;
+    }
+
+    .delete-option {
+        .yes-button {
+            left: 0;
+            background: #da7070;
+
+        }
+
+        .no-button {
+            right: 0;
+            background: #8c8c8c;
+        }
+    }
+
+    .add-classify-form {
+        .form-group {
+            display: inline-block;
+        }
+
+        .add-classify {
+            height: 31px;
+            position: relative;
+            top: -1px;
+        }
+    }
+}

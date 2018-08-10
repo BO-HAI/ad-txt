@@ -155,10 +155,10 @@ $(document).ready(function () {
             resList.done(function (res) {
                 illustration_list = res;
                 binding
-                .loadHtml('#illustrationNames', illustration_list, filename_tpl)
-                .bindEvent('#illustrationNames', 'change', (element) => {
-                    illustrationChange(element, w, h);
-                });
+                    .loadHtml('#illustrationNames', illustration_list, filename_tpl)
+                    .bindEvent('#illustrationNames', 'change', (element) => {
+                        illustrationChange(element, w, h);
+                    });
             });
 
             resList.fail(function () {
@@ -296,10 +296,10 @@ $(document).ready(function () {
 
         listPromise.done(function (res) {
             binding.loadHtml('#fileNames', res, filename_tpl)
-            .bindEvent('#fileNames', 'change', fileChange)
-            .bindEvent('#fileNames', 'click', function () {
-                $('.thumbnailImages-block').addClass('show');
-            });
+                .bindEvent('#fileNames', 'change', fileChange)
+                .bindEvent('#fileNames', 'click', function () {
+                    $('.thumbnailImages-block').addClass('show');
+                });
             $('#fileNames').val(0).trigger('change');
             $('.thumbnailImages-block').addClass('show');
 
@@ -325,43 +325,44 @@ $(document).ready(function () {
      * 入口
      */
     let classifyPromise = $.ajax({
-        url: host + 'classify.json',
+        url: 'http://localhost:8080/api/classify',
         type: 'GET',
-        dataType: 'json'
+        dataType: 'jsonp'
     });
     // 分类绑定
     classifyPromise.done(function (res) {
         binding
-        .loadHtml('.option-block ul', res, classify_tpl)
-        .bindEvent('.classify-0', 'click', function ($element) {
-            let $this = $element;
-            let id = $this.data('id');
-            let num = 0;
-            let $ul = $this.siblings('.first-list');
+            .loadHtml('.option-block ul', res.data, classify_tpl)
+            .bindEvent('.classify-0', 'click', function ($element) {
+                let $this = $element;
+                let id = $this.data('id');
+                let index = $this.data('index');
+                let num = 0;
+                let $ul = $this.siblings('.first-list');
 
-            // 计算高度
-            res[id].child.forEach((item) => {
-                num++;
-                item.child.forEach(() => {
+                // 计算高度
+                res.data[index].child.forEach((item) => {
                     num++;
+                    item.child.forEach(() => {
+                        num++;
+                    });
                 });
+
+                // 手风琴切换
+                if ($ul.hasClass('show')) {
+                    $ul.css({
+                        height: 0
+                    }).removeClass('show');
+
+                    $this.find('span').text('+');
+                } else {
+                    $ul.css({
+                        height: num * 42
+                    }).addClass('show');
+
+                    $this.find('span').text('-');
+                }
             });
-
-            // 手风琴切换
-            if ($ul.hasClass('show')) {
-                $ul.css({
-                    height: 0
-                }).removeClass('show');
-
-                $this.find('span').text('+');
-            } else {
-                $ul.css({
-                    height: num * 42
-                }).addClass('show');
-
-                $this.find('span').text('-');
-            }
-        });
 
         $('.classify-0').trigger('click');
     }, function () {
@@ -493,6 +494,7 @@ $(document).ready(function () {
         // 触发a的单击事件
         a.dispatchEvent(event);
     });
+
 
     function downloadFile(fileName, content){
         // var aLink = document.createElement('a');

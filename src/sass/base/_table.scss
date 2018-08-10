@@ -23,11 +23,16 @@ table {
 
     tbody td {
         border: 1px solid #dddddd;
-        height: 35px;
-        line-height: 35px;
         text-align: center;
         margin: 0;
-        padding: 10px;
-        line-height: 20px;
+        font-size: 14px;
+        height: 30px;
+        cursor: pointer;
+        transition: all 3s;
+        //background: rgba(255, 181, 95, 0);
+
+        //&:hover {
+        //    background: rgba(255, 181, 95, 100);
+        //}
     }
 }

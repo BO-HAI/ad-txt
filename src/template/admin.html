@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body style="padding:0;margin:0" class="admin">
+<header>
+    <img src="./images/logo.png" alt="">
+    <h1>AD工厂<span>v2.0.0</span> 管理后台</h1>
+</header>
+<div class="option-block">
+    <span></span>
+    <ul>
+    </ul>
+</div>
+<div class="container app_container clearFix">
+    <div class="classify-block">
+        <form class="add-classify-form">
+            <div class="form-group">
+                <label for="id">
+                    ID:
+                </label>
+                <input type="text" name="id">
+                <p class="error"></p>
+            </div>
+            <div class="form-group">
+                <label for="id">
+                    Name:
+                </label>
+                <input type="text" name="name">
+                <p class="error"></p>
+            </div>
+            <div class="form-group">
+                <label for="id">
+                    ParentId:
+                </label>
+                <input type="text" name="parentId">
+                <p class="error"></p>
+            </div>
+            <div class="form-group">
+                <a href="javascript:;" class="button button-primary add-classify">添加</a>
+            </div>
+        </form>
+        <table>
+            <thead>
+            <tr>
+                <td width="20%">_id</td>
+                <td width="20%">name</td>
+                <td width="20%">id</td>
+                <td width="20%">parentId</td>
+                <td width="20%">操作</td>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

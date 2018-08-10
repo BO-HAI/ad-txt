@@ -1,0 +1,17 @@
+.button {
+    width: 150px;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    border: 1px solid #dddddd;
+}
+
+.button-primary {
+    background: $color-red;
+    color: $color-white;
+
+    &:hover {
+        color: $color-white;
+    }
+}

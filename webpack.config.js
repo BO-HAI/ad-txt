@@ -7,6 +7,7 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         'index': './src/js/index.js',
+        'admin':'./src/js/admin.js',
         'jq': './src/js/jquery/1.11.0.js',
         'colors': './src/js/colorpicker-master/colors.js',
         'colorpicker_data': './src/js/colorpicker-master/colorpicker.data.js',
@@ -97,6 +98,14 @@ module.exports = {
             chunks: ['jq', 'handlebars', 'colors', 'colorpicker_data', 'colorpicker', 'jscolor', 'index'],
             // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
             template: 'src/template/index.html',
+            chunksSortMode: 'manual'
+        }),
+        new HtmlWebpackPlugin({
+            title: '广告工厂管理后台',
+            filename: 'admin.html',
+            chunks: ['jq', 'handlebars', 'admin'],
+            // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
+            template: 'src/template/admin.html',
             chunksSortMode: 'manual'
         }),
         new webpack.ProvidePlugin({
