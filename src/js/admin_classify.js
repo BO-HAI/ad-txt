@@ -2,12 +2,13 @@
  * Created by bohai on 18/8/9.
  */
 const classify_tpl = require('./template/admin/classify.handlebars');
+const binding = require('./bind.js');
 
-module.exports = function (host, binding) {
+module.exports = function () {
 
     function getAllClassify () {
         let classifyPromise = $.ajax({
-            url: host + '/classify/list',
+            url: window.app.host + '/classify/list',
             type: 'GET',
             dataType: 'jsonp'
         });
@@ -47,7 +48,7 @@ module.exports = function (host, binding) {
         $that.attr("disabled", true);
 
         $.ajax({
-            url: host + '/classify/' + key,
+            url: window.app.host + '/classify/' + key,
             type: 'PUT',
             dataType: 'json',
             data: obj
@@ -79,7 +80,7 @@ module.exports = function (host, binding) {
     $(document).on('click', '.yes-button', function () {
         let key = $(this).data('id');
         $.ajax({
-            url: host + '/classify/' + key,
+            url: window.app.host + '/classify/' + key,
             type: 'DELETE',
             dataType: 'json',
             success: function (res) {
@@ -107,7 +108,7 @@ module.exports = function (host, binding) {
         let themeId = $('.add-classify-form input[name="themeId"]').val();
 
         $.ajax({
-            url: host + '/classify',
+            url: window.app.host + '/classify',
             type: 'POST',
             dataType: 'json',
             data: {

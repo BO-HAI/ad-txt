@@ -4,8 +4,10 @@
 require('normalize.css');
 require('../sass/screen.scss');
 const binding = require('./bind.js');
-const host = 'http://localhost:8080/api';
 const classify = require('./admin_classify');
+
+window.app = {};
+window.app.host = 'http://localhost:8080/api';
 
 $(document).ready(function () {
 
@@ -23,5 +25,5 @@ $(document).ready(function () {
 
     $('.classify-0[data-id="classify"]').click();
 
-    classify(host, binding);
+    classify();
 });
