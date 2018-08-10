@@ -37,9 +37,10 @@ module.exports = function (host, binding) {
         let name = $($inputs[0]).val();
         let id = $($inputs[1]).val();
         let parentId = $($inputs[2]).val();
+        let theme = $($inputs[3]).val();
 
         let obj = {
-            name, id, parentId,
+            name, id, parentId, theme,
             _method: 'PUT'
         };
 
@@ -58,9 +59,9 @@ module.exports = function (host, binding) {
     $(document).on('click', '.classify-block table .delete-button', function () {
         let id = $(this).data('id');
         $('#' + id).addClass('delete-option').css({
-            'background': '#ffb55f'
+            'background': '#FFC107'
         }).find('input').css({
-            'background': '#ffb55f'
+            'background': '#FFC107'
         });
     });
 
@@ -82,8 +83,17 @@ module.exports = function (host, binding) {
             type: 'DELETE',
             dataType: 'json',
             success: function (res) {
-                console.log(res);
-                getAllClassify();
+
+                if (res.status === '200') {
+                    getAllClassify();
+                    binding.alert('success', '删除成功');
+                } else {
+                    binding.alert('error', '删除失败');
+                }
+
+            },
+            error: function () {
+                binding.alert('error', '请求失败');
             }
         });
     });
@@ -94,6 +104,7 @@ module.exports = function (host, binding) {
         let id = $('input[name="id"]').val();
         let name = $('input[name="name"]').val();
         let parentId = $('input[name="parentId"]').val();
+        let theme = $('input[name="theme"]').val();
 
         $.ajax({
             url: host + '/classify',
@@ -102,14 +113,20 @@ module.exports = function (host, binding) {
             data: {
                 id,
                 name,
-                parentId
+                parentId,
+                theme
             },
             success: function (res) {
-                console.log(res);
-                getAllClassify();
+
+                if (res.status === '200') {
+                    getAllClassify();
+                    binding.alert('success', '添加成功');
+                } else {
+                    binding.alert('error', '添加失败');
+                }
             },
             error: function (err) {
-                console.log(err);
+                binding.alert('error', '请求失败');
             }
         });
     });

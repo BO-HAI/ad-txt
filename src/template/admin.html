@@ -11,14 +11,44 @@
     <img src="./images/logo.png" alt="">
     <h1>AD工厂<span>v2.0.0</span> 管理后台</h1>
 </header>
+<div class="alert alert-success">
+    <h1></h1>
+</div>
 <div class="option-block">
     <span></span>
     <ul>
+        <li>
+            <p class="classify-0 gray-bg active" data-id="classify">
+                分类管理
+            </p>
+        </li>
+        <li>
+            <p class="classify-0 gray-bg" data-id="theme">
+                主题管理
+            </p>
+        </li>
+        <li>
+            <p class="classify-0 gray-bg" data-id="image">
+                广告图管理
+            </p>
+        </li>
+        <li>
+            <p class="classify-0 gray-bg" data-id="illustration">
+                配图管理
+            </p>
+        </li>
     </ul>
 </div>
 <div class="container app_container clearFix">
-    <div class="classify-block">
+    <div class="block classify-block">
         <form class="add-classify-form">
+            <div class="form-group">
+                <label for="id">
+                    名称:
+                </label>
+                <input type="text" name="name">
+                <p class="error"></p>
+            </div>
             <div class="form-group">
                 <label for="id">
                     ID:
@@ -28,16 +58,16 @@
             </div>
             <div class="form-group">
                 <label for="id">
-                    Name:
+                    父级ID:
                 </label>
-                <input type="text" name="name">
+                <input type="text" name="parentId">
                 <p class="error"></p>
             </div>
             <div class="form-group">
                 <label for="id">
-                    ParentId:
+                    主题ID:
                 </label>
-                <input type="text" name="parentId">
+                <input type="text" name="theme">
                 <p class="error"></p>
             </div>
             <div class="form-group">
@@ -47,10 +77,10 @@
         <table>
             <thead>
             <tr>
-                <td width="20%">_id</td>
-                <td width="20%">name</td>
-                <td width="20%">id</td>
-                <td width="20%">parentId</td>
+                <td width="20%">名称</td>
+                <td width="20%">ID</td>
+                <td width="20%">父级ID</td>
+                <td width="20%">主题</td>
                 <td width="20%">操作</td>
             </tr>
             </thead>
@@ -58,6 +88,9 @@
 
             </tbody>
         </table>
+    </div>
+    <div class="block theme-block">
+        主题管理
     </div>
 </div>
 </body>

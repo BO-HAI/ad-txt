@@ -8,7 +8,16 @@
 }
 
 .button-primary {
-    background: $color-red;
+    background: $color-primary;
+    color: $color-white;
+
+    &:hover {
+        color: $color-white;
+    }
+}
+
+.button-warning {
+    background: $color-warning;
     color: $color-white;
 
     &:hover {

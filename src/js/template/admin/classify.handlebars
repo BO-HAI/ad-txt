@@ -1,6 +1,5 @@
 {{#each data}}
     <tr id="{{_id}}">
-        <td>{{_id}}</td>
         <td>
             <input type="text" name="name" value="{{name}}" disabled="disabled" data-id="{{_id}}">
         </td>
@@ -10,8 +9,12 @@
         <td>
             <input type="text" name="parentId" value="{{parentId}}" disabled="disabled" data-id="{{_id}}">
         </td>
+        <td>
+            <input type="text" name="theme" value="{{theme}}" disabled="disabled" data-id="{{_id}}">
+        </td>
         <td class="option">
-            <a href="javascript:;" data-id="{{_id}}" class="delete-button">Delete</a>
+            <a href="javascript:;" data-id="{{_id}}" class="delete-button">删除</a>
+            <a href="javascript:;" class="show_images">查看图库</a>
             <a href="javascript:;" data-id="{{_id}}" class="classify-button option-button yes-button">Yes</a>
             <a href="javascript:;" data-id="{{_id}}" class="classify-button option-button no-button">No</a>
         </td>
