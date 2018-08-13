@@ -325,7 +325,7 @@ $(document).ready(function () {
      * 入口
      */
     let classifyPromise = $.ajax({
-        url: 'http://localhost:8080/api/classify',
+        url: 'http://localhost:8080/api/classify/list',
         type: 'GET',
         dataType: 'jsonp'
     });

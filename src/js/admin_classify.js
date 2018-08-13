@@ -3,12 +3,14 @@
  */
 const classify_tpl = require('./template/admin/classify.handlebars');
 const binding = require('./bind.js');
+let { classifyApi } = require('./api.js');
+// import { classifyApi } from './api.js';
 
 module.exports = function () {
 
     function getAllClassify () {
         let classifyPromise = $.ajax({
-            url: window.app.host + '/classify/list',
+            url: classifyApi().getAll,
             type: 'GET',
             dataType: 'jsonp'
         });
@@ -48,7 +50,7 @@ module.exports = function () {
         $that.attr("disabled", true);
 
         $.ajax({
-            url: window.app.host + '/classify/' + key,
+            url: classifyApi(key).update,
             type: 'PUT',
             dataType: 'json',
             data: obj
@@ -80,7 +82,7 @@ module.exports = function () {
     $(document).on('click', '.yes-button', function () {
         let key = $(this).data('id');
         $.ajax({
-            url: window.app.host + '/classify/' + key,
+            url: classifyApi(key).delete,
             type: 'DELETE',
             dataType: 'json',
             success: function (res) {
@@ -108,7 +110,7 @@ module.exports = function () {
         let themeId = $('.add-classify-form input[name="themeId"]').val();
 
         $.ajax({
-            url: window.app.host + '/classify',
+            url: classifyApi().postOne,
             type: 'POST',
             dataType: 'json',
             data: {
