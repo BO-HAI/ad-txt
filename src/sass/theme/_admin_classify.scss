@@ -1,0 +1,86 @@
+.admin {
+    .classify-block {
+        table {
+            margin-bottom: 200px;
+        }
+
+        tbody td {
+            position: relative;
+            overflow: hidden;
+        }
+
+        input:disabled {
+            border: 0;
+        }
+
+        .classify-button {
+            cursor: pointer;
+        }
+
+        .option-button {
+            display: block;
+            height: 32px;
+            line-height: 32px;
+
+            position: absolute;
+            top: 0;
+            color: #ffffff;
+            transition: all .5s;
+        }
+
+        .yes-button {
+            left: -40%;
+            width: 40%;
+            background: $color-warning;
+
+        }
+
+        .no-button {
+            right: -60%;
+            width: 60%;
+            background: #8c8c8c;
+        }
+
+        .delete-option {
+            .yes-button {
+                left: 0;
+                background: $color-warning;
+
+            }
+
+            .no-button {
+                right: 0;
+                background: #8c8c8c;
+            }
+        }
+
+        .delete-button {
+            font-size: 12px;
+        }
+
+        .show_images {
+
+        }
+
+        .add-classify-form {
+            .form-group {
+                display: inline-block;
+            }
+
+            label {
+                width: 50px;
+            }
+
+            input {
+                width: 150px;
+            }
+
+            .add-classify {
+                height: 31px;
+                position: relative;
+                top: -1px;
+                margin-left: 30px;
+            }
+        }
+    }
+}

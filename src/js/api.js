@@ -16,5 +16,19 @@ module.exports = {
             delete: HOST + `/classify/${id}`,
             getList: HOST + '/classify/list'
         }
+    },
+
+    themeApi: function () {
+        let id = 0;
+        if (arguments.length > 0) {
+            id = arguments[0];
+        }
+
+        return {
+            getAll: HOST + '/theme',
+            postOne: HOST + '/theme',
+            update: HOST + `/theme/${id}`,
+            delete: HOST + `/theme/${id}`,
+        }
     }
 };

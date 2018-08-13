@@ -3,8 +3,9 @@
  */
 require('normalize.css');
 require('../sass/screen.scss');
-const binding = require('./bind.js');
+// const binding = require('./bind.js');
 const classify = require('./admin_classify');
+const theme = require('./admin_theme');
 
 window.app = {};
 window.app.host = 'http://localhost:8080/api';
@@ -14,6 +15,24 @@ $(document).ready(function () {
     $('.classify-0').on('click', function () {
         let $that = $(this);
         let id = $that.data('id');
+
+        // if (id === 'theme') {
+        //     theme();
+        // }
+        //
+        // if () {
+        //
+        // }
+
+        switch (id) {
+            case 'theme':
+                theme();
+                break;
+            case 'classify':
+                classify()
+                break;
+
+        }
 
         $that.addClass('active');
 

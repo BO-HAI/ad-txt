@@ -17,7 +17,7 @@ module.exports = function () {
 
         classifyPromise.done(function (res) {
             console.log(res);
-            binding.loadHtml('tbody', res.data, classify_tpl);
+            binding.loadHtml('.classify-block table tbody', res.data, classify_tpl);
         });
     }
 

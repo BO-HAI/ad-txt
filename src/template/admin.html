@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
-<body style="padding:0;margin:0" class="admin">
+<body style="padding:0;margin:0" class="admin clearFix">
 <header>
     <img src="./images/logo.png" alt="">
     <h1>AD工厂<span>v2.0.0</span> 管理后台</h1>
@@ -90,7 +90,39 @@
         </table>
     </div>
     <div class="block theme-block">
-        主题管理
+        <form class="add-theme-form">
+            <div class="form-group name-group">
+                <label for="id">
+                    主题类型名称:
+                </label>
+                <input type="text" name="name">
+                <p class="error"></p>
+            </div>
+            <div class="form-group id-group">
+                <label for="id">
+                    ID:
+                </label>
+                <input type="text" name="id">
+                <p class="error"></p>
+            </div>
+            <div class="form-group">
+                <a href="javascript:;" class="button button-primary add-img-theme">添加一种图片主题</a>
+            </div>
+            <div class="form-group">
+                <a href="javascript:;" class="button button-primary add-theme">添加</a>
+            </div>
+            <div class="img-theme-group">
+                <div class="form-group">
+                    <label for="id">
+                        图片主题a:
+                    </label>
+                    <input type="text">
+                </div>
+            </div>
+
+
+        </form>
+        <div class="theme-list clearFix"></div>
     </div>
 </div>
 </body>
