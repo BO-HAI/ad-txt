@@ -28,7 +28,7 @@
             </p>
         </li>
         <li>
-            <p class="classify-0 gray-bg" data-id="image">
+            <p class="classify-0 gray-bg" data-id="images">
                 广告图管理
             </p>
         </li>
@@ -43,7 +43,7 @@
     <div class="block classify-block">
         <form class="add-classify-form">
             <div class="form-group">
-                <label for="id">
+                <label for="name">
                     名称:
                 </label>
                 <input type="text" name="name">
@@ -57,14 +57,14 @@
                 <p class="error"></p>
             </div>
             <div class="form-group">
-                <label for="id">
+                <label for="parentId">
                     父级ID:
                 </label>
                 <input type="text" name="parentId">
                 <p class="error"></p>
             </div>
             <div class="form-group">
-                <label for="id">
+                <label for="themeId">
                     主题ID:
                 </label>
                 <input type="text" name="themeId">
@@ -92,17 +92,17 @@
     <div class="block theme-block">
         <form class="add-theme-form">
             <div class="form-group name-group">
-                <label for="id">
+                <label for="theme-name">
                     主题类型名称:
                 </label>
-                <input type="text" name="name" id="theme-name">
+                <input type="text" name="theme-name" id="theme-name">
                 <p class="error"></p>
             </div>
             <div class="form-group id-group">
-                <label for="id">
+                <label for="theme-id">
                     ID:
                 </label>
-                <input type="text" name="id" id="theme-id">
+                <input type="text" name="theme-id" id="theme-id">
                 <p class="error"></p>
             </div>
             <div class="form-group">
@@ -113,16 +113,380 @@
             </div>
             <div class="img-theme-group">
                 <div class="form-group">
-                    <label for="id">
+                    <label>
                         图片主题a:
                     </label>
-                    <input type="text"  id="theme-img-a" data-id="a">
+                    <input type="text" id="theme-img-a" data-id="a">
                 </div>
             </div>
 
             <p class="warning-txt">＊不提供图片主题类型的删除及更新功能（暂时不需要），只能通过删除大主题重新创建</p>
         </form>
         <div class="theme-list clearFix"></div>
+    </div>
+
+    <div class="block images-block">
+        <div class="forms">
+            <form action="">
+                <div>
+                    <div class="form-group horizontal">
+                        <label for="classify-1">
+                            一级分类:
+                        </label>
+                        <select name="classify-1" id=""></select>
+                        <p class="error"></p>
+                    </div>
+                    <div class="form-group horizontal">
+                        <label for="classify-2">
+                            二级分类:
+                        </label>
+                        <select type="text" name="classify-1"></select>
+                        <p class="error"></p>
+                    </div>
+                    <div class="form-group horizontal">
+                        <label for="classify-3">
+                            三级分类:
+                        </label>
+                        <select type="text" name="classify-1"></select>
+                        <p class="error"></p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="form-group horizontal">
+                        <label for="fileName">
+                            文件名:
+                        </label>
+                        <input type="text" name="fileName">
+                        <p class="error"></p>
+                    </div>
+                    <div class="form-group horizontal">
+                        <label for="fileUrl">
+                            文件路径:
+                        </label>
+                        <input type="text" name="fileUrl">
+                        <p class="error"></p>
+                    </div>
+
+                    <div class="form-group horizontal">
+                        <label for="illustration">
+                            是否可配插图:
+                        </label>
+                        <input type="radio" name="illustration" value="1"> 是
+                        <input type="radio" name="illustration" value="0"> 否
+                        <p class="error"></p>
+                    </div>
+                </div>
+
+                <div class="form-group horizontal">
+                    <label for="describe">
+                        规则描述:
+                    </label>
+                    <input name="describe">
+                    <p class="error"></p>
+                </div>
+
+                <div class="form-group horizontal">
+                    <a href="javascript:;" class="button button-primary">添加一种分辨率图片</a>
+                </div>
+
+            </form>
+            <div class="px-block">
+                <form action="">
+                    <div class="form-group horizontal">
+                        <label for="image-width">
+                            图片宽度:
+                        </label>
+                        <input type="text" name="image-width">
+                        <p class="error"></p>
+                    </div>
+                    <div class="form-group horizontal">
+                        <label for="image-height">
+                            图片高度:
+                        </label>
+                        <input type="text" name="image-height">
+                        <p class="error"></p>
+                    </div>
+                    <div class="form-group horizontal">
+                        <a href="javascript:;" class="button button-primary">添加一个标题</a>
+                    </div>
+                </form>
+
+                <div class="txt-block">
+                    <form action="">
+                        <p class="txt-block-title">标题1</p>
+                        <div class="form-group horizontal">
+                            <label>
+                                表单标签:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                输入框提示:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                前置字段:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                后置字段:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                最大长度:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                最小长度:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                字号:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                字体:
+                            </label>
+                            <select>
+                                <option value="">请选择</option>
+                            </select>
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                字体颜色:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                间距微调:
+                            </label>
+                            <input type="text" value="3">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                X坐标:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                Y坐标:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    字号控制:
+                                </label>
+                                <input type="radio" value="1" name="fontSize-control"> 是
+                                <input type="radio" value="0" name="fontSize-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    字体颜色控制:
+                                </label>
+                                <input type="radio" value="1" name="fontColor-control"> 是
+                                <input type="radio" value="0" name="fontColor-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    字体控制:
+                                </label>
+                                <input type="radio" value="1" name="fontFamily-control"> 是
+                                <input type="radio" value="0" name="fontFamily-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    X坐标控制:
+                                </label>
+                                <input type="radio" value="1" name="x-control"> 是
+                                <input type="radio" value="0" name="x-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    Y坐标控制:
+                                </label>
+                                <input type="radio" value="1" name="y-control"> 是
+                                <input type="radio" value="0" name="y-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="txt-block">
+                    <form action="">
+                        <p class="txt-block-title">标题1</p>
+                        <div class="form-group horizontal">
+                            <label>
+                                表单标签:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                输入框提示:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                前置字段:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                后置字段:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                最大长度:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                最小长度:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                字号:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                字体:
+                            </label>
+                            <select>
+                                <option value="">请选择</option>
+                            </select>
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                字体颜色:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                间距微调:
+                            </label>
+                            <input type="text" value="3">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                X坐标:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div class="form-group horizontal">
+                            <label>
+                                Y坐标:
+                            </label>
+                            <input type="text">
+                            <p class="error"></p>
+                        </div>
+                        <div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    字号控制:
+                                </label>
+                                <input type="radio" value="1" name="fontSize-control"> 是
+                                <input type="radio" value="0" name="fontSize-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    字体颜色控制:
+                                </label>
+                                <input type="radio" value="1" name="fontColor-control"> 是
+                                <input type="radio" value="0" name="fontColor-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    字体控制:
+                                </label>
+                                <input type="radio" value="1" name="fontFamily-control"> 是
+                                <input type="radio" value="0" name="fontFamily-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    X坐标控制:
+                                </label>
+                                <input type="radio" value="1" name="x-control"> 是
+                                <input type="radio" value="0" name="x-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                            <div class="form-group horizontal">
+                                <label>
+                                    Y坐标控制:
+                                </label>
+                                <input type="radio" value="1" name="y-control"> 是
+                                <input type="radio" value="0" name="y-control" checked="checked"> 否
+                                <p class="error"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="images">
+
+        </div>
     </div>
 </div>
 </body>

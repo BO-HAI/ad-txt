@@ -1,0 +1,46 @@
+.admin {
+    .images-block {
+        form {
+            textarea {
+                vertical-align: middle;
+                width: 180px;
+                height: 60px;
+                padding: 10px;
+            }
+        }
+
+        .forms {
+            margin-bottom: 200px;
+
+            .txt-block-title {
+                font-size: 18px;
+                background: $color-title;
+                height: 35px;
+                line-height: 35px;
+                text-indent: 27px;
+                margin-bottom: 10px;
+                color: $color-white;
+            }
+        }
+
+        .px-block {
+            margin: 30px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            padding: 10px;
+            background: #f9f9f9;
+
+            input[type="text"] {
+                width: 140px;
+            }
+
+            select {
+                width: 162px;
+            }
+        }
+
+        .txt-block {
+            margin-bottom: 20px;
+        }
+    }
+}
