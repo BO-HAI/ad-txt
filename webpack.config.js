@@ -103,7 +103,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: '广告工厂管理后台',
             filename: 'admin.html',
-            chunks: ['jq', 'handlebars', 'admin'],
+            chunks: ['jq', 'colors', 'colorpicker_data', 'colorpicker', 'jscolor', 'handlebars', 'admin'],
             // chunks: ['jq', 'colpick', 'colpick_plugin', 'index', 'index2'],
             template: 'src/template/admin.html',
             chunksSortMode: 'manual'

@@ -6,11 +6,13 @@ require('../sass/screen.scss');
 // const binding = require('./bind.js');
 const classify = require('./admin_classify');
 const theme = require('./admin_theme');
+const colors = require('./colors.js');
 
 window.app = {};
 window.app.host = 'http://localhost:8080/api';
 
 $(document).ready(function () {
+    colors.init();
 
     $('.classify-0').on('click', function () {
         let $that = $(this);
@@ -29,7 +31,7 @@ $(document).ready(function () {
                 theme();
                 break;
             case 'classify':
-                classify()
+                classify();
                 break;
 
         }
