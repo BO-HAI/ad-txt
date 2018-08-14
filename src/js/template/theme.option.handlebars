@@ -1,20 +1,4 @@
-{{#compare data.id '==' '0-0-1'}}
-    <option value="-1">请选择</option>
-    <option value="a">建筑工程</option>
-    <option value="b">财会经济</option>
-    <option value="c">医药卫生</option>
-    <option value="d">职业资格</option>
-    <option value="e">教师公考</option>
-    <option value="f">考研学历</option>
-    <option value="g">外语考试</option>
-{{/compare}}
-
-{{#compare data.id '!=' '0-0-1'}}
-    <option value="-1">请选择</option>
-    <option value="a">基础</option>
-    <option value="b">强化</option>
-    <option value="c">冲刺</option>
-    <option value="d">报名指导</option>
-    <option value="e">解析</option>
-    <option value="f">听课指南</option>
-{{/compare}}
+<option value="-1">请选择</option>
+{{#each data}}
+    <option value="{{id}}">{{name}}</option>
+{{/each}}

@@ -12,6 +12,7 @@ const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
 const validateFn = require('./validate.js');
+let { classifyApi, themeApi } = require('./api.js');
 // const fileList = ['j_blue.jpg', 'j_purple.jpg'];
 //
 // fileList.forEach((item) => {
@@ -325,7 +326,7 @@ $(document).ready(function () {
      * 入口
      */
     let classifyPromise = $.ajax({
-        url: 'http://localhost:8080/api/classify/list',
+        url: classifyApi().getList,
         type: 'GET',
         dataType: 'jsonp'
     });
@@ -439,20 +440,36 @@ $(document).ready(function () {
     $(document).on('click', '.classify-2', function () {
         let $this = $(this);
         let id = $this.parent().data('index');
+        let themeTypeId = $this.parent().data('themetype');
 
-        classifyId = $this.data('id');
-        // 绑定不同主题
-        binding.loadHtml('#themeNames', {id: classifyId}, theme_tpl).bindEvent('#themeNames', 'change', function ($element) {
-            theme = $element.val();
-            if (classifyId !== '') {
-                getDataByClassifyId();
-            } else {
-                alert('请选择分类');
-                $element.val('-1');
-            }
-        }, function () {
-            $('#themeNames').val('a').trigger('change');
+        let themeTypePromise = $.ajax({
+            url: themeApi(themeTypeId).getOne,
+            type: 'GET',
+            dataType: 'jsonp'
         });
+
+        themeTypePromise.then(function (res) {
+            binding.loadHtml('#themeNames', res.data.child, theme_tpl).bindEvent('#themeNames', 'change', function ($element) {
+                theme = $element.val(); // 全局的theme
+                getDataByClassifyId();
+            }, function () {
+                $('#themeNames').val('a').trigger('change');
+            });
+        });
+
+        classifyId = $this.data('id'); // 全局的classifyId
+        // 绑定不同主题
+        // binding.loadHtml('#themeNames', {id: classifyId}, theme_tpl).bindEvent('#themeNames', 'change', function ($element) {
+        //     theme = $element.val();
+        //     if (classifyId !== '') {
+        //         getDataByClassifyId();
+        //     } else {
+        //         alert('请选择分类');
+        //         $element.val('-1');
+        //     }
+        // }, function () {
+        //     $('#themeNames').val('a').trigger('change');
+        // });
 
         // $('#themeNames').val('a').trigger('change');
 

@@ -29,6 +29,7 @@ module.exports = {
             postOne: HOST + '/theme',
             update: HOST + `/theme/${id}`,
             delete: HOST + `/theme/${id}`,
+            getOne: HOST + `/theme/${id}`
         }
     }
 };
