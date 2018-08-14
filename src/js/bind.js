@@ -13,6 +13,16 @@ class binding {
         return this;
     }
 
+    static appendHtml (select, data, template, fn) {
+        let $element = $(select);
+        let html = template({data});
+        $element.append(html);
+        if (fn) {
+            fn();
+        }
+        return this;
+    }
+
     static bindEvent (select, event, fn, callback) {
         let $element = $(select);
         $element.unbind(event).on(event, function () {

@@ -6,6 +6,7 @@ require('../sass/screen.scss');
 // const binding = require('./bind.js');
 const classify = require('./admin_classify');
 const theme = require('./admin_theme');
+const images = require('./admin_images');
 const colors = require('./colors.js');
 
 window.app = {};
@@ -32,6 +33,9 @@ $(document).ready(function () {
                 break;
             case 'classify':
                 classify();
+                break;
+            case 'images':
+                images();
                 break;
 
         }

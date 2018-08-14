@@ -1,0 +1,26 @@
+{{#data}}
+    <div class="px-block" id="px-block-{{key}}">
+        <form action="">
+            <div class="form-group horizontal">
+                <label for="image-width">
+                    图片宽度:
+                </label>
+                <input type="text" name="image-width">
+                <p class="error"></p>
+            </div>
+            <div class="form-group horizontal">
+                <label for="image-height">
+                    图片高度:
+                </label>
+                <input type="text" name="image-height">
+                <p class="error"></p>
+            </div>
+            <div class="form-group horizontal">
+                <a href="javascript:;" class="button button-primary add-image-title" data-id="px-block-{{key}}">添加一个标题</a>
+            </div>
+            <div class="form-group horizontal">
+                <a href="javascript:;" class="button button-danger button-small del-image" data-id="px-block-{{key}}">删除图片</a>
+            </div>
+        </form>
+    </div>
+{{/data}}
