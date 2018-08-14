@@ -95,14 +95,14 @@
                 <label for="id">
                     主题类型名称:
                 </label>
-                <input type="text" name="name">
+                <input type="text" name="name" id="theme-name">
                 <p class="error"></p>
             </div>
             <div class="form-group id-group">
                 <label for="id">
                     ID:
                 </label>
-                <input type="text" name="id">
+                <input type="text" name="id" id="theme-id">
                 <p class="error"></p>
             </div>
             <div class="form-group">
@@ -116,11 +116,11 @@
                     <label for="id">
                         图片主题a:
                     </label>
-                    <input type="text">
+                    <input type="text"  id="theme-img-a" data-id="a">
                 </div>
             </div>
 
-
+            <p class="warning-txt">＊不提供图片主题类型的删除及更新功能（暂时不需要），只能通过删除大主题重新创建</p>
         </form>
         <div class="theme-list clearFix"></div>
     </div>

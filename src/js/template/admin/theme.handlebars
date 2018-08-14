@@ -1,20 +1,20 @@
 {{#each data}}
-    <div class="theme clearFix" id="{{_id}}" data-id="{{id}}">
-        <span class="theme--delete">x</span>
+    <div class="theme clearFix" data-id="{{_id}}">
+        <span class="theme--delete" data-id="{{_id}}">x</span>
         <p class="theme-title">{{id}}:{{name}}</p>
         <ul class="theme-tag">
             {{#each child}}
-                <li class="theme-tag-item" id="{{_id}}" data-id="{{id}}">
+                <li class="theme-tag-item" data-id="{{_id}}">
                     <span class="id-tag">{{id}}</span>
                     <input type="text" value="{{name}}" disabled="disabled">
-                    <span class="theme-tag-item--delete">x</span>
+                    <!--<span class="theme-tag-item--delete">x</span>-->
                 </li>
             {{/each}}
 
-            <li class="theme-tag-item theme-plus ornament ornament-plus">
-                <span class="ornament-plus--1"></span>
-                <span class="ornament-plus--2"></span>
-            </li>
+            <!--<li class="theme-tag-item theme-plus ornament ornament-plus">-->
+                <!--<span class="ornament-plus--1"></span>-->
+                <!--<span class="ornament-plus--2"></span>-->
+            <!--</li>-->
         </ul>
 
         <!--<a href="javascript:;" class="update-button">更新</a>-->

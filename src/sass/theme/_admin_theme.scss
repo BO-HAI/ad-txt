@@ -1,5 +1,9 @@
 .admin {
     .theme-block {
+        .theme-list {
+            margin-bottom: 200px;
+        }
+        
         .theme {
             width: 200px;
             border: 1px solid #dddddd;
@@ -10,7 +14,7 @@
             transition: all .5s;
             //cursor: pointer;
             position: relative;
-            margin-bottom: 200px;
+            //margin-bottom: 200px;
 
             .theme--delete {
                 position: absolute;
