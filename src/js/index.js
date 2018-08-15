@@ -12,7 +12,7 @@ const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
 const validateFn = require('./validate.js');
-let { classifyGetList, themeApi } = require('./api.js');
+let { classifyGetList, themeGetById } = require('./api.js');
 // const fileList = ['j_blue.jpg', 'j_purple.jpg'];
 //
 // fileList.forEach((item) => {
@@ -437,11 +437,7 @@ $(document).ready(function () {
         let id = $this.parent().data('index');
         let themeTypeId = $this.parent().data('themetype');
 
-        let themeTypePromise = $.ajax({
-            url: themeApi(themeTypeId).getOne,
-            type: 'GET',
-            dataType: 'jsonp'
-        });
+        let themeTypePromise = themeGetById(themeTypeId);
 
         themeTypePromise.then(function (res) {
             binding.loadHtml('#themeNames', res.data.child, theme_tpl).bindEvent('#themeNames', 'change', function ($element) {

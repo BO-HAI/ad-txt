@@ -33,6 +33,15 @@ module.exports = {
         }
     },
 
+    themeGetById: function (id) {
+        let url = HOST + `/theme/${id}`;
+        return $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'jsonp'
+        });
+    },
+
     themeGetAll: function () {
         let url = HOST + '/theme';
         return $.ajax({
