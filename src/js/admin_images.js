@@ -4,8 +4,10 @@
 const binding = require('./bind.js');
 const img_tpl = require('./template/admin/image.handlebars');
 const title_tpl = require('./template/admin/image.title.handlebars');
+let { classifyApi } = require('./api.js');
 module.exports = function () {
-    $('.add-image').on('click', function () {
+
+    $('.add-image').unbind('click').on('click', function () {
         let key = parseInt(Math.random() * 1000000);
         binding.appendHtml('.px-block-group', {key}, img_tpl);
     });

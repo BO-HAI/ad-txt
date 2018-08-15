@@ -12,7 +12,7 @@ const binding = require('./bind.js');
 const DrawImage = require('./drawImage.js');
 const storage = require('./storage.js');
 const validateFn = require('./validate.js');
-let { classifyApi, themeApi } = require('./api.js');
+let { classifyGetList, themeApi } = require('./api.js');
 // const fileList = ['j_blue.jpg', 'j_purple.jpg'];
 //
 // fileList.forEach((item) => {
@@ -26,7 +26,6 @@ require('../images/warning.png');
 // let host = debug ? './js/data/' : '/subject/0000/ad2/';
 
 $(document).ready(function () {
-    let promise;
     let drawImage; // 绘制对象
     let host = './js/data/';
     let data;                   // data 是页面编辑内容对象
@@ -325,11 +324,7 @@ $(document).ready(function () {
     /**
      * 入口
      */
-    let classifyPromise = $.ajax({
-        url: classifyApi().getList,
-        type: 'GET',
-        dataType: 'jsonp'
-    });
+    let classifyPromise = classifyGetList();
     // 分类绑定
     classifyPromise.done(function (res) {
         binding

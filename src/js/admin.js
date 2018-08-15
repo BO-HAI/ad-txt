@@ -50,5 +50,5 @@ $(document).ready(function () {
 
     $('.classify-0[data-id="classify"]').click();
 
-    classify();
+    // classify();
 });

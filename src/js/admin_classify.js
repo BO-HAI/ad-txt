@@ -3,17 +3,13 @@
  */
 const classify_tpl = require('./template/admin/classify.handlebars');
 const binding = require('./bind.js');
-let { classifyApi } = require('./api.js');
+let { classifyGetAll, classifyPostOne, classifyUpdateById, classifyDeleteById } = require('./api.js');
 // import { classifyApi } from './api.js';
 
 module.exports = function () {
 
     function getAllClassify () {
-        let classifyPromise = $.ajax({
-            url: classifyApi().getAll,
-            type: 'GET',
-            dataType: 'jsonp'
-        });
+        let classifyPromise = classifyGetAll();
 
         classifyPromise.done(function (res) {
             console.log(res);
@@ -42,18 +38,25 @@ module.exports = function () {
         let parentId = $($inputs[2]).val();
         let themeId = $($inputs[3]).val();
 
-        let obj = {
+        let data = {
             name, id, parentId, themeId,
             _method: 'PUT'
         };
 
         $that.attr("disabled", true);
 
-        $.ajax({
-            url: classifyApi(key).update,
-            type: 'PUT',
-            dataType: 'json',
-            data: obj
+        let classifyUpdatePromise = classifyUpdateById(key, data);
+
+        classifyUpdatePromise.then(function (res) {
+            if (res.status === '200') {
+                binding.alert('success', '更新成功');
+            } else {
+                binding.alert('error', '更新失败了，信息未保存道数据库');
+            }
+        });
+
+        classifyUpdatePromise.fail(function (err) {
+            binding.alert('error', '更新请求失败');
         });
 
     });
@@ -81,56 +84,51 @@ module.exports = function () {
     // 确认删除
     $(document).on('click', '.yes-button', function () {
         let key = $(this).data('id');
-        $.ajax({
-            url: classifyApi(key).delete,
-            type: 'DELETE',
-            dataType: 'json',
-            success: function (res) {
 
-                if (res.status === '200') {
-                    getAllClassify();
-                    binding.alert('success', '删除成功');
-                } else {
-                    binding.alert('error', '删除失败');
-                }
+        let classifyDeletePromise = classifyDeleteById(key);
 
-            },
-            error: function () {
-                binding.alert('error', '请求失败');
+        classifyDeletePromise.then(function (res) {
+            if (res.status === '200') {
+                binding.alert('success', '删除成功');
+            } else {
+                binding.alert('error', '删除失败');
             }
+
+            getAllClassify();
+        });
+
+        classifyDeletePromise.fail(function () {
+            binding.alert('error', '删除请求失败');
         });
     });
 
     // 添加分类
-    $('.add-classify').on('click', function () {
+    $('.add-classify').unbind('click').on('click', function () {
 
         let id = $('.add-classify-form input[name="id"]').val();
         let name = $('.add-classify-form input[name="name"]').val();
         let parentId = $('.add-classify-form input[name="parentId"]').val();
         let themeId = $('.add-classify-form input[name="themeId"]').val();
 
-        $.ajax({
-            url: classifyApi().postOne,
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id,
-                name,
-                parentId,
-                themeId
-            },
-            success: function (res) {
+        let postOnePromise = classifyPostOne({
+            id,
+            name,
+            parentId,
+            themeId
+        });
 
-                if (res.status === '200') {
-                    getAllClassify();
-                    binding.alert('success', '添加成功');
-                } else {
-                    binding.alert('error', '添加失败');
-                }
-            },
-            error: function (err) {
-                binding.alert('error', '请求失败');
+        postOnePromise.then(function (res) {
+            if (res.status === '200') {
+                getAllClassify();
+                binding.alert('success', '添加成功');
+            } else {
+                binding.alert('error', '添加失败');
             }
         });
+
+        postOnePromise.fail(function (err) {
+            binding.alert('error', '添加请求失败');
+        });
+
     });
 };
