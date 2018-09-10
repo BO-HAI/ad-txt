@@ -6,6 +6,7 @@ const img_tpl = require('./template/admin/image.handlebars');
 const title_tpl = require('./template/admin/image.title.handlebars');
 const option_tpl = require('./template/admin/classify.option.handlebars');
 let { classifyGetAll } = require('./api.js');
+const colors = require('./colors.js');
 module.exports = function () {
     let l1 = [];
     let l2 = [];
@@ -72,7 +73,9 @@ module.exports = function () {
     $(document).on('click', '.add-image-title', function () {
         let id = $(this).data('id');
         let key = parseInt(Math.random() * 1000000);
-        binding.appendHtml('#' + id, {key}, title_tpl);
+        binding.appendHtml('#' + id, {key}, title_tpl, function () {
+            colors.init();
+        });
     });
 
     $(document).on('click', '.del-image', function () {
@@ -108,4 +111,5 @@ module.exports = function () {
             bindClassify1();
         }
     });
+
 };

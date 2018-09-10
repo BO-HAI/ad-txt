@@ -20,6 +20,15 @@
     }
 }
 
+.button-info {
+    background: $color-info;
+    color: $color-white;
+
+    &:hover {
+        color: $color-white;
+    }
+}
+
 .button-warning {
     background: $color-warning;
     color: $color-white;
