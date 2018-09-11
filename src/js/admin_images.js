@@ -4,13 +4,14 @@
 const binding = require('./bind.js');
 const img_tpl = require('./template/admin/image.handlebars');
 const title_tpl = require('./template/admin/image.title.handlebars');
-const option_tpl = require('./template/admin/classify.option.handlebars');
-let { classifyGetAll } = require('./api.js');
+const option_tpl = require('./template/admin/option.handlebars');
+let { classifyGetAll, themeGetAll } = require('./api.js');
 const colors = require('./colors.js');
 module.exports = function () {
     let l1 = [];
     let l2 = [];
     let l3 = [];
+    let themes = null;
 
     function bindClassify1 () {
         binding
@@ -65,6 +66,11 @@ module.exports = function () {
             });
     }
 
+    function bindThemeName (list) {
+        binding
+            .loadHtml('#images-block--theme-name', list, option_tpl);
+    }
+
     $('.add-image').unbind('click').on('click', function () {
         let key = parseInt(Math.random() * 1000000);
         binding.appendHtml('.px-block-group', {key}, img_tpl);
@@ -110,6 +116,20 @@ module.exports = function () {
 
             bindClassify1();
         }
+    });
+
+    themeGetAll().done((res) => {
+        themes = res.data;
+
+        console.log(res);
+
+        binding
+            .loadHtml('#images-block--theme-type', res.data, option_tpl)
+            .bindEvent('#images-block--theme-type', 'change', function ($element) {
+                let val = parseInt($element.val(), 10);
+
+                bindThemeName(themes[val].child);
+            });
     });
 
 };
