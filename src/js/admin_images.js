@@ -23,19 +23,21 @@ module.exports = function () {
      */
     function dataEncapsulation () {
         let data = $('#images-form').serializeArray();
-        let name = data[0].value;
-        // let url = data[1].value;
-        let illustration = data[1].value;
-        let describe = data[2].value;
+        let theme = data[0].value;
+        let classifyId = data[1].value;
+        let name = data[2].value;
+        let illustration = data[3].value;
+        let describe = data[4].value;
         let url = $('#image_file_Url').val();
-        let size = [];
+        let size = imageData_size;
+
 
         console.log(data);
 
         illustration =  illustration === '1';
 
         imageData = {
-            name, url, illustration, describe, size
+            theme, classifyId, name, url, illustration, describe, size
         };
 
         // console.log(imageData);
@@ -226,6 +228,7 @@ module.exports = function () {
 
     $('#image-save-button').on('click', function () {
         let json = dataEncapsulation();
+        console.log(json);
     });
 
     classifyGetAll().done((res) => {
