@@ -1,64 +1,64 @@
 {{#data}}
-    <div class="txt-block" id="txt-block-{{key}}">
-        <form action="">
+    <div class="txt-block txt-block-{{key}}">
+        <form class="{{key}}-form" action="">
             <p class="txt-block-title">标题
                 <span class="txt-block-title--key">{{key}}</span>
-                <span class="txt-block-del" data-id="txt-block-{{key}}">x</span>
+                <span class="txt-block-del" data-key="txt-block-{{key}}">x</span>
             </p>
             <div class="form-group horizontal">
                 <label>
                     表单标签:
                 </label>
-                <input type="text">
+                <input name="txt-label" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     输入框提示:
                 </label>
-                <input type="text">
+                <input name="txt-placeholder" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     前置字段:
                 </label>
-                <input type="text">
+                <input name="txt-befor" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     后置字段:
                 </label>
-                <input type="text">
+                <input name="txt-after" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     最大长度:
                 </label>
-                <input type="text">
+                <input name="txt-maxLen" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     最小长度:
                 </label>
-                <input type="text">
+                <input name="txt-minLen" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     字号:
                 </label>
-                <input type="text">
+                <input name="txt-fontSize" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     字体:
                 </label>
-                <select>
+                <select name="txt-fontFamily" class="font-family-select" data-key="{{key}}">
                     <option value="">请选择</option>
                     <option value="cnYAHEI" class="cnYAHEI">微软雅黑细</option>
                     <option value="cnYAHEIBD" class="cnYAHEI">微软雅黑粗</option>
@@ -73,28 +73,28 @@
                 <label>
                     字体颜色:
                 </label>
-                <input class="color" type="text" value="#ffffff">
+                <input name="txt-fontColor" class="color" type="text" value="#ffffff" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     间距微调:
                 </label>
-                <input type="text" value="3">
+                <input name="txt-spacing" type="text" value="3" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     X坐标:
                 </label>
-                <input type="text">
+                <input name="x" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div class="form-group horizontal">
                 <label>
                     Y坐标:
                 </label>
-                <input type="text">
+                <input name="y" type="text" data-key="{{key}}">
                 <p class="error"></p>
             </div>
             <div>
@@ -102,24 +102,24 @@
                     <label>
                         字号控制:
                     </label>
-                    <input type="radio" value="1" name="fontSize-control"> 是
-                    <input type="radio" value="0" name="fontSize-control" checked="checked"> 否
+                    <input type="radio" value="1" name="controlFont-size" data-key="{{key}}"> 是
+                    <input type="radio" value="0" name="controlFont-size" checked="checked" data-key="{{key}}"> 否
                     <p class="error"></p>
                 </div>
                 <div class="form-group horizontal">
                     <label>
                         字体颜色控制:
                     </label>
-                    <input type="radio" value="1" name="fontColor-control"> 是
-                    <input type="radio" value="0" name="fontColor-control" checked="checked"> 否
+                    <input type="radio" value="1" name="controlFont-color" data-key="{{key}}"> 是
+                    <input type="radio" value="0" name="controlFont-color" checked="checked" data-key="{{key}}"> 否
                     <p class="error"></p>
                 </div>
                 <div class="form-group horizontal">
                     <label>
                         字体控制:
                     </label>
-                    <input type="radio" value="1" name="fontFamily-control"> 是
-                    <input type="radio" value="0" name="fontFamily-control" checked="checked"> 否
+                    <input type="radio" value="1" name="controlFont-family" data-key="{{key}}"> 是
+                    <input type="radio" value="0" name="controlFont-family" checked="checked" data-key="{{key}}"> 否
                     <p class="error"></p>
                 </div>
             </div>
@@ -128,16 +128,16 @@
                     <label>
                         X坐标控制:
                     </label>
-                    <input type="radio" value="1" name="x-control"> 是
-                    <input type="radio" value="0" name="x-control" checked="checked"> 否
+                    <input type="radio" value="1" name="controlCoordinate-x" data-key="{{key}}"> 是
+                    <input type="radio" value="0" name="controlCoordinate-x" checked="checked" data-key="{{key}}"> 否
                     <p class="error"></p>
                 </div>
                 <div class="form-group horizontal">
                     <label>
                         Y坐标控制:
                     </label>
-                    <input type="radio" value="1" name="y-control"> 是
-                    <input type="radio" value="0" name="y-control" checked="checked"> 否
+                    <input type="radio" value="1" name="controlCoordinate-y" data-key="{{key}}"> 是
+                    <input type="radio" value="0" name="controlCoordinate-y" checked="checked" data-key="{{key}}"> 否
                     <p class="error"></p>
                 </div>
             </div>

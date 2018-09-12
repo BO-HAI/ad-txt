@@ -126,41 +126,13 @@
     </div>
 
     <div class="block images-block">
-        <form action="">
-            <div>
-                <div class="form-group horizontal">
-                    <label for="classify-1">
-                        一级分类:
-                    </label>
-                    <select name="classify-1" id="images-block--classify-1"></select>
-                    <p class="error"></p>
-                </div>
-                <div class="form-group horizontal">
-                    <label for="classify-2">
-                        二级分类:
-                    </label>
-                    <select type="text" name="classify-1" id="images-block--classify-2">
-                        <option value="-1">请选择</option>
-                    </select>
-                    <p class="error"></p>
-                </div>
-                <div class="form-group horizontal">
-                    <label for="classify-3">
-                        三级分类:
-                    </label>
-                    <select type="text" name="classify-1" id="images-block--classify-3">
-                        <option value="-1">请选择</option>
-                    </select>
-                    <p class="error"></p>
-                </div>
-            </div>
-
+        <form id="images-form" action="">
             <div>
                 <div class="form-group horizontal">
                     <label for="theme-type">
                         主题类型:
                     </label>
-                    <select name="theme-type" id="images-block--theme-type">
+                    <select id="images-block--theme-type">
                         <option value="-1">请选择</option>
                     </select>
                     <p class="error"></p>
@@ -169,26 +141,52 @@
                     <label for="theme-name">
                         主题名称:
                     </label>
-                    <select type="text" name="theme-name" id="images-block--theme-name">
+                    <select type="text" id="images-block--theme-name">
                         <option value="-1">请选择</option>
                     </select>
                     <p class="error"></p>
                 </div>
             </div>
-
+            <div>
+                <div class="form-group horizontal">
+                    <label>
+                        一级分类:
+                    </label>
+                    <select id="images-block--classify-1"></select>
+                    <p class="error"></p>
+                </div>
+                <div class="form-group horizontal">
+                    <label for="classify-2">
+                        二级分类:
+                    </label>
+                    <select type="text" id="images-block--classify-2">
+                        <option value="-1">请选择</option>
+                    </select>
+                    <p class="error"></p>
+                </div>
+                <div class="form-group horizontal">
+                    <label for="classify-3">
+                        三级分类:
+                    </label>
+                    <select type="text" id="images-block--classify-3">
+                        <option value="-1">请选择</option>
+                    </select>
+                    <p class="error"></p>
+                </div>
+            </div>
             <div>
                 <div class="form-group horizontal">
                     <label for="fileName">
                         文件名:
                     </label>
-                    <input type="text" name="fileName">
+                    <input type="text" name="name" id="image_file_name">
                     <p class="error"></p>
                 </div>
                 <div class="form-group horizontal">
                     <label for="fileUrl">
                         文件路径:
                     </label>
-                    <input type="text" name="fileUrl">
+                    <input type="text" name="url" disabled="disabled" id="image_file_Url">
                     <p class="error"></p>
                 </div>
 
@@ -206,7 +204,7 @@
                 <label for="describe">
                     规则描述:
                 </label>
-                <input name="describe">
+                <input name="describe" id="image_describe">
                 <p class="error"></p>
             </div>
 
@@ -218,7 +216,7 @@
         <div class="px-block-group">
 
         </div>
-        <a href="javascript:;" class="button button-primary">保存</a>
+        <a href="javascript:;" class="button button-primary" id="image-save-button">保存</a>
         <div class="images">
 
         </div>

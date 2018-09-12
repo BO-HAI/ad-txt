@@ -12,7 +12,7 @@ module.exports = function () {
         let classifyPromise = classifyGetAll();
 
         classifyPromise.done(function (res) {
-            console.log(res);
+            // console.log(res);
             binding.loadHtml('.classify-block table tbody', res.data, classify_tpl);
         });
     }
