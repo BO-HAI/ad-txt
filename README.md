@@ -4,7 +4,7 @@
 
 ```
 // 热加载
-npm run start:dev
+npm run dev
 
 http://localhost:9001/
 

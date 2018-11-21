@@ -4,8 +4,28 @@
         "value": "jzgc_wsj"
     },
     {
+        "name": "建筑工程-王立雪",
+        "value": "jzgc_wlx"
+    },
+    {
         "name": "建筑工程-陈明",
         "value": "jzgc_cm"
+    },
+    {
+        "name": "建筑工程-王宏伟",
+        "value": "jzgc_whw"
+    },
+    {
+        "name": "建筑工程-张君",
+        "value": "jzgc_zj"
+    },
+    {
+        "name": "建筑工程-赵知启",
+        "value": "jzgc_zzq"
+    },
+    {
+        "name": "建筑工程-赵学斌",
+        "value": "jzgc_zxb"
     },
     {
         "name": "建筑工程-王双增",
@@ -44,8 +64,12 @@
         "value": "jzgc_mcly"
     },
     {
-        "name": "建筑工程-双师资-柯洪柯洪王双增",
+        "name": "建筑工程-双师资-柯洪王双增",
         "value": "jzgc_khwsz"
+    },
+    {
+        "name": "建筑工程-三师资-孟川李钰赵学斌",
+        "value": "jzgc_mclyzxb"
     },
     {
         "name": "财会经济-刘艳霞",
@@ -100,6 +124,10 @@
         "value": "yyws_ld"
     },
     {
+        "name": "医药卫生-肖琴",
+        "value": "yyws_xq"
+    },
+    {
         "name": "医药卫生-李雪巧",
         "value": "yyws_lxq"
     },
@@ -116,12 +144,20 @@
         "value": "zyzg_txj"
     },
     {
+        "name": "职业资格-汤小洁付子健",
+        "value": "zyzg_txjfzj"
+    },
+    {
         "name": "教师公考-王卫东",
         "value": "jsgk_wwd"
     },
     {
         "name": "教师公考-王颖",
         "value": "jsgk_wy"
+    },
+    {
+        "name": "教师公考-张静沈武超",
+        "value": "jsgk_swczj"
     },
     {
         "name": "考研学历-刘晶",
