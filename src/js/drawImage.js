@@ -166,7 +166,7 @@ class DrawImage {
             strArr.forEach((item, index) => {
                 let mss = this.context.measureText(temp);
                 if (index > 0) {
-                    x = x + mss.width + spacing;
+                    x = parseInt(x, 10) + mss.width + spacing;
                 }
 
                 this.context.fillText(item, x, y);
