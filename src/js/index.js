@@ -123,10 +123,12 @@ $(document).ready(function () {
             let indexs = getIndex();
 
             if (data.illustration) {
-                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h);
+                bindIllustration(data.size[indexs.sizeIndex].w, data.size[indexs.sizeIndex].h).done(function () {
+                    bindTxtOption();
+                });
+            } else {
+                bindTxtOption();
             }
-
-            bindTxtOption();
         });
         $('#imgSize').val(0).trigger('change');
     };
@@ -138,6 +140,7 @@ $(document).ready(function () {
      * @return {null}
      */
     let bindIllustration = function (w, h) {
+        let deferred = $.Deferred();
         $('#illustrationNames').attr('disabled', false);
         // illustration_data = null;
         /**
@@ -159,18 +162,24 @@ $(document).ready(function () {
                 .bindEvent('#illustrationNames', 'change', (element) => {
                     illustrationChange(element, w, h);
                 });
+
+                deferred.resolve(true);
             });
 
             resList.fail(function () {
                 console.error('illustration（配图）属性为true,但未找到相关json');
                 $('#illustrationNames').attr('disabled', true);
+                deferred.reject(false);
             });
         } catch (e) {
             console.error('illustration（配图）属性为true,但未找到相关json');
             $('#illustrationNames').attr('disabled', true);
+            deferred.reject(false);
         } finally {
 
         }
+
+        return deferred.promise();
     };
 
     /**
