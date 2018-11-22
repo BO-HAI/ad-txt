@@ -34,7 +34,7 @@ $(document).ready(function () {
     let theme = 'a';             // 主题
     let scale = 1;              // 缩放比例
     let history_version = storage.load('ad_version');
-    let now_version = 'v1.2.2';
+    let now_version = 'v1.2.2.20181122';
 
     console.log(history_version);
 
