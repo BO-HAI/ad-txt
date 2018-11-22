@@ -1,7 +1,7 @@
 {
-    "name": "01",
-    "url": "./images/theme/d/0-0-1/01.png",
-    "illustration": false,
+    "name": "00",
+    "url": "./images/theme/d/0-0-1/00.png",
+    "illustration": true,
     "describe": "",
     "size": [
         {
