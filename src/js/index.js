@@ -34,7 +34,7 @@ $(document).ready(function () {
     let theme = 'a';             // 主题
     let scale = 1;              // 缩放比例
     let history_version = storage.load('ad_version');
-    let now_version = 'v1.2.2.20181122';
+    let now_version = 'v1.2.2.20181211';
 
     console.log(history_version);
 
@@ -45,6 +45,18 @@ $(document).ready(function () {
             $('#dialog').hide();
         });
     }
+
+    let promotionDay = function () {
+        let now = new Date();
+        let day = now.getDate();
+        let month = now.getMonth() + 1;
+
+        if (month === 12 && day < 12) {
+            // 双12
+            $('.classify-1[data-id="0-1"]').css({color: '#b75858'});
+            $('.classify-2[data-id="0-1-0"]').css({color: '#b75858'});
+        }
+    };
 
 
     /**
@@ -373,8 +385,13 @@ $(document).ready(function () {
         });
 
         $('.classify-0').trigger('click');
+
+        // 节日判断
+        promotionDay();
+
     }, function () {
-        $($('.classify-2')[8]).click();
+        // 默认选择
+        $($('.classify-2')[2]).click();
     });
 
     classifyPromise.fail(function () {

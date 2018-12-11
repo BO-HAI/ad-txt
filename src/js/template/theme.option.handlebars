@@ -9,7 +9,12 @@
     <option value="g">外语考试</option>
 {{/compare}}
 
-{{#compare data.id '!=' '0-0-1'}}
+{{#compare data.id '===' '0-1-0'}}
+    <option value="-1">请选择</option>
+    <option value="a">紫色</option>
+{{/compare}}
+
+{{#compare data.id '===' '1-1-0'}}
     <option value="-1">请选择</option>
     <option value="a">基础</option>
     <option value="b">强化</option>
@@ -18,3 +23,7 @@
     <option value="e">解析</option>
     <option value="f">听课指南</option>
 {{/compare}}
+
+
+
+
