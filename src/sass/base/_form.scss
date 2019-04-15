@@ -18,6 +18,11 @@ form {
         padding: 0 10px;
     }
 
+    input {
+        border: 0;
+        border-bottom: 1px solid #dddddd;
+    }
+
     label {
         width: 80px;
         display: inline-block;

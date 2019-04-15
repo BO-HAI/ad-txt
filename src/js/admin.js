@@ -9,11 +9,15 @@ const theme = require('./admin_theme');
 const images = require('./admin_images');
 const colors = require('./colors.js');
 
+let ui = require('gedu-ui');
+
 window.app = {};
 window.app.host = 'http://localhost:8080/api';
 
 $(document).ready(function () {
     colors.init();
+    ui.ripple();
+    ui.rotateCard();
 
     $('.classify-0').on('click', function () {
         let $that = $(this);

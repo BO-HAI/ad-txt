@@ -1,24 +1,24 @@
 {{#each data}}
-    <div class="theme clearFix" data-id="{{_id}}">
-        <span class="theme--delete" data-id="{{_id}}">x</span>
-        <p class="theme-title">{{id}}:{{name}}</p>
-        <ul class="theme-tag">
-            {{#each child}}
-                <li class="theme-tag-item" data-id="{{_id}}">
-                    <span class="id-tag">{{id}}</span>
-                    <input type="text" value="{{name}}" disabled="disabled">
-                    <!--<span class="theme-tag-item--delete">x</span>-->
-                </li>
-            {{/each}}
+<div class="card rotate-card">
+    <div class="card-wrap">
+        <div class="front">
+            <div class="theme clearfix"  data-id="{{_id}}">
+                <span class="theme--delete" data-id="{{_id}}">x</span>
+                <p class="theme-title">{{id}}:{{name}}</p>
+                <ul class="theme-tag clearfix">
+                    {{#each child}}
+                        <li class="theme-tag-item" data-id="{{_id}}">
+                            <span class="id-tag">{{id}}</span>
+                            <input type="text" value="{{name}}" disabled="disabled">
+                            <!--<span class="theme-tag-item--delete">x</span>-->
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
 
-            <!--<li class="theme-tag-item theme-plus ornament ornament-plus">-->
-                <!--<span class="ornament-plus--1"></span>-->
-                <!--<span class="ornament-plus--2"></span>-->
-            <!--</li>-->
-        </ul>
-
-        <!--<a href="javascript:;" class="update-button">更新</a>-->
-        <!--<a href="javascript:;" class="update-button">更新</a>-->
-        <!--<a href="javascript:;" class="delete-button">删除</a>-->
+            <span class="rotate-btn"></span>
+        </div>
+        <div class="back">卡片背面<span class="rotate-btn"></span></div>
     </div>
+</div>
 {{/each}}
