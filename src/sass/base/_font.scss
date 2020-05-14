@@ -1,4 +1,28 @@
 @font-face {
+    font-family: "HQ";
+    src: url("../font/SourceHanSansCN-Regular.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "HQ_HD";
+    src: url("../font/SourceHanSansCN-heavy.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.HQ {
+    font-family: 'HQ' !important;
+}
+
+.HQ_HD {
+    font-family: 'HQ_HD' !important;
+}
+
+
+
+
+@font-face {
     font-family: "enJonahRegular";
     src: url("../font/jonah-regular.ttf") format('truetype');
     font-weight: normal;
