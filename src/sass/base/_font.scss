@@ -67,6 +67,14 @@
     font-style: normal;
 }
 
+/*汉仪雅酷黑*/
+@font-face {
+    font-family: "cnHYYKH";
+    src: url("../font/HYYakuHei-75W.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 // /*造字工坊悦黑 纤细超长体*/
 // @font-face {
 //     font-family: "cnZZGFYHQXCCT";
@@ -79,6 +87,10 @@
 // .cnYAHEI {
 //     font-family: 'microsoft yahei' !important;
 // }
+
+.cnHYYKH {
+    font-family: 'cnHYYKH' !important;
+}
 
 .cnZHSRZJ {
     font-family: 'cnZHSRZJ' !important;

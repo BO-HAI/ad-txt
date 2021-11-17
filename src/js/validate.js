@@ -101,6 +101,10 @@ class V {
             return true;
         }
     }
+
+    static w1334h750 (data) {
+        return true;
+    }
 }
 
 module.exports = function (data) {

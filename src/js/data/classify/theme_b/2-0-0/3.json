@@ -1,0 +1,66 @@
+{
+    "name": "01",
+    "url": "./images/theme/b/2-0-0/03.png",
+    "illustration": false,
+    "describe": "",
+    "size": [
+        {
+            "w": 1334,
+            "h": 750,
+            "title": [
+                {
+                    "txt": {
+                        "label": "商品主标题1",
+                        "value": "新媒体高手",
+                        "befor": "",
+                        "after": "",
+                        "placeholder": "1-7个汉字",
+                        "maxLen": 7,
+                        "minLen": 1,
+                        "fontSize": 140,
+                        "fontFamily": "cnHYYKH",
+                        "fontColor": "#ffffff",
+                        "spacing": 3
+                    },
+                    "x": 307,
+                    "y": 375,
+                    "controlFont": {
+                        "size": false,
+                        "color": false,
+                        "family": false
+                    },
+                    "controlCoordinate": {
+                        "x": true,
+                        "y": false
+                    }
+                },
+                {
+                    "txt": {
+                        "label": "商品主标题2",
+                        "value": "进阶指南2.0",
+                        "befor": "",
+                        "after": "",
+                        "placeholder": "1-7个汉字",
+                        "maxLen": 7,
+                        "minLen": 1,
+                        "fontSize": 140,
+                        "fontFamily": "cnHYYKH",
+                        "fontColor": "#ffffff",
+                        "spacing": 3
+                    },
+                    "x": 269,
+                    "y": 526,
+                    "controlFont": {
+                        "size": false,
+                        "color": false,
+                        "family": false
+                    },
+                    "controlCoordinate": {
+                        "x": true,
+                        "y": false
+                    }
+                }
+            ]
+        }
+    ]
+}
